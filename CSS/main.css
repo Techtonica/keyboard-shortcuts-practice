@@ -1,0 +1,96 @@
+#container {
+margin: 100px auto;
+width: 688px;
+}
+body {
+font: 71%/1.5 Verdana, Sans-Serif;
+background: #eee;
+}
+#write {
+margin: 0 0 5px;
+padding: 5px;
+width: 671px;
+height: 200px;
+font: 1em/1.5 Verdana, Sans-Serif;
+background: #fff;
+border: 1px solid #f9f9f9;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+}
+#read {
+margin: 50px 0 5px;
+padding: 5px;
+width: 671px;
+height: 200px;
+font: 1em/1.5 Verdana, Sans-Serif;
+background: #fff;
+border: 1px solid #f9f9f9;
+overflow: hidden;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+white-space:nowrap;
+<!-- animation: typing 3.5s; -->
+}
+.anim {
+animation : typing 3.5s steps(30, end);
+}
+@keyframes typing {
+from { width: 0}
+to { width:671px  }
+}
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+from, to { border-color: transparent }
+50% { border-color: orange }
+}
+#keyboard {
+margin: 0;
+padding: 0;
+list-style: none;
+}
+#keyboard li {
+float: left;
+margin: 0 5px 5px 0;
+width: 40px;
+height: 40px;
+line-height: 40px;
+text-align: center;
+background: #fff;
+border: 1px solid #f9f9f9;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+}
+.tab{
+clear: left;
+}
+.lastitem {
+margin-right: 0;
+}
+#keyboard .return {
+width: 77px;
+}
+#keyboard .capslock {
+width: 80px;
+}
+#keyboard .tab {
+width: 70px;
+}
+.pressed{
+background: orange !important;
+}
+.uppercase {
+text-transform: uppercase;
+}
+#keyboard .space {
+clear: left;
+width: 681px;
+}
+#keyboard .left-shift {
+width: 95px;
+}
+#keyboard .right-shift {
+width: 109px;
+}
+.on {
+display: none;
+}
