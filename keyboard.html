@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+     
+    <title>Keyboard</title>
+    <!-- <link rel="stylesheet" type="text/css" href="css/style.css" /> -->
+	<style type="text/css">
+	#container {
+		margin: 100px auto;
+		width: 688px;
+	}
+	body {
+font: 71%/1.5 Verdana, Sans-Serif;
+background: #eee;
+}
+	#write {
+		margin: 0 0 5px;
+		padding: 5px;
+		width: 671px;
+		height: 200px;
+		font: 1em/1.5 Verdana, Sans-Serif;
+		background: #fff;
+		border: 1px solid #f9f9f9;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+	}
+	
+	#read {
+		margin: 50px 0 5px;
+		padding: 5px;
+		width: 671px;
+		height: 200px;
+		font: 1em/1.5 Verdana, Sans-Serif;
+		background: #fff;
+		border: 1px solid #f9f9f9;
+		overflow: hidden;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		white-space:nowrap;
+		<!-- animation: typing 3.5s; -->
+	}
+	
+	.anim {
+	 animation : typing 3.5s steps(30, end);
+	}
+	
+	@keyframes typing {
+  from { width: 0}
+  to { width:671px  }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange }
+}
+	
+	#keyboard {
+margin: 0;
+padding: 0;
+list-style: none;
+}
+#keyboard li {
+    float: left;
+    margin: 0 5px 5px 0;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #f9f9f9;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    }
+	.tab{
+        clear: left;
+        }
+		
+	.lastitem {
+        margin-right: 0;
+        }
+	#keyboard .return {
+            width: 77px;
+            }
+		#keyboard .capslock {
+            width: 80px;
+            }
+        #keyboard .tab {
+            width: 70px;
+        }
+	.pressed{
+	background: orange !important;
+	}
+	.uppercase {
+        text-transform: uppercase;
+        }
+	#keyboard .space {
+        clear: left;
+        width: 681px;
+        }
+	#keyboard .left-shift {
+            width: 95px;
+            }
+            #keyboard .right-shift {
+            width: 109px;
+            }
+	.on {
+	display: none;
+	}
+	
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script>
+	$(document).ready(function() {
+	<!-- write.onkeydown = write.onkeyup =  -->
+	<!-- write.onkeypress = handle; -->
+	
+	<!-- $("#read").text("The company's rapid growth since incorporation has triggered a chain of products, acquisitions, and partnerships beyond Google's core search engine (Google Search). It offers services designed for work and productivity (Google Docs, Sheets, and Slides), email (Gmail/Inbox), scheduling and time management (Google Calendar), cloud storage (Google Drive), social networking (Google+), instant messaging and video chat (Google Allo/Duo/Hangouts), language translation (Google Translate), mapping and turn-by-turn navigation (Google Maps/Waze/Earth/Street View), video sharing (YouTube), notetaking (Google Keep), and photo organizing and editing (Google Photos). The company leads the development of the Android mobile operating system, the Google Chrome web browser, and Chrome OS, a lightweight operating system based on the Chrome browser. Google has moved increasingly into hardware; from 2010 to 2015, it partnered with major electronics manufacturers in the production of its Nexus devices, and in October 2016, it released multiple hardware products (including the Google Pixel smartphone, Home smart speaker, Wifi mesh wireless router, and Daydream View virtual reality headset). The new hardware chief, Rick Osterloh, stated: \"a lot of the innovation that we want to do now ends up requiring controlling the end-to-end user experience\". Google has also experimented with becoming an Internet carrier. In February 2010, it announced Google Fiber, a fiber-optic infrastructure that was installed in Kansas City"); -->
+	$("#textdiv").text("The company's rapid growth since")
+	<!-- $("#read").css("animation", "typing 3.5s steps(" + $('#read').val().length +",end);") -->
+	$("#textdiv").addClass("anim")
+	
+	alert($("#textdiv").css("animation"))
+	write.onkeydown = handle;
+	write.onkeyup = release;
+	var caps = false;
+	
+		function handle(e) {
+			
+			var text1 = e.type +
+					' key=' + e.key +
+					' code=' + e.code
+			
+			if(e.key.toLowerCase()=="capslock" && caps==false){ 
+			caps= true;
+			$("#"+e.key.toLowerCase()).toggleClass("pressed");
+			$('.letter').toggleClass('uppercase');
+			}
+			else if(e.key.toLowerCase()=="capslock" && caps==true) {
+			$("#"+e.key.toLowerCase()).toggleClass("pressed");
+			$('.letter').toggleClass('uppercase');
+			caps=false;
+			}
+			else $("#"+e.key.toLowerCase() ).addClass("pressed");
+		}
+		
+		function release(e) {
+			if(e.key.toLowerCase()=="capslock")return
+			else{
+			$("#"+e.key.toLowerCase() ).removeClass("pressed");
+		}
+		}
+		
+		function highlightNextKey(params){
+			$("#"+nxt.toLowerCase()).toggleClass("pressed");
+			
+			<!-- var params = { width:1680, height:1050 }; -->
+			<!-- var str = jQuery.param( params ); -->
+			<!-- $( "#results" ).text( str ); -->
+		}
+		
+	})
+	</script>
+</head>
+<body>
+<div id="container">
+    <textarea id="write" rows="6" cols="60"></textarea>
+    <ul id="keyboard">
+	<li class="tab" id="tab">tab</li>
+        <li class="letter" id="q">q</li>
+        <li class="letter" id="w">w</li>
+        <li class="letter" id="e">e</li>
+        <li class="letter" id="r">r</li>
+        <li class="letter" id="t">t</li>
+        <li class="letter" id="y">y</li>
+        <li class="letter" id="u">u</li>
+        <li class="letter" id="i">i</li>
+        <li class="letter" id="o">o</li>
+        <li class="letter" id="p">p</li>
+		<li class="symbol" id="left-brac">{[</li>
+		<li class="symbol" id="right-brac">]}</li>
+		<li class="symbol" id="pipes">|\</li>
+		<li class="capslock" id="capslock">caps lock</li>
+        <li class="letter" id="a">a</li>
+        <li class="letter" id="s">s</li>
+        <li class="letter" id="d">d</li>
+        <li class="letter" id="f">f</li>
+        <li class="letter" id="g">g</li>
+        <li class="letter" id="h">h</li>
+        <li class="letter" id="j">j</li>
+        <li class="letter" id="k">k</li>
+        <li class="letter" id="l">l</li>
+        <li class="symbol"><span class="off" id=";">;</span><span class="on" id=":">:</span></li>
+        <li class="symbol"><span id="'" class="off">'</span><span class="on" id=";">&quot;</span></li>
+        <li class="return lastitem">return</li>
+		<li class="left-shift">shift</li>
+        <li class="letter" id="z">z</li>
+        <li class="letter" id="x">x</li>
+        <li class="letter" id="c">c</li>
+        <li class="letter" id="v">v</li>
+        <li class="letter" id="b">b</li>
+        <li class="letter" id="n">n</li>
+        <li class="letter" id="m">m</li>
+        <li class="symbol"><span class="off">, &lt;</span><span class="on">,</span><span class="on">&lt;</span></li>
+        <li class="symbol"><span class="off">, &gt;</span><span class="on">.</span><span class="on">&gt;</span></li>
+        <li class="symbol"><span class="off">, ?</span><span class="on">/</span><span class="on">?</span></li>
+        <li class="right-shift lastitem" id="shift">shift</li>
+        <li class="space lastitem" id="space">&nbsp;</li>
+	<div id="read"><div id="textdiv"> </div></div>
+</div>
+
+</body>
+</html>
+	</ul>
