@@ -5,7 +5,7 @@ $(document).ready(function() {
 $("#textdiv").text("The company's rapid growth since")
 <!-- $("#read").css("animation", "typing 3.5s steps(" + $('#read').val().length +",end);") -->
 $("#textdiv").addClass("anim")
-alert($("#textdiv").css("animation"))
+<!-- alert($("#textdiv").css("animation")) -->
 write.onkeydown = handle;
 write.onkeyup = release;
 var caps = false;
