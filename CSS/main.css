@@ -93,6 +93,9 @@ width: 102px;
 #keyboard .control, #keyboard .command{
 	width: 64px;
 }
+#keyboard .special #esc{
+	width: 64px;
+}
 #keyboard .option{
 	width: 54px;
 }
