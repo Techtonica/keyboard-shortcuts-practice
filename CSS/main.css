@@ -90,7 +90,7 @@ width: 95px;
 #keyboard .right-shift {
 width: 109px;
 }
-#keyboard .control #keyboard .command{
+#keyboard .control, #keyboard .command{
 	width: 60px;
 }
 #keyboard .option{
