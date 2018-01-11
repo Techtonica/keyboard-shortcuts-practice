@@ -85,13 +85,13 @@ text-transform: uppercase;
 width: 275px;
 }
 #keyboard .left-shift {
-width: 95px;
+width: 102px;
 }
 #keyboard .right-shift {
-width: 109px;
+width: 102px;
 }
 #keyboard .control, #keyboard .command{
-	width: 60px;
+	width: 64px;
 }
 #keyboard .option{
 	width: 54px;
