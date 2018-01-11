@@ -1,6 +1,6 @@
 #container {
 margin: 100px auto;
-width: 688px;
+width: 680px;
 }
 body {
 font: 71%/1.5 Verdana, Sans-Serif;
@@ -9,7 +9,7 @@ background: #eee;
 #write {
 margin: 0 0 5px;
 padding: 5px;
-width: 671px;
+width: 667px;
 height: 200px;
 font: 1em/1.5 Verdana, Sans-Serif;
 background: #fff;
@@ -18,9 +18,9 @@ border: 1px solid #f9f9f9;
 -webkit-border-radius: 5px;
 }
 #read {
-margin: 50px 0 5px;
+margin: 10px 0 5px;
 padding: 5px;
-width: 671px;
+width: 667px;
 height: 200px;
 font: 1em/1.5 Verdana, Sans-Serif;
 background: #fff;
@@ -78,7 +78,7 @@ width: 77px;
 width: 80px;
 }
 #keyboard .tab,  #keyboard .delete, #keyboard .esc{
-width: 70px;
+width: 72px;
 }
 .pressed{
 background: orange !important;
@@ -87,7 +87,7 @@ background: orange !important;
 text-transform: uppercase;
 }
 #keyboard .space {
-width: 275px;
+width: 270px;
 }
 #keyboard .left-shift {
 width: 102px;
