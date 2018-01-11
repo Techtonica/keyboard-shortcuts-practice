@@ -82,13 +82,19 @@ background: orange !important;
 text-transform: uppercase;
 }
 #keyboard .space {
-width: 271px;
+width: 275px;
 }
 #keyboard .left-shift {
 width: 95px;
 }
 #keyboard .right-shift {
 width: 109px;
+}
+.control .command{
+	width: 60px;
+}
+.option{
+	width: 54px;
 }
 .on {
 display: none;
