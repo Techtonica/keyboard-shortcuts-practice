@@ -44,13 +44,16 @@ from, to { border-color: transparent }
 50% { border-color: orange }
 }
 #keyboard {
+background: #0000004d;
 margin: 0;
-padding: 0;
+padding: 2px;
 list-style: none;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
 }
 #keyboard li {
 float: left;
-margin: 0 5px 5px 0;
+margin: 2px;
 width: 40px;
 height: 40px;
 line-height: 40px;
