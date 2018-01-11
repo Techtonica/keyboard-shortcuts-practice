@@ -72,7 +72,7 @@ width: 77px;
 #keyboard .capslock {
 width: 80px;
 }
-#keyboard .tab,  #keyboard .delete{
+#keyboard .tab,  #keyboard .delete, #keyboard .esc{
 width: 70px;
 }
 .pressed{
@@ -91,9 +91,6 @@ width: 102px;
 width: 102px;
 }
 #keyboard .control, #keyboard .command{
-	width: 64px;
-}
-#esc{
 	width: 64px;
 }
 
