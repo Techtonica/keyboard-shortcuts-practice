@@ -89,10 +89,8 @@ text-transform: uppercase;
 #keyboard .space {
 width: 270px;
 }
-#keyboard .left-shift {
-width: 102px;
-}
-#keyboard .right-shift {
+
+#keyboard .shift {
 width: 102px;
 }
 #keyboard .control, #keyboard .command{
