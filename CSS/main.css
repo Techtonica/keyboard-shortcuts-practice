@@ -114,7 +114,10 @@ width: 102px;
 height: 25px;
 width: 42.28px;
 }
-
+div .arrows{
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;	
+}
 .on {
 display: none;
 }
