@@ -88,6 +88,7 @@ text-transform: uppercase;
 }
 #keyboard .space {
 width: 270px;
+height: 55px;
 }
 
 #keyboard .shift {
@@ -95,11 +96,17 @@ width: 102px;
 }
 #keyboard .control, #keyboard .command{
 	width: 64px;
+	height: 55px;
 }
 
 #keyboard .option{
 	width: 54px;
+	height: 55px;
 }
+#keyboard .special {
+height: 25px;
+}
+
 .on {
 display: none;
 }
