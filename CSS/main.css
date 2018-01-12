@@ -87,7 +87,7 @@ background: orange !important;
 text-transform: uppercase;
 }
 #keyboard .space {
-width: 270px;
+width: 224px;
 height: 55px;
 }
 #keyboard .esc{
@@ -98,13 +98,13 @@ height: 55px;
 #keyboard .shift {
 width: 102px;
 }
-#keyboard .control, #keyboard .command{
-	width: 64px;
+#keyboard .command{
+	width: 56px;
 	height: 55px;
 }
 
-#keyboard .option{
-	width: 54px;
+
+#keyboard .option, #keyboard .control, #keyboard .function{
 	height: 55px;
 }
 #keyboard .special {
