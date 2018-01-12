@@ -77,7 +77,7 @@ width: 77px;
 #keyboard .capslock {
 width: 80px;
 }
-#keyboard .tab,  #keyboard .delete, #keyboard .esc{
+#keyboard .tab,  #keyboard .delete{
 width: 72px;
 }
 .pressed{
@@ -87,18 +87,36 @@ background: orange !important;
 text-transform: uppercase;
 }
 #keyboard .space {
-width: 270px;
+width: 224px;
+height: 55px;
+}
+#keyboard .esc{
+	width: 42.28px;
+	height: 25px;
 }
 
 #keyboard .shift {
 width: 102px;
 }
-#keyboard .control, #keyboard .command{
-	width: 64px;
+#keyboard .command{
+	width: 56px;
+	height: 55px;
+}
+#keyboard .arrows{
+	line-height: 20px;
+	height: 20px;
 }
 
-#keyboard .option{
-	width: 54px;
+#keyboard .option, #keyboard .control, #keyboard .function{
+	height: 55px;
+}
+#keyboard .special {
+height: 25px;
+width: 42.28px;
+}
+div .arrows{
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;	
 }
 .on {
 display: none;
