@@ -1,6 +1,6 @@
 #container {
 margin: 100px auto;
-width: 688px;
+width: 680px;
 }
 body {
 font: 71%/1.5 Verdana, Sans-Serif;
@@ -9,7 +9,7 @@ background: #eee;
 #write {
 margin: 0 0 5px;
 padding: 5px;
-width: 671px;
+width: 667px;
 height: 200px;
 font: 1em/1.5 Verdana, Sans-Serif;
 background: #fff;
@@ -18,9 +18,9 @@ border: 1px solid #f9f9f9;
 -webkit-border-radius: 5px;
 }
 #read {
-margin: 50px 0 5px;
+margin: 10px 0 5px;
 padding: 5px;
-width: 671px;
+width: 667px;
 height: 200px;
 font: 1em/1.5 Verdana, Sans-Serif;
 background: #fff;
@@ -44,13 +44,18 @@ from, to { border-color: transparent }
 50% { border-color: orange }
 }
 #keyboard {
+background: #0000004d;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
 margin: 0;
-padding: 0;
+padding: 2px;
 list-style: none;
+overflow:auto;
 }
+
 #keyboard li {
 float: left;
-margin: 0 5px 5px 0;
+margin: 2px;
 width: 40px;
 height: 40px;
 line-height: 40px;
@@ -72,8 +77,8 @@ width: 77px;
 #keyboard .capslock {
 width: 80px;
 }
-#keyboard .tab {
-width: 70px;
+#keyboard .tab,  #keyboard .delete, #keyboard .esc{
+width: 72px;
 }
 .pressed{
 background: orange !important;
@@ -82,14 +87,18 @@ background: orange !important;
 text-transform: uppercase;
 }
 #keyboard .space {
-clear: left;
-width: 681px;
+width: 270px;
 }
-#keyboard .left-shift {
-width: 95px;
+
+#keyboard .shift {
+width: 102px;
 }
-#keyboard .right-shift {
-width: 109px;
+#keyboard .control, #keyboard .command{
+	width: 64px;
+}
+
+#keyboard .option{
+	width: 54px;
 }
 .on {
 display: none;
