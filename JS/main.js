@@ -1,7 +1,7 @@
 $(document).ready(function() {
 <!-- write.onkeydown = write.onkeyup =  -->
 
-$("#textdiv").text("The company's rapid growth since")
+$("#textdiv").text("Ctrl + A")
 
 $("#textdiv").addClass("anim")
 
