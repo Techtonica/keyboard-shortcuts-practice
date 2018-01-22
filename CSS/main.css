@@ -83,6 +83,9 @@ width: 72px;
 .pressed{
 background: orange !important;
 }
+.prompt{
+background: blue !important;
+}
 .uppercase {
 text-transform: uppercase;
 }

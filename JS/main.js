@@ -1,13 +1,24 @@
 $(document).ready(function() {
 <!-- write.onkeydown = write.onkeyup =  -->
 
-$("#textdiv").text("Ctrl + A")
+$("#textdiv").text("Ctrl-A")
 
 $("#textdiv").addClass("anim")
 
 write.onkeydown = handle;
 write.onkeyup = release;
 var caps = false;
+
+readText()
+
+function readText(){
+	commandText = $("#textdiv").text();
+	commandText.split('-').forEach(function(c) {
+    promptKey(c)
+	});
+
+}
+
 function handle(e) {
 	var text1 = e.type +
 	' key=' + e.key +
@@ -45,4 +56,32 @@ function highlightNextKey(params){
 	<!-- var str = jQuery.param( params ); -->
 	<!-- $( "#results" ).text( str ); -->
 }
+
+function promptKey(key){
+	if(key.toLowerCase()=='ctrl')
+		$("#controlleft").toggleClass("prompt");
+	else if(key.toLowerCase()=='command' || key.toLowerCase()=='cmd')
+		$("#commandleft").toggleClass("prompt");
+	else if(key.toLowerCase()=='fn')
+		$("#fnc").toggleClass("prompt");
+	else if(key.toLowerCase()=='option')
+		$("#optionleft").toggleClass("prompt");
+	else if(key.toLowerCase()=='shift')
+		$("#shiftleft").toggleClass("prompt");
+	else if(key.toLowerCase()=='esc')
+		$("#escape").toggleClass("prompt");
+	else if(key.toLowerCase()=='space bar')
+		$("#space").toggleClass("prompt");
+	else if(key.toLowerCase()=='tab')
+		$("#tab").toggleClass("prompt");
+	else if(key.toLowerCase()=='tilde(~)')
+		$("#tilde").toggleClass("prompt");
+	else if(key.toLowerCase()=='comma(,)')
+		$("#comma").toggleClass("prompt");
+	else if(key.toLowerCase()=='underscore(_)')
+		$("#minus").toggleClass("prompt");
+	else if(key.toLowerCase().charCodeAt(0)>=97 && key.toLowerCase().charCodeAt(0)<=122)
+		$("#"+key.toLowerCase()).toggleClass("prompt");
+}
+
 })
