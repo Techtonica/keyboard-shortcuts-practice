@@ -1,0 +1,12 @@
+Ctrl-A
+Ctrl-E
+Ctrl-Q
+Ctrl-L
+Ctrl-K
+Ctrl-U
+Ctrl-W
+Ctrl-Y
+Cmd-K
+Command-X
+Command-C
+Command-V
