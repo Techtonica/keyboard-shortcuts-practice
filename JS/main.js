@@ -98,11 +98,14 @@ function readText(){
 	});
 	runOnKeys(
 
-			() => alert("Hello!"),
+			() => onSuccess(),
 				...reqKeys
 		);
 }
 
+function onSuccess(){
+	$("#textdiv").text("Correct Keys pressed")
+}
 	
 function runOnKeys(func, ...keySet) {
       let pressed = new Set();
