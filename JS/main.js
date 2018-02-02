@@ -98,13 +98,18 @@ function readText(){
 	});
 	runOnKeys(
 
-			() => onSuccess(),
+			() => onSuccess(...reqKeys),
 				...reqKeys
 		);
 }
 
-function onSuccess(){
+function onSuccess(...keys){
 	$("#textdiv").text("Correct Keys pressed")
+	
+	$.each( keys, function( index, key ){
+		$("#"+key.toLowerCase()).toggleClass("prompt")
+	});
+	
 }
 	
 function runOnKeys(func, ...keySet) {
