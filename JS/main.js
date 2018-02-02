@@ -1,7 +1,7 @@
 $(document).ready(function() {
 <!-- write.onkeydown = write.onkeyup =  -->
 
-$("#textdiv").text("Ctrl-A")
+$("#textdiv").text("Control-A")
 
 $("#textdiv").addClass("anim")
 
@@ -11,18 +11,22 @@ var caps = false;
 
 readText()
 
-function readText(){
-	commandText = $("#textdiv").text();
-	commandText.split('-').forEach(function(c) {
-    promptKey(c)
-	});
-
+function checkPromptKey(e){
+	if($("#"+e.code.toLowerCase()).hasClass("prompt")){
+		
+	}
 }
+
 
 function handle(e) {
 	var text1 = e.type +
 	' key=' + e.key +
 	' code=' + e.code
+	
+	var isPrompt = false
+	<!-- Check if the key is the one of the prompted keys -->
+	isPrompt = checkPromptKey(e)	
+	
 if(e.key.toLowerCase()=="control" || e.key.toLowerCase()=="shift"){
 	$("#"+e.code.toLowerCase()).toggleClass("pressed");
 }
@@ -83,5 +87,50 @@ function promptKey(key){
 	else if(key.toLowerCase().charCodeAt(0)>=97 && key.toLowerCase().charCodeAt(0)<=122)
 		$("#"+key.toLowerCase()).toggleClass("prompt");
 }
+
+function readText(){
+	var reqKeys = []
+	commandText = $("#textdiv").text();
+	commandText.split('-').forEach(function(c) {		
+		reqKeys.push(c)
+		promptKey(c)
+		runOnKeys(
+
+			() => alert("Hello!"),
+				...reqKeys
+		);
+	});
+}
+
+var arr = ['a', 'Control'];
+runOnKeys(
+
+      () => alert("Hello!"),
+      ...arr
+    );
+	
+function runOnKeys(func, ...keySet) {
+      let pressed = new Set();
+
+      document.addEventListener('keydown', function(event) {
+        pressed.add(event.key.toLowerCase());
+
+        for (let key of keySet) { // are all required keys pressed?
+          if (!pressed.has(key.toLowerCase())) {
+            return;
+          }
+        }
+
+        // All the required keys are pressed
+        pressed.clear();
+
+        func();
+      });
+
+      document.addEventListener('keyup', function(event) {
+        pressed.delete(event.key.toLowerCase());
+      });
+
+    }
 
 })
