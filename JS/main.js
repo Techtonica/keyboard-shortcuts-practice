@@ -94,20 +94,15 @@ function readText(){
 	commandText.split('-').forEach(function(c) {		
 		reqKeys.push(c)
 		promptKey(c)
-		runOnKeys(
+		
+	});
+	runOnKeys(
 
 			() => alert("Hello!"),
 				...reqKeys
 		);
-	});
 }
 
-var arr = ['a', 'Control'];
-runOnKeys(
-
-      () => alert("Hello!"),
-      ...arr
-    );
 	
 function runOnKeys(func, ...keySet) {
       let pressed = new Set();
