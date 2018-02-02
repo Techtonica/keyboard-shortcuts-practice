@@ -63,7 +63,7 @@ function highlightNextKey(params){
 
 function promptKey(key){
 	if(key.toLowerCase()=='ctrl'||key.toLowerCase()=='control')
-		$("#controlleft").toggleClass("prompt");
+		$("#control").toggleClass("prompt");
 	else if(key.toLowerCase()=='command' || key.toLowerCase()=='cmd')
 		$("#commandleft").toggleClass("prompt");
 	else if(key.toLowerCase()=='fn')
