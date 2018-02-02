@@ -26,7 +26,7 @@ function handle(e) {
 	var isPrompt = false
 	<!-- Check if the key is the one of the prompted keys -->
 	isPrompt = checkPromptKey(e)	
-if(e.key.toLowerCase()==""){
+if(e.code.toLowerCase()=="space"){
 	$("#space").toggleClass("pressed");
 }
 	
@@ -51,7 +51,7 @@ function release(e) {
 	if(e.key.toLowerCase()=="control" || e.key.toLowerCase()=="shift"){
 	$("#"+e.code.toLowerCase()).toggleClass("pressed");
 }
-if(e.key.toLowerCase()==""){
+if(e.code.toLowerCase()=="space"){
 	$("#space").toggleClass("pressed");
 }
 	if(e.key.toLowerCase()=="capslock")return
