@@ -121,7 +121,7 @@ function readText(){
 
 function writeQuestion(question, speed, i) {
   if (i < question.length) {
-    $("#textdiv").text() += question.charAt(i);
+    $("#textdiv").text += question.charAt(i);
     i++;
     setTimeout(writeQuestion, speed);
   }
