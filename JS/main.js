@@ -30,7 +30,7 @@ if(e.code.toLowerCase()=="space"){
 	$("#space").toggleClass("pressed");
 }
 	
-if(e.key.toLowerCase()=="control" || e.key.toLowerCase()=="shift"){
+if(e.key.toLowerCase()=="alt" || e.key.toLowerCase()=="shift" || e.key.toLowerCase()=="command"){
 	$("#"+e.code.toLowerCase()).toggleClass("pressed");
 }
 	
@@ -48,7 +48,7 @@ else $("#"+e.key.toLowerCase() ).addClass("pressed");
 }
 
 function release(e) {
-	if(e.key.toLowerCase()=="control" || e.key.toLowerCase()=="shift"){
+	if(e.key.toLowerCase()=="alt" || e.key.toLowerCase()=="shift" || e.key.toLowerCase()=="command"){
 	$("#"+e.code.toLowerCase()).toggleClass("pressed");
 }
 if(e.code.toLowerCase()=="space"){
