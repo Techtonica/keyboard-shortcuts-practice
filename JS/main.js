@@ -123,7 +123,7 @@ function writeQuestion(question, speed, i) {
   if (i < question.length) {
     $("#textdiv").innerHTML+= question.charAt(i);
     i++;
-    setTimeout(writeQuestion, speed);
+    setTimeout(writeQuestion, speed, i);
   }
 }
 
