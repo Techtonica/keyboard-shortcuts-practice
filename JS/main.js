@@ -106,7 +106,7 @@ function readText(){
 	var speed = 50
 	
 	var i = 0;
-	writeQuestion("How do you go to the start of text?", speed)
+	writeQuestion("How do you go to the start of text?", speed, i)
 	commandText.split('-').forEach(function(c) {		
 		reqKeys.push(c)
 		promptKey(c)
@@ -119,7 +119,7 @@ function readText(){
 		);
 }
 
-function writeQuestion(question, speed) {
+function writeQuestion(question, speed, i) {
   if (i < question.length) {
     $("#textdiv").innerHTML += txt.charAt(i);
     i++;
