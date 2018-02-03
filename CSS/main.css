@@ -31,6 +31,7 @@ overflow: hidden;
 white-space:nowrap;
 <!-- animation: typing 3.5s; -->
 }
+
 .anim {
 animation : typing 3.5s steps(30, end);
 }

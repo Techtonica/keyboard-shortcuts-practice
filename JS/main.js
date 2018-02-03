@@ -1,9 +1,7 @@
 $(document).ready(function() {
 <!-- write.onkeydown = write.onkeyup =  -->
 
-$("#textdiv").text("Control-A")
-
-$("#textdiv").addClass("anim")
+//$("#textdiv").text("Control-A")
 
 write.onkeydown = handle;
 write.onkeyup = release;
@@ -104,7 +102,11 @@ function promptKey(key){
 
 function readText(){
 	var reqKeys = []
-	commandText = $("#textdiv").text();
+	commandText = "A-Control"  //$("#textdiv").text();
+	var speed = 50
+	
+	var i = 0;
+	writeQuestion("How do you go to the start of text?", speed)
 	commandText.split('-').forEach(function(c) {		
 		reqKeys.push(c)
 		promptKey(c)
@@ -115,6 +117,14 @@ function readText(){
 			() => onSuccess(...reqKeys),
 				...reqKeys
 		);
+}
+
+function writeQuestion(question, speed) {
+  if (i < question.length) {
+    $("#textdiv").innerHTML += txt.charAt(i);
+    i++;
+    setTimeout(writeQuestion, speed);
+  }
 }
 
 function onSuccess(...keys){
