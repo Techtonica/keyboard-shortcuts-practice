@@ -30,6 +30,10 @@ if(e.code.toLowerCase()=="space"){
 	$("#space").toggleClass("pressed");
 }
 	
+if((e.which>=186 && e.which<=192)|| (e.which>=219 && e.which<=222)){
+	$("#"+e.code.toLowerCase()).toggleClass("pressed");
+}
+	
 if(e.key.toLowerCase()=="alt" || e.key.toLowerCase()=="shift" || e.key.toLowerCase()=="command"){
 	$("#"+e.code.toLowerCase()).toggleClass("pressed");
 }
