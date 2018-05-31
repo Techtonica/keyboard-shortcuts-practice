@@ -19,11 +19,12 @@ border: 1px solid #f9f9f9;
 }
 #read {
 margin: 10px 0 5px;
-padding: 5px;
-width: 667px;
+padding: 15px;
+width: 648px;
 height: 200px;
-font: 1em/1.5 Verdana, Sans-Serif;
-background: #fff;
+font: 2.5em/1.5 Verdana, Sans-Serif;
+background: #0093b5;
+color: white;
 border: 1px solid #f9f9f9;
 overflow: hidden;
 -moz-border-radius: 5px;
