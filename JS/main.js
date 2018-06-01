@@ -1,29 +1,35 @@
 $(document).ready(function() {
 <!-- write.onkeydown = write.onkeyup =  -->
-
 //$("#textdiv").text("Control-A")
 
+//Set keyUp and KeyDown custom functions
 write.onkeydown = handle;
 write.onkeyup = release;
+
+// Global variable to keep track of CapsLock 
 var caps = false;
 
+// Call readText() 
 readText()
 
+// May have to be removed. Not being used currently
 function checkPromptKey(e){
 	if($("#"+e.code.toLowerCase()).hasClass("prompt")){
 		
 	}
 }
 
-
+// Function called on KeyDown to show Pressed key by adding class = 'pressed' 
 function handle(e) {
-	var text1 = e.type +
-	' key=' + e.key +
-	' code=' + e.code
 	
+	
+	<!--var text1 = e.type +
+	' key=' + e.key +
+	' code=' + e.code		
 	var isPrompt = false
-	<!-- Check if the key is the one of the prompted keys -->
-	isPrompt = checkPromptKey(e)	
+	//Check if the key is the one of the prompted keys
+	isPrompt = checkPromptKey(e)-->
+	
 if(e.code.toLowerCase()=="space"){
 	$("#space").toggleClass("pressed");
 }
@@ -49,6 +55,7 @@ else if(e.key.toLowerCase()=="capslock" && caps==true) {
 else $("#"+e.key.toLowerCase() ).addClass("pressed");
 }
 
+// Function called on KeyUp to reset the key by removing class = 'pressed'
 function release(e) {
 if((e.which>=186 && e.which<=192)|| (e.which>=219 && e.which<=222)){
 	$("#"+e.code.toLowerCase()).toggleClass("pressed");
@@ -66,6 +73,7 @@ else{
 	}
 }
 
+// May have to be removed. Not being used currently
 function highlightNextKey(params){
 	$("#"+nxt.toLowerCase()).toggleClass("pressed");
 	<!-- var params = { width:1680, height:1050 }; -->
@@ -73,7 +81,9 @@ function highlightNextKey(params){
 	<!-- $( "#results" ).text( str ); -->
 }
 
+// Function to highlight any key passed as input
 function promptKey(key){
+	// Handling all key types
 	if(key.toLowerCase()=='ctrl'||key.toLowerCase()=='control')
 		$("#control").toggleClass("prompt");
 	else if(key.toLowerCase()=='command' || key.toLowerCase()=='cmd')
@@ -100,18 +110,25 @@ function promptKey(key){
 		$("#"+key.toLowerCase()).toggleClass("prompt");
 }
 
+// Function to read the next combination of keys and highlight it on keyboard
 function readText(){
 	var reqKeys = []
-	commandText = "A-Control"  //$("#textdiv").text();
+	commandText = "A-Control"  //$("#textdiv").text(); // Will be taken from some other list type of a source. 
+								//Each command will have an associated question text used in writeQuestion
 	var speed = 50
 	
 	var i = 0;
+	// Call writeQuestion to add question on the top textarea
 	writeQuestion("How do you go to the start of text?", speed, i)
+	
 	commandText.split('-').forEach(function(c) {		
 		reqKeys.push(c)
+		// Highlight the command keys
 		promptKey(c)
 		
 	});
+	
+	// When the reqKeys combination is pressed, onSuccess function is called
 	runOnKeys(
 
 			() => onSuccess(...reqKeys),
@@ -127,15 +144,18 @@ function writeQuestion(question, speed, i) {
   }
 }
 
+// Function to execute when correct keys are pressed.
 function onSuccess(...keys){
 	$("#textdiv").text("Correct Keys pressed")
 	
+	// Un-Highlight the command keys.
 	$.each( keys, function( index, key ){
 		$("#"+key.toLowerCase()).toggleClass("prompt")
 	});
 	
 }
-	
+
+// Function to keep track when correct keys are pressed with a call back Success function as onSuccess() 
 function runOnKeys(func, ...keySet) {
       let pressed = new Set();
 
