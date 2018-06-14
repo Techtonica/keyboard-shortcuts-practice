@@ -23,12 +23,12 @@ function checkPromptKey(e){
 function handle(e) {
 	
 	
-	<!--var text1 = e.type +
+	var text1 = e.type +
 	' key=' + e.key +
 	' code=' + e.code		
 	var isPrompt = false
 	//Check if the key is the one of the prompted keys
-	isPrompt = checkPromptKey(e)-->
+	isPrompt = checkPromptKey(e)
 	
 if(e.code.toLowerCase()=="space"){
 	$("#space").toggleClass("pressed");
