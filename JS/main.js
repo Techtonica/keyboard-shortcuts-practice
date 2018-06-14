@@ -119,8 +119,8 @@ function readText(){
 	
 	var i = 0;
 	// Call writeQuestion to add question on the top textarea
-	writeQuestion("How do you go to the start of text?", speed, i)
-	
+	writeQuestion("How do you go to the start of text?")
+		
 	commandText.split('-').forEach(function(c) {		
 		reqKeys.push(c)
 		// Highlight the command keys
@@ -136,12 +136,15 @@ function readText(){
 		);
 }
 
-function writeQuestion(question, speed, i) {
-  if (i < question.length) {
-    $("#textdiv").append(question.charAt(i));
-    i++;
-    setTimeout(writeQuestion, speed);
-  }
+function writeQuestion(question) {
+	var newfield = document.getElementById('textdiv');
+
+	var typewriter = new Typewriter(newfield, {
+		loop: false
+	});
+
+	typewriter.typeString(question)
+    .start();
 }
 
 // Function to execute when correct keys are pressed.
