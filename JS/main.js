@@ -1,17 +1,14 @@
 function retry(){
 	// Hide the Try again button
 	$("#retryButton").toggleClass("on");
-readText();
+	readText();
 }
 
 $(document).ready(function() {
-	
-// Hide the Try again button
-$("#retryButton").addClass("on");
-	
+$("#retryButton").toggleClass("on");	
 // Call readText() 
 readText()
-})
+});
 	
 //$("#textdiv").text("Control-A")
 
