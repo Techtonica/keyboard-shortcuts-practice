@@ -170,7 +170,9 @@ function onSuccess(...keys){
 	reqKeys = [];
 	
 	// Show the Try again button
+	if(keys!=[]){
 	$("#retryButton").toggleClass("on");
+	}
 }
 
 // Function to keep track when correct keys are pressed with a call back Success function as onSuccess() 
