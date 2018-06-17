@@ -5,6 +5,10 @@ readText();
 }
 
 $(document).ready(function() {
+	
+// Hide the Try again button
+	$("#retryButton").toggleClass("on");
+	
 // Call readText() 
 readText()
 })
