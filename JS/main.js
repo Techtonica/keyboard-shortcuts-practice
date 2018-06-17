@@ -3,7 +3,10 @@ readText();
 }
 
 $(document).ready(function() {
-<!-- write.onkeydown = write.onkeyup =  -->
+// Call readText() 
+readText()
+})
+	
 //$("#textdiv").text("Control-A")
 
 //Set keyUp and KeyDown custom functions
@@ -13,8 +16,7 @@ $(document).ready(function() {
 // Global variable to keep track of CapsLock 
 var caps = false;
 
-// Call readText() 
-readText()
+
 
 // May have to be removed. Not being used currently
 function checkPromptKey(e){
@@ -190,4 +192,4 @@ function runOnKeys(func, ...keySet) {
 
     }
 
-})
+//})
