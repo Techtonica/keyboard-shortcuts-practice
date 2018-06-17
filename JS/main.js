@@ -5,6 +5,7 @@ $(document).ready(function() {
 //Set keyUp and KeyDown custom functions
 write.onkeydown = handle;
 write.onkeyup = release;
+write.onkeypress = check;
 
 // Global variable to keep track of CapsLock 
 var caps = false;
@@ -17,6 +18,10 @@ function checkPromptKey(e){
 	if($("#"+e.code.toLowerCase()).hasClass("prompt")){
 		
 	}
+}
+
+function check(e){
+	e.preventDefault();
 }
 
 // Function called on KeyDown to show Pressed key by adding class = 'pressed' 
