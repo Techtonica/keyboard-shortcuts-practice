@@ -166,7 +166,7 @@ function runOnKeys(func, ...keySet) {
       document.addEventListener('keydown', function(event) {
 		event.preventDefault();
         pressed.add(event.key.toLowerCase());
-		handle(e);
+		handle(event);
         for (let key of keySet) { // are all required keys pressed?
           if (!pressed.has(key.toLowerCase())) {
             return;
@@ -182,7 +182,7 @@ function runOnKeys(func, ...keySet) {
       document.addEventListener('keyup', function(event) {
 		  event.preventDefault();
         pressed.delete(event.key.toLowerCase());
-		release(e);
+		release(event);
       });
 
     }
