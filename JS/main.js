@@ -1,3 +1,7 @@
+function retry(){
+readText();
+}
+
 $(document).ready(function() {
 <!-- write.onkeydown = write.onkeyup =  -->
 //$("#textdiv").text("Control-A")
@@ -19,9 +23,6 @@ function checkPromptKey(e){
 	}
 }
 
-function retry(){
-readText();
-}
 
 // Function called on KeyDown to show Pressed key by adding class = 'pressed' 
 function handle(e) {	
