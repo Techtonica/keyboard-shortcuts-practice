@@ -170,7 +170,7 @@ function onSuccess(...keys){
 	reqKeys = [];
 	
 	// Show the Try again button
-	if(keys!=[]){
+	if(keys.length!=0){
 	$("#retryButton").toggleClass("on");
 	}
 }
