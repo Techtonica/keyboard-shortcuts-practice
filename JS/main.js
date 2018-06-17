@@ -3,8 +3,8 @@ $(document).ready(function() {
 //$("#textdiv").text("Control-A")
 
 //Set keyUp and KeyDown custom functions
-write.onkeydown = handle;
-write.onkeyup = release;
+//write.onkeydown = handle;
+//write.onkeyup = release;
 
 // Global variable to keep track of CapsLock 
 var caps = false;
@@ -20,9 +20,7 @@ function checkPromptKey(e){
 }
 
 // Function called on KeyDown to show Pressed key by adding class = 'pressed' 
-function handle(e) {
-	e.preventDefault();
-	
+function handle(e) {	
 	var text1 = e.type +
 	' key=' + e.key +
 	' code=' + e.code		
@@ -57,7 +55,7 @@ else $("#"+e.key.toLowerCase() ).addClass("pressed");
 
 // Function called on KeyUp to reset the key by removing class = 'pressed'
 function release(e) {
-	e.preventDefault();
+	
 if((e.which>=186 && e.which<=192)|| (e.which>=219 && e.which<=222)){
 	$("#"+e.code.toLowerCase()).toggleClass("pressed");
 }
