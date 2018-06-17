@@ -19,6 +19,10 @@ function checkPromptKey(e){
 	}
 }
 
+function retry(){
+readText();
+}
+
 // Function called on KeyDown to show Pressed key by adding class = 'pressed' 
 function handle(e) {	
 	var text1 = e.type +
