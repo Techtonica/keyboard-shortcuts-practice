@@ -116,9 +116,10 @@ function promptKey(key){
 		$("#"+key.toLowerCase()).toggleClass("prompt");
 }
 
+var reqKeys = []
 // Function to read the next combination of keys and highlight it on keyboard
 function readText(){
-	var reqKeys = []
+	
 	commandText = "A-Control"  //$("#textdiv").text(); // Will be taken from some other list type of a source. 
 								//Each command will have an associated question text used in writeQuestion
 	var speed = 50
@@ -161,6 +162,9 @@ function onSuccess(...keys){
 	$.each( keys, function( index, key ){
 		$("#"+key.toLowerCase()).toggleClass("prompt")
 	});
+	
+	// Reset the reqKeys
+	reqKeys = [];
 	
 }
 
