@@ -7,7 +7,7 @@ readText();
 $(document).ready(function() {
 	
 // Hide the Try again button
-	$("#retryButton").toggleClass("on");
+$("#retryButton").addClass("on");
 	
 // Call readText() 
 readText()
