@@ -1,4 +1,6 @@
 function retry(){
+	// Hide the Try again button
+	$("#retryButton").toggleClass("on");
 readText();
 }
 
@@ -166,6 +168,8 @@ function onSuccess(...keys){
 	// Reset the reqKeys
 	reqKeys = [];
 	
+	// Show the Try again button
+	$("#retryButton").toggleClass("on");
 }
 
 // Function to keep track when correct keys are pressed with a call back Success function as onSuccess() 
