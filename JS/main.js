@@ -5,7 +5,6 @@ $(document).ready(function() {
 //Set keyUp and KeyDown custom functions
 write.onkeydown = handle;
 write.onkeyup = release;
-write.onkeypress = check;
 
 // Global variable to keep track of CapsLock 
 var caps = false;
@@ -18,10 +17,6 @@ function checkPromptKey(e){
 	if($("#"+e.code.toLowerCase()).hasClass("prompt")){
 		
 	}
-}
-
-function check(e){
-	e.preventDefault();
 }
 
 // Function called on KeyDown to show Pressed key by adding class = 'pressed' 
@@ -169,6 +164,7 @@ function runOnKeys(func, ...keySet) {
       let pressed = new Set();
 
       document.addEventListener('keydown', function(event) {
+		event.preventDefault();
         pressed.add(event.key.toLowerCase());
 
         for (let key of keySet) { // are all required keys pressed?
@@ -184,6 +180,7 @@ function runOnKeys(func, ...keySet) {
       });
 
       document.addEventListener('keyup', function(event) {
+		  event.preventDefault();
         pressed.delete(event.key.toLowerCase());
       });
 
