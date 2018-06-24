@@ -12,4 +12,159 @@
     "answer": "Ctrl+q",
     "question": "How do you clears everything on current line?",
     "keys": [17, 81]
+  },
+  {
+    "answer": "Ctrl+l",
+    "question": "How do you clear the screen using the control key?",
+    "keys": [17, 76]
+  },
+  {
+    "answer": "Ctrl+k",
+    "question": "How do you cut everything forward to end of line?",
+    "keys": [17, 75]
+  },
+  {
+    "answer": "Ctrl+u",
+    "question": "How do you cut everything backwards to beginning of line?",
+    "keys": [17, 85]
+  },
+  {
+    "answer": "Ctrl+w",
+    "question": "How do you cut one word backwards using white space as delimiter?",
+    "keys": [17, 87]
+  },
+  {
+    "answer": "Ctrl+y",
+    "question": "How do you paste whatever was cut by the last cut command?",
+    "keys": [17, 89]
+  },
+  {
+    "answer": "&#8984;+x",
+    "question": "How do you cut the selected item and copy it to the clipboard?",
+    "keys": [91, 88]
+  },
+  {
+    "answer": "&#8984;+c",
+    "question": "How do you copy the selected item to the clipboard?",
+    "keys": [91, 67]
+  },
+  {
+    "answer": "&#8984;+v",
+    "question": "How do you paste the contents of the clipboard into the current document or app?",
+    "keys": [91, 86]
+  },
+  {
+    "answer": "&#8984;+z",
+    "question": "How do you undo the previous command?",
+    "keys": [91, 90]
+  },
+  {
+    "answer": "&#8984;+Shift+z",
+    "question": "How do you redo to reverse the undo command?",
+    "keys": [91, 16, 90]
+  },
+  {
+    "answer": "&#8984;+a",
+    "question": "How do you select All items?",
+    "keys": [91, 65]
+  },
+  {
+    "answer": "&#8984;+f",
+    "question": "How do you find items in a document or open a Find window?",
+    "keys": [91, 70]
+  },
+  {
+    "answer": "&#8984;+g",
+    "question": "How do you find Again? (Find the next occurrence of the item previously found.)",
+    "keys": [91, 71]
+  },
+  {
+    "answer": "&#8984;+h",
+    "question": "How do you hide the windows of the front app?",
+    "keys": [91, 72]
+  },
+  {
+    "answer": "&#8984;+Option+h",
+    "question": "How do you view the front app but hide all other apps?",
+    "keys": [91, 18, 72]
+  },
+  {
+    "answer": "&#8984;+k",
+    "question": "How do you clear the screen using the command key?",
+    "keys": [91, 75]
+  },
+  {
+    "answer": "&#8984;+m",
+    "question": "How do you minimize the front window to the Dock?",
+    "keys": [91, 77]
+  },
+  {
+    "answer": "&#8984;+Option+m",
+    "question": "How do you minimize all windows of the front app?",
+    "keys": [91, 18, 77]
+  },
+  {
+    "answer": "&#8984;+n",
+    "question": "How do you open a new document or window?",
+    "keys": [91, 78]
+  },
+  {
+    "answer": "&#8984;+o",
+    "question": "How do you open the selected item, or open a dialog to select a file to open?",
+    "keys": [91, 79]
+  },
+  {
+    "answer": "&#8984;+p",
+    "question": "How do you print the current document?",
+    "keys": [91, 80]
+  },
+  {
+    "answer": "&#8984;+s",
+    "question": "How do you save the current document?",
+    "keys": [91, 83]
+  },
+  {
+    "answer": "&#8984;+w",
+    "question": "How do you close the front window?",
+    "keys": [91, 87]
+  },
+  {
+    "answer": "&#8984;+Option+w",
+    "question": "How do you close all windows of the app?",
+    "keys": [91, 18, 87]
+  },
+  {
+    "answer": "&#8984;+q",
+    "question": "How do you quit the app?",
+    "keys": [91, 81]
+  },
+  {
+    "answer": "Option+&#8984;+Esc",
+    "question": "How do you force quit?",
+    "keys": [18, 91, 27]
+  },
+  {
+    "answer": "&#8984;+Space",
+    "question": "How do you show or hide the Spotlight search field?",
+    "keys": [91, 32]
+  },
+  {
+    "answer": "&#8984;+Tab",
+    "question": "How do you switch to the next most recently used app among your open apps?",
+    "keys": [91, 9]
+  },
+  {
+    "answer": "Shift+&#8984;+Tilde(~)",
+    "question": "How do you switch to the next most recently used window of the front app?",
+    "keys": [16 ,91, 192]
+  },
+  {
+    "answer": "Shift+&#8984;+3",
+    "question": "How do you take a screenshot of the entire screen?",
+    "keys": [16 ,91, 51]
+  },
+  {
+    "answer": "&#8984;+Comma(,)",
+    "question": "How do you open preferences for the front app?",
+    "keys": [91, 188]
   }]

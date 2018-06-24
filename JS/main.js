@@ -101,7 +101,7 @@ function promptKey(key){
 	// Handling all key types
 	if(key.toLowerCase()=='ctrl'||key.toLowerCase()=='control')
 		$("#control").toggleClass("prompt");
-	else if(key.toLowerCase()=='command' || key.toLowerCase()=='cmd')
+	else if(key.toLowerCase()=='command' || key.toLowerCase()=='cmd'|| key.toLowerCase()=='&#8984;')
 		$("#commandleft").toggleClass("prompt");
 	else if(key.toLowerCase()=='fn')
 		$("#fnc").toggleClass("prompt");
@@ -129,7 +129,7 @@ var reqKeys = []
 // Function to read the next combination of keys and highlight it on keyboard
 function readText(){
 	
-	commandText = "A-Control"  //$("#textdiv").text(); // Will be taken from some other list type of a source. 
+	commandText = "A+Control"  //$("#textdiv").text(); // Will be taken from some other list type of a source. 
 								//Each command will have an associated question text used in writeQuestion
 	var speed = 50
 	
@@ -137,7 +137,7 @@ function readText(){
 	// Call writeQuestion to add question on the top textarea
 	writeQuestion("How do you go to the start of text?")
 		
-	commandText.split('-').forEach(function(c) {		
+	commandText.split('+').forEach(function(c) {		
 		reqKeys.push(c)
 		// Highlight the command keys
 		promptKey(c)
