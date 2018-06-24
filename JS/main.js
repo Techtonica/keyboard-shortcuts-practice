@@ -8,6 +8,11 @@ $(document).ready(function() {
 $("#retryButton").toggleClass("on");	
 // Call readText() 
 readText()
+
+$.getJSON( "shortcuts.json", function( data ) {
+	alert(data)
+})
+
 });
 	
 //$("#textdiv").text("Control-A")
