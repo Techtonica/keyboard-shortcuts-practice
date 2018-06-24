@@ -10,10 +10,11 @@ $("#retryButton").toggleClass("on");
 readText()
 
 $.getJSON( "JS/shortcuts.json", function( data ) {
-	alert(data.length)
+	//alert(data.length)
 	//data.length  6  data[0].name
 	if(sessionStorage.getItem("questionNo")==null){
 		sessionStorage.setItem("questionNo", "1");
+		alert("is not set");
 	}
 })
 
