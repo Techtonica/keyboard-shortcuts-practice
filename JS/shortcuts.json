@@ -1,5 +1,4 @@
-[
-  {
+[{
     answer: "Ctrl+a",
     question: "How do you go to the beginning of the line you are currently typing on?",
     keys: [17, 65]
@@ -168,5 +167,4 @@
     answer: "⌘+Comma(,)",
     question: "How do you open preferences for the front app?",
     keys: [91, 188]
-  }  
-]
+  }]
