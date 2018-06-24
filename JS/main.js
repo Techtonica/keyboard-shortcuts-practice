@@ -11,6 +11,7 @@ readText()
 
 $.getJSON( "JS/shortcuts.json", function( data ) {
 	alert(data.length)
+	sessionStorage.setItem("questionNo", "1");
 	//data.length  6  data[0].name
 })
 
