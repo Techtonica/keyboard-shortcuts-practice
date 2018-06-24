@@ -9,7 +9,7 @@ $("#retryButton").toggleClass("on");
 // Call readText() 
 readText()
 
-$.getJSON( "shortcuts.json", function( data ) {
+$.getJSON( "JS/shortcuts.json", function( data ) {
 	alert(data)
 })
 
