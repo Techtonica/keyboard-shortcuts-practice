@@ -160,6 +160,7 @@ function readText(){
 	
 	var i = 0;
 	// Call writeQuestion to add question on the top textarea
+	console.log(allData[parseInt(sessionStorage.getItem("questionNo"))-1].question);
 	writeQuestion(allData[parseInt(sessionStorage.getItem("questionNo"))-1].question)
 		
 	commandText.split('+').forEach(function(c) {		
