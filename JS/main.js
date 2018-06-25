@@ -180,6 +180,7 @@ function readText(){
 }
 
 function writeQuestion(question) {
+	$("#textdiv").text("");
 	var newfield = document.getElementById('textdiv');
 
 	var typewriter = new Typewriter(newfield, {
