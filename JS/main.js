@@ -14,6 +14,9 @@ function nextQuestion(){
 	// Un-Highlight the command keys.
 	$.each( reqKeys, function( index, key ){
 		$("#"+key.toLowerCase()).toggleClass("prompt")
+		if(key.toLowerCase()=="meta"){
+			$("#metaleft").toggleClass("prompt")
+		}
 	});
 	
 	// Reset the reqKeys
@@ -77,7 +80,7 @@ if((e.which>=186 && e.which<=192)|| (e.which>=219 && e.which<=222)){
 	$("#"+e.code.toLowerCase()).toggleClass("pressed");
 }
 	
-if(e.key.toLowerCase()=="alt" || e.key.toLowerCase()=="shift" || e.key.toLowerCase()=="command"){
+if(e.key.toLowerCase()=="alt" || e.key.toLowerCase()=="shift" || e.key.toLowerCase()=="meta"){
 	$("#"+e.code.toLowerCase()).toggleClass("pressed");
 }
 	
@@ -101,7 +104,7 @@ if((e.which>=186 && e.which<=192)|| (e.which>=219 && e.which<=222)){
 	$("#"+e.code.toLowerCase()).toggleClass("pressed");
 }
 
-if(e.key.toLowerCase()=="alt" || e.key.toLowerCase()=="shift" || e.key.toLowerCase()=="command"){
+if(e.key.toLowerCase()=="alt" || e.key.toLowerCase()=="shift" || e.key.toLowerCase()=="meta"){
 	$("#"+e.code.toLowerCase()).toggleClass("pressed");
 }
 if(e.code.toLowerCase()=="space"){
@@ -130,7 +133,7 @@ function promptKey(key){
 		if(key.toLowerCase()=='ctrl'||key.toLowerCase()=='control')
 			$("#control").toggleClass("prompt");
 		if(key.toLowerCase()=='command' || key.toLowerCase()=='cmd')
-			$("#commandleft").toggleClass("prompt");
+			$("#metaleft").toggleClass("prompt");
 		if(key.toLowerCase()=='fn')
 			$("#fnc").toggleClass("prompt");
 		if(key.toLowerCase()=='option')
@@ -168,8 +171,12 @@ function readText(){
 	console.log(allData[parseInt(sessionStorage.getItem("questionNo"))-1].question);
 	writeQuestion(allData[parseInt(sessionStorage.getItem("questionNo"))-1].question)
 		
-	commandText.split('+').forEach(function(c) {		
-		reqKeys.push(c)
+	commandText.split('+').forEach(function(c) {	
+		if(c.toLowerCase()=="command"){
+			reqKeys.push("meta")
+		}else{			
+			reqKeys.push(c)
+		}
 		// Highlight the command keys
 		promptKey(c)
 		
@@ -210,6 +217,9 @@ function onSuccess(...keys){
 	// Un-Highlight the command keys.
 	$.each( keys, function( index, key ){
 		$("#"+key.toLowerCase()).toggleClass("prompt")
+		if(key.toLowerCase()=="meta"){
+			$("#metaleft").toggleClass("prompt")
+		}
 	});
 	
 	// Reset the reqKeys
