@@ -126,27 +126,27 @@ function promptKey(key){
 	// Handling all key types
 	if(key.toLowerCase()=='ctrl'||key.toLowerCase()=='control')
 		$("#control").toggleClass("prompt");
-	else if(key.toLowerCase()=='command' || key.toLowerCase()=='cmd')
+	if(key.toLowerCase()=='command' || key.toLowerCase()=='cmd')
 		$("#commandleft").toggleClass("prompt");
-	else if(key.toLowerCase()=='fn')
+	if(key.toLowerCase()=='fn')
 		$("#fnc").toggleClass("prompt");
-	else if(key.toLowerCase()=='option')
+	if(key.toLowerCase()=='option')
 		$("#optionleft").toggleClass("prompt");
-	else if(key.toLowerCase()=='shift')
+	if(key.toLowerCase()=='shift')
 		$("#shiftleft").toggleClass("prompt");
-	else if(key.toLowerCase()=='esc')
+	if(key.toLowerCase()=='esc')
 		$("#escape").toggleClass("prompt");
-	else if(key.toLowerCase()=='space bar')
+	if(key.toLowerCase()=='space bar')
 		$("#space").toggleClass("prompt");
-	else if(key.toLowerCase()=='tab')
+	if(key.toLowerCase()=='tab')
 		$("#tab").toggleClass("prompt");
-	else if(key.toLowerCase()=='tilde(~)')
+	if(key.toLowerCase()=='tilde(~)')
 		$("#tilde").toggleClass("prompt");
-	else if(key.toLowerCase()=='comma(,)')
+	if(key.toLowerCase()=='comma(,)')
 		$("#comma").toggleClass("prompt");
-	else if(key.toLowerCase()=='underscore(_)')
+	if(key.toLowerCase()=='underscore(_)')
 		$("#minus").toggleClass("prompt");
-	else if(key.toLowerCase().charCodeAt(0)>=97 && key.toLowerCase().charCodeAt(0)<=122)
+	if(key.toLowerCase().charCodeAt(0)>=97 && key.toLowerCase().charCodeAt(0)<=122)
 		$("#"+key.toLowerCase()).toggleClass("prompt");
 }
 
