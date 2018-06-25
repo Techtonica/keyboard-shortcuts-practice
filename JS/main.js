@@ -37,7 +37,7 @@ $.getJSON( "JS/shortcuts.json", function( data ) {
 	allData = data;
 	if(sessionStorage.getItem("questionNo")==null){
 		sessionStorage.setItem("questionNo", "1");
-		alert("is not set");
+		console.log("is not set");
 	}
 	// Call readText() 
 	readText()
@@ -173,11 +173,14 @@ function readText(){
 	});
 	
 	// When the reqKeys combination is pressed, onSuccess function is called
-	runOnKeys(
+	/*runOnKeys(
 
 			() => onSuccess(...reqKeys),
 				...reqKeys
-		);
+		);*/
+	
+	key(commandText, function(){ onSuccess(...reqKeys)});
+	
 	} // END IF for sessionStorage check
 }
 
