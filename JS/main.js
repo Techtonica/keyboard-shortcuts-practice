@@ -126,7 +126,7 @@ function promptKey(key){
 	// Handling all key types
 	if(key.toLowerCase()=='ctrl'||key.toLowerCase()=='control')
 		$("#control").toggleClass("prompt");
-	else if(key.toLowerCase()=='command' || key.toLowerCase()=='cmd'|| key.toLowerCase()=='&#8984;')
+	else if(key.toLowerCase()=='command' || key.toLowerCase()=='cmd')
 		$("#commandleft").toggleClass("prompt");
 	else if(key.toLowerCase()=='fn')
 		$("#fnc").toggleClass("prompt");
