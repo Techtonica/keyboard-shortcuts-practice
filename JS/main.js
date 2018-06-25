@@ -1,3 +1,16 @@
+// Global variable to keep track of CapsLock 
+var caps = false;
+
+var allData ;
+
+function nextQuestion(){
+	if(sessionStorage.getItem("questionNo")!=null){
+		sessionStorage.setItem("questionNo", parseInt(sessionStorage.getItem("questionNo"))+1);
+	}
+	
+	readText();
+}
+
 function retry(){
 	// Hide the Try again button
 	$("#retryButton").toggleClass("on");
@@ -6,16 +19,17 @@ function retry(){
 
 $(document).ready(function() {
 $("#retryButton").toggleClass("on");	
-// Call readText() 
-readText()
+
 
 $.getJSON( "JS/shortcuts.json", function( data ) {
 	//alert(data.length)
-	//data.length  6  data[0].name
+	allData = data;
 	if(sessionStorage.getItem("questionNo")==null){
 		sessionStorage.setItem("questionNo", "1");
 		alert("is not set");
 	}
+	// Call readText() 
+	readText()
 })
 
 });
@@ -25,10 +39,6 @@ $.getJSON( "JS/shortcuts.json", function( data ) {
 //Set keyUp and KeyDown custom functions
 //write.onkeydown = handle;
 //write.onkeyup = release;
-
-// Global variable to keep track of CapsLock 
-var caps = false;
-
 
 
 // May have to be removed. Not being used currently
@@ -132,14 +142,16 @@ function promptKey(key){
 var reqKeys = []
 // Function to read the next combination of keys and highlight it on keyboard
 function readText(){
-	
-	commandText = "A+Control"  //$("#textdiv").text(); // Will be taken from some other list type of a source. 
+	if(sessionStorage.getItem("questionNo")!=null){
+		commandText = allData[parseInt(sessionStorage.getItem("questionNo"))-1].answer
+		
+	//commandText = "A+Control"  //$("#textdiv").text(); // Will be taken from some other list type of a source. 
 								//Each command will have an associated question text used in writeQuestion
 	var speed = 50
 	
 	var i = 0;
 	// Call writeQuestion to add question on the top textarea
-	writeQuestion("How do you go to the start of text?")
+	writeQuestion(allData[parseInt(sessionStorage.getItem("questionNo"))-1].question)
 		
 	commandText.split('+').forEach(function(c) {		
 		reqKeys.push(c)
@@ -154,6 +166,7 @@ function readText(){
 			() => onSuccess(...reqKeys),
 				...reqKeys
 		);
+	} // END IF for sessionStorage check
 }
 
 function writeQuestion(question) {
