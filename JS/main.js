@@ -195,7 +195,8 @@ function writeQuestion(question) {
 	var newfield = document.getElementById('textdiv');
 
 	typewriter = new Typewriter(newfield, {
-		loop: false
+		loop: false,
+		typingSpeed: 2
 	});
 
 	typewriter.typeString(question)
