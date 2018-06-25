@@ -173,13 +173,13 @@ function readText(){
 	});
 	
 	// When the reqKeys combination is pressed, onSuccess function is called
-	/*runOnKeys(
+	runOnKeys(
 
 			() => onSuccess(...reqKeys),
 				...reqKeys
-		);*/
+		);
 	
-	key(commandText, function(){ onSuccess(...reqKeys)});
+	//key(commandText, function(){ onSuccess(...reqKeys)});
 	
 	} // END IF for sessionStorage check
 }

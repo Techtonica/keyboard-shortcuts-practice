@@ -1,40 +1,40 @@
 [{
-    "answer": "Ctrl+A",
+    "answer": "control+A",
     "question": "How do you go to the beginning of the line you are currently typing on?",
     "keys": [17, 65]
   },
   {
-    "answer": "Ctrl+e",
+    "answer": "control+e",
     "question": "How do you go to the end of the line you are currently typing on?",
     "keys": [17, 69]
   },
   {
-    "answer": "Ctrl+q",
+    "answer": "control+q",
     "question": "How do you clears everything on current line?",
     "keys": [17, 81]
   },
   {
-    "answer": "Ctrl+l",
+    "answer": "control+l",
     "question": "How do you clear the screen using the control key?",
     "keys": [17, 76]
   },
   {
-    "answer": "Ctrl+k",
+    "answer": "control+k",
     "question": "How do you cut everything forward to end of line?",
     "keys": [17, 75]
   },
   {
-    "answer": "Ctrl+u",
+    "answer": "control+u",
     "question": "How do you cut everything backwards to beginning of line?",
     "keys": [17, 85]
   },
   {
-    "answer": "Ctrl+w",
+    "answer": "control+w",
     "question": "How do you cut one word backwards using white space as delimiter?",
     "keys": [17, 87]
   },
   {
-    "answer": "Ctrl+y",
+    "answer": "control+y",
     "question": "How do you paste whatever was cut by the last cut command?",
     "keys": [17, 89]
   },
