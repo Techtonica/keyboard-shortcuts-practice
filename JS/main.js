@@ -146,7 +146,7 @@ function promptKey(key){
 		$("#comma").toggleClass("prompt");
 	if(key.toLowerCase()=='underscore(_)')
 		$("#minus").toggleClass("prompt");
-	if(key.toLowerCase().charCodeAt(0)>=97 && key.toLowerCase().charCodeAt(0)<=122)
+	if(key.toUpperCase().charCodeAt(0)>=65 && key.toUpperCase().charCodeAt(0)<=90)
 		$("#"+key.toLowerCase()).toggleClass("prompt");
 }
 
