@@ -5,6 +5,8 @@ var allData ;
 
 var reqKeys = []
 
+var typewriter;
+
 function nextQuestion(){
 	if(sessionStorage.getItem("questionNo")!=null){
 		sessionStorage.setItem("questionNo", parseInt(sessionStorage.getItem("questionNo"))+1);
@@ -180,10 +182,13 @@ function readText(){
 }
 
 function writeQuestion(question) {
-	$("#textdiv").text("");
+	if(typewriter!=null)
+	{
+		typewriter.deleteAll();
+	}
 	var newfield = document.getElementById('textdiv');
 
-	var typewriter = new Typewriter(newfield, {
+	typewriter = new Typewriter(newfield, {
 		loop: false
 	});
 
