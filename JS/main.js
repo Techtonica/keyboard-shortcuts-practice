@@ -123,32 +123,35 @@ function highlightNextKey(params){
 
 // Function to highlight any key passed as input
 function promptKey(key){
-	// Handling all key types
-	if(key.toLowerCase()=='ctrl'||key.toLowerCase()=='control')
-		$("#control").toggleClass("prompt");
-	if(key.toLowerCase()=='command' || key.toLowerCase()=='cmd')
-		$("#commandleft").toggleClass("prompt");
-	if(key.toLowerCase()=='fn')
-		$("#fnc").toggleClass("prompt");
-	if(key.toLowerCase()=='option')
-		$("#optionleft").toggleClass("prompt");
-	if(key.toLowerCase()=='shift')
-		$("#shiftleft").toggleClass("prompt");
-	if(key.toLowerCase()=='esc')
-		$("#escape").toggleClass("prompt");
-	if(key.toLowerCase()=='space bar')
-		$("#space").toggleClass("prompt");
-	if(key.toLowerCase()=='tab')
-		$("#tab").toggleClass("prompt");
-	if(key.toLowerCase()=='tilde(~)')
-		$("#tilde").toggleClass("prompt");
-	if(key.toLowerCase()=='comma(,)')
-		$("#comma").toggleClass("prompt");
-	if(key.toLowerCase()=='underscore(_)')
-		$("#minus").toggleClass("prompt");
-	if(key.toUpperCase().charCodeAt(0)>=65 && key.toUpperCase().charCodeAt(0)<=90)
+	// Handling all key types	
+	if(key.toLowerCase().charCodeAt(0)>=97 && key.toLowerCase().charCodeAt(0)<=122)
 		$("#"+key.toLowerCase()).toggleClass("prompt");
+	else{
+		if(key.toLowerCase()=='ctrl'||key.toLowerCase()=='control')
+			$("#control").toggleClass("prompt");
+		if(key.toLowerCase()=='command' || key.toLowerCase()=='cmd')
+			$("#commandleft").toggleClass("prompt");
+		if(key.toLowerCase()=='fn')
+			$("#fnc").toggleClass("prompt");
+		if(key.toLowerCase()=='option')
+			$("#optionleft").toggleClass("prompt");
+		if(key.toLowerCase()=='shift')
+			$("#shiftleft").toggleClass("prompt");
+		if(key.toLowerCase()=='esc')
+			$("#escape").toggleClass("prompt");
+		if(key.toLowerCase()=='space bar')
+			$("#space").toggleClass("prompt");
+		if(key.toLowerCase()=='tab')
+			$("#tab").toggleClass("prompt");
+		if(key.toLowerCase()=='tilde(~)')
+			$("#tilde").toggleClass("prompt");
+		if(key.toLowerCase()=='comma(,)')
+			$("#comma").toggleClass("prompt");
+		if(key.toLowerCase()=='underscore(_)')
+			$("#minus").toggleClass("prompt");
+	}
 }
+
 
 
 // Function to read the next combination of keys and highlight it on keyboard
