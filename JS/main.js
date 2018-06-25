@@ -3,12 +3,14 @@ var caps = false;
 
 var allData ;
 
+var reqKeys = []
+
 function nextQuestion(){
 	if(sessionStorage.getItem("questionNo")!=null){
 		sessionStorage.setItem("questionNo", parseInt(sessionStorage.getItem("questionNo"))+1);
 	}
 	// Un-Highlight the command keys.
-	$.each( keys, function( index, key ){
+	$.each( reqKeys, function( index, key ){
 		$("#"+key.toLowerCase()).toggleClass("prompt")
 	});
 	
@@ -146,7 +148,7 @@ function promptKey(key){
 		$("#"+key.toLowerCase()).toggleClass("prompt");
 }
 
-var reqKeys = []
+
 // Function to read the next combination of keys and highlight it on keyboard
 function readText(){
 	if(sessionStorage.getItem("questionNo")!=null){
