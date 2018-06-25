@@ -7,6 +7,13 @@ function nextQuestion(){
 	if(sessionStorage.getItem("questionNo")!=null){
 		sessionStorage.setItem("questionNo", parseInt(sessionStorage.getItem("questionNo"))+1);
 	}
+	// Un-Highlight the command keys.
+	$.each( keys, function( index, key ){
+		$("#"+key.toLowerCase()).toggleClass("prompt")
+	});
+	
+	// Reset the reqKeys
+	reqKeys = [];
 	
 	readText();
 }
