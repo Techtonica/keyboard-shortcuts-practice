@@ -29,22 +29,9 @@ border: 1px solid #f9f9f9;
 overflow: hidden;
 -moz-border-radius: 5px;
 -webkit-border-radius: 5px;
-white-space:nowrap;
-<!-- animation: typing 3.5s; -->
+white-space:inherit;
 }
 
-.anim {
-animation : typing 3.5s steps(30, end);
-}
-@keyframes typing {
-from { width: 0}
-to { width:671px  }
-}
-/* The typewriter cursor effect */
-@keyframes blink-caret {
-from, to { border-color: transparent }
-50% { border-color: orange }
-}
 #keyboard {
 background: #0000004d;
 -moz-border-radius: 5px;
