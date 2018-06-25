@@ -1,5 +1,5 @@
 [{
-    "answer": "Ctrl+a",
+    "answer": "Ctrl+A",
     "question": "How do you go to the beginning of the line you are currently typing on?",
     "keys": [17, 65]
   },
