@@ -36,7 +36,6 @@ $("#retryButton").toggleClass("on");
 
 
 $.getJSON( "JS/shortcuts.json", function( data ) {
-	//alert(data.length)
 	allData = data;
 	if(sessionStorage.getItem("questionNo")==null){
 		sessionStorage.setItem("questionNo", "1");
@@ -47,30 +46,12 @@ $.getJSON( "JS/shortcuts.json", function( data ) {
 })
 
 });
-	
-//$("#textdiv").text("Control-A")
-
-//Set keyUp and KeyDown custom functions
-//write.onkeydown = handle;
-//write.onkeyup = release;
-
-
-// May have to be removed. Not being used currently
-function checkPromptKey(e){
-	if($("#"+e.code.toLowerCase()).hasClass("prompt")){
-		
-	}
-}
-
 
 // Function called on KeyDown to show Pressed key by adding class = 'pressed' 
 function handle(e) {	
 	var text1 = e.type +
 	' key=' + e.key +
 	' code=' + e.code		
-	var isPrompt = false
-	//Check if the key is the one of the prompted keys
-	isPrompt = checkPromptKey(e)
 	
 if(e.code.toLowerCase()=="space"){
 	$("#space").toggleClass("pressed");
@@ -101,14 +82,14 @@ else $("#"+e.key.toLowerCase() ).addClass("pressed");
 function release(e) {
 	
 if((e.which>=186 && e.which<=192)|| (e.which>=219 && e.which<=222)){
-	$("#"+e.code.toLowerCase()).toggleClass("pressed");
+	$("#"+e.code.toLowerCase()).removeClass("pressed");
 }
 
 if(e.key.toLowerCase()=="alt" || e.key.toLowerCase()=="shift" || e.key.toLowerCase()=="meta"){
-	$("#"+e.code.toLowerCase()).toggleClass("pressed");
+	$("#"+e.code.toLowerCase()).removeClass("pressed");
 }
 if(e.code.toLowerCase()=="space"){
-	$("#space").toggleClass("pressed");
+	$("#space").removeClass("pressed");
 }
 	if(e.key.toLowerCase()=="capslock")return
 else{
