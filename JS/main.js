@@ -187,8 +187,8 @@ function readText(){
 	// When the reqKeys combination is pressed, onSuccess function is called
 	runOnKeys(
 
-			() => onSuccess(...reqKeys),
-				...reqKeys, ...quesNo
+			() => onSuccess(...reqKeys), quesNo,
+				...reqKeys 
 		);
 	
 	//key(commandText, function(){ onSuccess(...reqKeys)});
@@ -234,7 +234,7 @@ function onSuccess(...keys){
 }
 
 // Function to keep track when correct keys are pressed with a call back Success function as onSuccess() 
-function runOnKeys(func, ...keySet, ...quesNo) {
+function runOnKeys(func, quesNo, ...keySet) {
       let pressed = new Set();
 		if(sessionStorage.getItem("questionNo")!=null){
 			if(quesNo!=sessionStorage.getItem("questionNo")){
