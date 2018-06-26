@@ -235,15 +235,16 @@ function onSuccess(...keys){
 
 // Function to keep track when correct keys are pressed with a call back Success function as onSuccess() 
 function runOnKeys(func, quesNo, ...keySet) {
-      let pressed = new Set();
+      let pressed = new Set();	
+		
+      document.addEventListener('keydown', function(event) {
+		event.preventDefault();
 		if(sessionStorage.getItem("questionNo")!=null){
 			if(quesNo!=sessionStorage.getItem("questionNo")){
 				return;
 			}
 		}
 		
-      document.addEventListener('keydown', function(event) {
-		event.preventDefault();
         pressed.add(event.key.toLowerCase());
 		handle(event);
         for (let key of keySet) { // are all required keys pressed?
@@ -260,6 +261,11 @@ function runOnKeys(func, quesNo, ...keySet) {
 
       document.addEventListener('keyup', function(event) {
 		  event.preventDefault();
+		  if(sessionStorage.getItem("questionNo")!=null){
+			if(quesNo!=sessionStorage.getItem("questionNo")){
+				return;
+			}
+		}
         pressed.delete(event.key.toLowerCase());
 		release(event);
       });
