@@ -127,7 +127,7 @@ function highlightNextKey(params){
 // Function to highlight any key passed as input
 function promptKey(key){
 	// Handling all key types	
-	if(key.toLowerCase().charCodeAt(0)>=97 && key.toLowerCase().charCodeAt(0)<=122)
+	if(key.length==1)
 		$("#"+key.toLowerCase()).toggleClass("prompt");
 	else{
 		if(key.toLowerCase()=='ctrl'||key.toLowerCase()=='control')
