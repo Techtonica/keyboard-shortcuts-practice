@@ -159,8 +159,10 @@ function promptKey(key){
 
 // Function to read the next combination of keys and highlight it on keyboard
 function readText(){
-	if(sessionStorage.getItem("questionNo")!=null){
-		commandText = allData[parseInt(sessionStorage.getItem("questionNo"))-1].answer
+	
+	quesNo = sessionStorage.getItem("questionNo")
+	if(quesNo!=null){
+		commandText = allData[parseInt(quesNo)-1].answer
 		
 	//commandText = "A+Control"  //$("#textdiv").text(); // Will be taken from some other list type of a source. 
 								//Each command will have an associated question text used in writeQuestion
@@ -186,7 +188,7 @@ function readText(){
 	runOnKeys(
 
 			() => onSuccess(...reqKeys),
-				...reqKeys
+				...reqKeys, ...quesNo
 		);
 	
 	//key(commandText, function(){ onSuccess(...reqKeys)});
@@ -232,9 +234,14 @@ function onSuccess(...keys){
 }
 
 // Function to keep track when correct keys are pressed with a call back Success function as onSuccess() 
-function runOnKeys(func, ...keySet) {
+function runOnKeys(func, ...keySet, ...quesNo) {
       let pressed = new Set();
-
+		if(sessionStorage.getItem("questionNo")!=null){
+			if(quesNo!=sessionStorage.getItem("questionNo")){
+				return;
+			}
+		}
+		
       document.addEventListener('keydown', function(event) {
 		event.preventDefault();
         pressed.add(event.key.toLowerCase());
