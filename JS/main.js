@@ -223,7 +223,8 @@ function onSuccess(...keys){
 	// Show the Try again button
 	if(keys.length!=0){
 	$("#retryButton").toggleClass("on");
-	}
+  }
+  setTimeout(nextQuestion, 2000);
 }
 
 // Function to keep track when correct keys are pressed with a call back Success function as onSuccess() 
