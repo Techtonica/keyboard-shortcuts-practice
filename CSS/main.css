@@ -23,7 +23,7 @@ padding: 15px;
 width: 648px;
 height: 200px;
 font: 2.5em/1.5 Verdana, Sans-Serif;
-background: #0093b5;
+background: rgb(0,147,181);
 color: white;
 border: 1px solid #f9f9f9;
 overflow: hidden;
@@ -31,7 +31,9 @@ overflow: hidden;
 -webkit-border-radius: 5px;
 white-space:inherit;
 }
-
+#read.incorrect {
+  background-color: rgb(180,96,96) !important;
+}
 #keyboard {
 background: #0000004d;
 -moz-border-radius: 5px;
