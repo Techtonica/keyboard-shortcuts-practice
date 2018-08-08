@@ -167,11 +167,14 @@ function readText(){
 	
 	// When the reqKeys combination is pressed, onSuccess function is called
 	runOnKeys(
+    {
+      onSuccess: () => onSuccess(...reqKeys),
+      onIncorrect: () => onIncorrect()
+    },
+		quesNo,
+		...reqKeys
+	);
 
-			() => onSuccess(...reqKeys), quesNo,
-				...reqKeys 
-		);
-	
 	//key(commandText, function(){ onSuccess(...reqKeys)});
 	
 	} // END IF for sessionStorage check
@@ -193,10 +196,19 @@ function writeQuestion(question) {
     .start();
 }
 
+function clearIncorrectIndication() {
+  $("#read").removeClass('incorrect');
+};
+
+function onIncorrect() {
+  $('#textdiv').effect("shake", { distance: 3 });
+  $("#read").addClass('incorrect');
+};
+
 // Function to execute when correct keys are pressed.
 function onSuccess(...keys){
 	$("#textdiv").text("Correct Keys pressed!")
-	
+
 	// Un-Highlight the command keys.
 	$.each( keys, function( index, key ){
 		$("#"+key.toLowerCase()).toggleClass("prompt")
@@ -215,11 +227,12 @@ function onSuccess(...keys){
 }
 
 // Function to keep track when correct keys are pressed with a call back Success function as onSuccess() 
-function runOnKeys(func, quesNo, ...keySet) {
+function runOnKeys(callbacks, quesNo, ...keySet) {
       let pressed = new Set();	
 		
       document.addEventListener('keydown', function(event) {
-		event.preventDefault();
+        event.preventDefault();
+        clearIncorrectIndication();
 		if(sessionStorage.getItem("questionNo")!=null){
 			if(quesNo!=sessionStorage.getItem("questionNo")){
 				return;
@@ -230,6 +243,9 @@ function runOnKeys(func, quesNo, ...keySet) {
 		handle(event);
         for (let key of keySet) { // are all required keys pressed?
           if (!pressed.has(key.toLowerCase())) {
+            if (pressed.size > 1) {
+              callbacks.onIncorrect();
+            }
             return;
           }
         }
@@ -237,7 +253,7 @@ function runOnKeys(func, quesNo, ...keySet) {
         // All the required keys are pressed
         pressed.clear();
 
-        func();
+        callbacks.onSuccess();
       });
 
       document.addEventListener('keyup', function(event) {
