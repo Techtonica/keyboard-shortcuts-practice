@@ -226,8 +226,6 @@ function onSuccess(...keys){
 		}
 	}); */
 	
-	// Reset the reqKeys
-	reqKeys = [];
 	
 	// Show the Try again button
 	/*if(keys.length!=0){
@@ -235,6 +233,9 @@ function onSuccess(...keys){
 	}*/
 	
 	setTimeout(nextQuestion,1000);
+	
+	// Reset the reqKeys
+	reqKeys = [];
 }
 
 // Function to keep track when correct keys are pressed with a call back Success function as onSuccess() 
