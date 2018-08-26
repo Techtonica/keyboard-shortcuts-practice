@@ -218,13 +218,13 @@ function onIncorrect() {
 function onSuccess(...keys){
 	$("#textdiv").text("Correct Keys pressed!")
 
-	// Un-Highlight the command keys.
+	/* // Un-Highlight the command keys.
 	$.each( keys, function( index, key ){
 		$("#"+key.toLowerCase()).toggleClass("prompt")
 		if(key.toLowerCase()=="meta"){
 			$("#metaleft").toggleClass("prompt")
 		}
-	});
+	}); */
 	
 	// Reset the reqKeys
 	reqKeys = [];
