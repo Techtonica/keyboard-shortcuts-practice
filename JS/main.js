@@ -32,7 +32,7 @@ function retry(){
 }
 
 $(document).ready(function() {
-$("#retryButton").toggleClass("on");	
+//$("#retryButton").toggleClass("on");	
 
 
 $.getJSON( "JS/shortcuts.json", function( data ) {
@@ -221,9 +221,9 @@ function onSuccess(...keys){
 	reqKeys = [];
 	
 	// Show the Try again button
-	if(keys.length!=0){
+	/*if(keys.length!=0){
 	$("#retryButton").toggleClass("on");
-	}
+	}*/
 	
 	setTimeout(nextQuestion,5000);
 }
