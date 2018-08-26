@@ -9,7 +9,10 @@ var typewriter;
 
 function nextQuestion(){
 	if(sessionStorage.getItem("questionNo")!=null){
-		sessionStorage.setItem("questionNo", parseInt(sessionStorage.getItem("questionNo"))+1);
+		if(parseInt(sessionStorage.getItem("questionNo"))<parseInt(sessionStorage.getItem("totalCount"))-1){
+			sessionStorage.setItem("questionNo", parseInt(sessionStorage.getItem("questionNo"))+1);
+		}
+		else sessionStorage.setItem("questionNo",0);
 	}
 	// Un-Highlight the command keys.
 	$.each( reqKeys, function( index, key ){
@@ -39,7 +42,7 @@ $.getJSON( "JS/shortcuts.json", function( data ) {
 	allData = data;
 	if(sessionStorage.getItem("questionNo")==null){
 		sessionStorage.setItem("questionNo", "1");
-		console.log("NO of records=",Object.keys(allData).length);
+		sessionStorage.setItem("totalCount", Object.keys(allData).length);
 	}
 	// Call readText() 
 	readText()
