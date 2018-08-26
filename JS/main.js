@@ -14,12 +14,15 @@ function nextQuestion(){
 		}
 		else sessionStorage.setItem("questionNo",0);
 	}
-	// Un-Highlight the command keys.
+	// Un-Highlight the prompr keys.
 	$.each( reqKeys, function( index, key ){
-		$("#"+key.toLowerCase()).toggleClass("prompt")
+		promptKey(key)
+		/* $("#"+key.toLowerCase()).toggleClass("prompt")
 		if(key.toLowerCase()=="meta"){
 			$("#metaleft").toggleClass("prompt")
 		}
+		if(key.toLowerCase()=='alt')
+			$("#optionleft").toggleClass("prompt"); */
 	});
 	
 	// Reset the reqKeys
@@ -116,11 +119,11 @@ function promptKey(key){
 	else{
 		if(key.toLowerCase()=='ctrl'||key.toLowerCase()=='control')
 			$("#control").toggleClass("prompt");
-		if(key.toLowerCase()=='command' || key.toLowerCase()=='cmd')
+		if(key.toLowerCase()=='command' || key.toLowerCase()=='cmd'|| key.toLowerCase()=="meta")
 			$("#metaleft").toggleClass("prompt");
 		if(key.toLowerCase()=='fn')
 			$("#fnc").toggleClass("prompt");
-		if(key.toLowerCase()=='option')
+		if(key.toLowerCase()=='alt')
 			$("#optionleft").toggleClass("prompt");
 		if(key.toLowerCase()=='shift')
 			$("#shiftleft").toggleClass("prompt");
@@ -160,10 +163,13 @@ function readText(){
 	commandText.split('+').forEach(function(c) {	
 		if(c.toLowerCase()=="command"){
 			reqKeys.push("meta")
-		}else{			
+		}else if(c.toLowerCase()=="option"){			
+			reqKeys.push("alt")
+		}
+		else{			
 			reqKeys.push(c)
 		}
-		// Highlight the command keys
+		// Highlight the prompt keys
 		promptKey(c)
 		
 	});
