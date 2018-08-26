@@ -39,7 +39,7 @@ $.getJSON( "JS/shortcuts.json", function( data ) {
 	allData = data;
 	if(sessionStorage.getItem("questionNo")==null){
 		sessionStorage.setItem("questionNo", "1");
-		console.log("is not set");
+		console.log("NO of records=",Object.keys(allData).length;);
 	}
 	// Call readText() 
 	readText()
