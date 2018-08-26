@@ -224,6 +224,8 @@ function onSuccess(...keys){
 	if(keys.length!=0){
 	$("#retryButton").toggleClass("on");
 	}
+	
+	setTimeout(nextQuestion,5000);
 }
 
 // Function to keep track when correct keys are pressed with a call back Success function as onSuccess() 
