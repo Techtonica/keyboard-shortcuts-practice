@@ -10,7 +10,7 @@
   },
   {
     "answer": "control+q",
-    "question": "How do you clears everything on current line?",
+    "question": "How do you clear everything on the current line?",
     "keys": [17, 81]
   },
   {
@@ -30,7 +30,7 @@
   },
   {
     "answer": "control+w",
-    "question": "How do you cut one word backwards using white space as delimiter?",
+    "question": "How do you cut one word backwards using white space as a delimiter?",
     "keys": [17, 87]
   },
   {
@@ -65,17 +65,17 @@
   },
   {
     "answer": "command+a",
-    "question": "How do you select All items?",
+    "question": "How do you select all items?",
     "keys": [91, 65]
   },
   {
     "answer": "command+f",
-    "question": "How do you find items in a document or open a Find window?",
+    "question": "How do you find items in a document or window?",
     "keys": [91, 70]
   },
   {
     "answer": "command+g",
-    "question": "How do you find Again? (Find the next occurrence of the item previously found.)",
+    "question": "How do you find the next occurrence of the item previously found?",
     "keys": [91, 71]
   },
   {
@@ -140,7 +140,7 @@
   },
   {
     "answer": "Option+command+Esc",
-    "question": "How do you force quit?",
+    "question": "How do you force quit a program?",
     "keys": [18, 91, 27]
   },
   {
