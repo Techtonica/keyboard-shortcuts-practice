@@ -9,7 +9,7 @@ var typewriter;
 
 function nextQuestion(){
 	if(sessionStorage.getItem("questionNo")!=null){
-		if(parseInt(sessionStorage.getItem("questionNo"))<parseInt(sessionStorage.getItem("totalCount"))-1){
+		if(parseInt(sessionStorage.getItem("questionNo"))<parseInt(sessionStorage.getItem("totalCount"))){
 			sessionStorage.setItem("questionNo", parseInt(sessionStorage.getItem("questionNo"))+1);
 		}
 		else sessionStorage.setItem("questionNo","1");
