@@ -16,7 +16,9 @@ function nextQuestion(){
 	}
 	// Un-Highlight the prompr keys.
 	$.each( reqKeys, function( index, key ){
-		promptKey(key)
+		if($('li[data-keycode="'+key+'"]'[0]).hasClass('prompt')){
+			promptKey2(key)
+		}
 		/* $("#"+key.toLowerCase()).toggleClass("prompt")
 		if(key.toLowerCase()=="meta"){
 			$("#metaleft").toggleClass("prompt")
@@ -113,10 +115,10 @@ function highlightNextKey(params){
 	<!-- $( "#results" ).text( str ); -->
 }
 
-promptKey2(32);
-
 function promptKey2(key){
-	$('li[data-keycode="'+key+'"]').toggleClass("prompt");
+	//if($('li[data-keycode="'+key+'"]'[0]).hasClass('prompt')){
+		$('li[data-keycode="'+key+'"]'[0]).toggleClass("prompt");
+	//}
 }
 
 // Function to highlight any key passed as input
@@ -170,13 +172,13 @@ function readText(){
 	writeQuestion(allData[parseInt(sessionStorage.getItem("questionNo"))-1].question)
 	
 	$.each(answerkeys , function(index, val) { 
-		//reqKeys.push(val)
+		reqKeys.push(val)
 		// Highlight the prompt keys
-		//promptKey(val)
+		promptKey2(val)
 			
 	});
 		
-	commandText.split('+').forEach(function(c) {	
+	/* commandText.split('+').forEach(function(c) {	
 		if(c.toLowerCase()=="command"){
 			reqKeys.push("meta")
 		}else if(c.toLowerCase()=="option"){			
@@ -188,7 +190,7 @@ function readText(){
 		// Highlight the prompt keys
 		promptKey(c)
 		
-	});
+	}); */
 	
 	// When the reqKeys combination is pressed, onSuccess function is called
 	runOnKeys(
@@ -264,10 +266,10 @@ function runOnKeys(callbacks, quesNo, ...keySet) {
 			}
 		}
 		
-        pressed.add(event.key.toLowerCase());
+        pressed.add(event.keyCode);
 		handle(event);
         for (let key of keySet) { // are all required keys pressed?
-          if (!pressed.has(key.toLowerCase())) {
+          if (!pressed.has(key)) {
             if (pressed.size > 1) {
               callbacks.onIncorrect();
             }
@@ -288,7 +290,7 @@ function runOnKeys(callbacks, quesNo, ...keySet) {
 				return;
 			}
 		}
-        pressed.delete(event.key.toLowerCase());
+        pressed.delete(event.keyCode);
 		release(event);
       });
 
