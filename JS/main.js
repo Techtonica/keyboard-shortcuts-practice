@@ -152,15 +152,23 @@ function readText(){
 	quesNo = sessionStorage.getItem("questionNo")
 	if(quesNo!=null){
 		commandText = allData[parseInt(quesNo)-1].answer
+		answerkeys = allData[parseInt(quesNo)-1].keys
 		
 	//commandText = "A+Control"  //$("#textdiv").text(); // Will be taken from some other list type of a source. 
 								//Each command will have an associated question text used in writeQuestion
 	var speed = 50
 	
 	var i = 0;
+	
 	// Call writeQuestion to add question on the top textarea
-	console.log(allData[parseInt(sessionStorage.getItem("questionNo"))-1].question);
 	writeQuestion(allData[parseInt(sessionStorage.getItem("questionNo"))-1].question)
+	
+	$.each(answerkeys , function(index, val) { 
+		alert(val)
+		/* reqKeys.push(val)
+		// Highlight the prompt keys
+		promptKey(val) */
+	});
 		
 	commandText.split('+').forEach(function(c) {	
 		if(c.toLowerCase()=="command"){
