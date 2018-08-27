@@ -12,7 +12,7 @@ function nextQuestion(){
 		if(parseInt(sessionStorage.getItem("questionNo"))<parseInt(sessionStorage.getItem("totalCount"))-1){
 			sessionStorage.setItem("questionNo", parseInt(sessionStorage.getItem("questionNo"))+1);
 		}
-		else sessionStorage.setItem("questionNo",0);
+		else sessionStorage.setItem("questionNo","1");
 	}
 	// Un-Highlight the prompr keys.
 	$.each( reqKeys, function( index, key ){
