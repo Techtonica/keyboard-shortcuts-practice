@@ -16,7 +16,8 @@ function nextQuestion(){
 	}
 	// Un-Highlight the prompr keys.
 	$.each( reqKeys, function( index, key ){
-		if($('li[data-keycode="'+key+'"]')[0].hasClass('prompt')){
+		
+		if($($('li[data-keycode="'+key+'"]')[0]).hasClass('prompt')){
 			promptKey2(key)
 		}
 		/* $("#"+key.toLowerCase()).toggleClass("prompt")
@@ -117,7 +118,8 @@ function highlightNextKey(params){
 
 function promptKey2(key){
 	//if($('li[data-keycode="'+key+'"]'[0]).hasClass('prompt')){
-		$('li[data-keycode="'+key+'"]')[0].toggleClass("prompt");
+		
+		$($('li[data-keycode="'+key+'"]')[0]).toggleClass("prompt")
 	//}
 }
 
