@@ -40,6 +40,8 @@ function retry(){
 $(document).ready(function() {
 //$("#retryButton").toggleClass("on");	
 
+alert($('li[data-keycode="test"]').attr('id'));
+
 
 $.getJSON( "JS/shortcuts.json", function( data ) {
 	allData = data;
