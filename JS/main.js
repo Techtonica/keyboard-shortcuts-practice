@@ -113,6 +113,12 @@ function highlightNextKey(params){
 	<!-- $( "#results" ).text( str ); -->
 }
 
+promptKey2(32);
+
+function promptKey2(key){
+	$('li[data-keycode="'+key+'"]').toggleClass("prompt");
+}
+
 // Function to highlight any key passed as input
 function promptKey(key){
 	// Handling all key types	
@@ -164,10 +170,10 @@ function readText(){
 	writeQuestion(allData[parseInt(sessionStorage.getItem("questionNo"))-1].question)
 	
 	$.each(answerkeys , function(index, val) { 
-		alert(val)
-		/* reqKeys.push(val)
+		//reqKeys.push(val)
 		// Highlight the prompt keys
-		promptKey(val) */
+		//promptKey(val)
+			
 	});
 		
 	commandText.split('+').forEach(function(c) {	
