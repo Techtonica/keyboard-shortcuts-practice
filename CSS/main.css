@@ -75,7 +75,8 @@ width: 72px;
 background: orange !important;
 }
 .prompt{
-background: blue !important;
+  color: white;
+  background: blue !important;
 }
 .uppercase {
 text-transform: uppercase;

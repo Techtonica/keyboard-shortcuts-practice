@@ -14,7 +14,7 @@ function nextQuestion(){
 		}
 		else sessionStorage.setItem("questionNo","1");
 	}
-	// Un-Highlight the prompr keys.
+	// Un-Highlight the prompt keys.
 	$.each( reqKeys, function( index, key ){
 		
 		if($($('li[data-keycode="'+key+'"]')[0]).hasClass('prompt')){
@@ -229,6 +229,10 @@ function clearIncorrectIndication() {
   $("#read").removeClass('incorrect');
 };
 
+function clearPromptKeys() {
+  $('.prompt').removeClass('prompt');
+};
+
 function onIncorrect() {
   $('#textdiv').effect("shake", { distance: 3 });
   $("#read").addClass('incorrect');
@@ -237,21 +241,7 @@ function onIncorrect() {
 // Function to execute when correct keys are pressed.
 function onSuccess(...keys){
 	$("#textdiv").text("Correct Keys pressed!")
-
-	/* // Un-Highlight the command keys.
-	$.each( keys, function( index, key ){
-		$("#"+key.toLowerCase()).toggleClass("prompt")
-		if(key.toLowerCase()=="meta"){
-			$("#metaleft").toggleClass("prompt")
-		}
-	}); */
-	
-	
-	// Show the Try again button
-	/*if(keys.length!=0){
-	$("#retryButton").toggleClass("on");
-	}*/
-	
+  clearPromptKeys();
 	setTimeout(nextQuestion,1000);
 }
 
