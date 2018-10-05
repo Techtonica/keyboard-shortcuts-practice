@@ -10,7 +10,7 @@
   },
   {
     "answer": "control+q",
-    "question": "How do you clears everything on current line?",
+    "question": "How do you clear everything on the current line?",
     "keys": [17, 81]
   },
   {
@@ -20,17 +20,17 @@
   },
   {
     "answer": "control+k",
-    "question": "How do you cut everything forward to end of line?",
+    "question": "How do you cut everything forward to the end of the line?",
     "keys": [17, 75]
   },
   {
     "answer": "control+u",
-    "question": "How do you cut everything backwards to beginning of line?",
+    "question": "How do you cut everything backwards to the beginning of the line?",
     "keys": [17, 85]
   },
   {
     "answer": "control+w",
-    "question": "How do you cut one word backwards using white space as delimiter?",
+    "question": "How do you cut one word backwards using white space as the delimiter?",
     "keys": [17, 87]
   },
   {
@@ -65,7 +65,7 @@
   },
   {
     "answer": "command+a",
-    "question": "How do you select All items?",
+    "question": "How do you select all items?",
     "keys": [91, 65]
   },
   {
@@ -75,17 +75,17 @@
   },
   {
     "answer": "command+g",
-    "question": "How do you find Again? (Find the next occurrence of the item previously found.)",
+    "question": "How do you find the next occurrence of the item previously found?",
     "keys": [91, 71]
   },
   {
     "answer": "command+h",
-    "question": "How do you hide the windows of the front app?",
+    "question": "How do you hide the windows of the front (active) app?",
     "keys": [91, 72]
   },
   {
     "answer": "command+Option+h",
-    "question": "How do you view the front app but hide all other apps?",
+    "question": "How do you view the front (active) app but hide all other apps?",
     "keys": [91, 18, 72]
   },
   {
@@ -125,7 +125,7 @@
   },
   {
     "answer": "command+w",
-    "question": "How do you close the front window?",
+    "question": "How do you close the front (active) window?",
     "keys": [91, 87]
   },
   {
