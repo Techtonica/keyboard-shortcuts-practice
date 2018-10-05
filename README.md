@@ -13,6 +13,7 @@ This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 Inter
 ### Contributing
 
 We would love your help! See the issues tab above for open items that need some attention.
+Try the current version of the app [here](https://techtonica.github.io/keyboard-shortcuts-practice/).
 
 #### Troubleshooting
 
