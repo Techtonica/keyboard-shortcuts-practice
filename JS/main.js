@@ -1,11 +1,22 @@
 // Global variable to keep track of CapsLock
 var caps = false;
-
 var allData ;
-
 var reqKeys = []
-
 var typewriter;
+
+$(document).ready(function() {
+	//$("#retryButton").toggleClass("on");
+	//alert($('li[data-keycode="test"]').attr('id'));
+	$.getJSON( "JS/shortcuts.json", function( data ) {
+		allData = data;
+		if(sessionStorage.getItem("questionNo")==null){
+			sessionStorage.setItem("questionNo", "1");
+			sessionStorage.setItem("totalCount", Object.keys(allData).length);
+		}
+		// Call readText()
+		readText()
+	})
+});
 
 function nextQuestion(){
 	if(sessionStorage.getItem("questionNo")!=null){
@@ -16,7 +27,6 @@ function nextQuestion(){
 	}
 	// Un-Highlight the prompt keys.
 	$.each( reqKeys, function( index, key ){
-
 		if($($('li[data-keycode="'+key+'"]')[0]).hasClass('prompt')){
 			promptKey2(key)
 		}
@@ -27,10 +37,8 @@ function nextQuestion(){
 		if(key.toLowerCase()=='alt')
 			$("#optionleft").toggleClass("prompt"); */
 	});
-
 	// Reset the reqKeys
 	reqKeys = [];
-
 	readText();
 }
 
@@ -39,24 +47,6 @@ function retry(){
 	$("#retryButton").toggleClass("on");
 	readText();
 }
-
-$(document).ready(function() {
-//$("#retryButton").toggleClass("on");
-
-//alert($('li[data-keycode="test"]').attr('id'));
-
-
-$.getJSON( "JS/shortcuts.json", function( data ) {
-	allData = data;
-	if(sessionStorage.getItem("questionNo")==null){
-		sessionStorage.setItem("questionNo", "1");
-		sessionStorage.setItem("totalCount", Object.keys(allData).length);
-	}
-	// Call readText()
-	readText()
-})
-
-});
 
 // Function called on KeyDown to show Pressed key by adding class = 'pressed'
 function handle(e) {
@@ -67,37 +57,30 @@ function handle(e) {
 	if(e.code.toLowerCase()=="space"){
 		$("#space").toggleClass("pressed");
 	}
-
 	if((e.which>=186 && e.which<=192)|| (e.which>=219 && e.which<=222)){
 		$("#"+e.code.toLowerCase()).toggleClass("pressed");
 	}
-
 	if(e.key.toLowerCase()=="alt" || e.key.toLowerCase()=="shift" || e.key.toLowerCase()=="meta"){
 		$("#"+e.code.toLowerCase()).toggleClass("pressed");
 	}
-
 	if(e.key.toLowerCase()=="capslock" && caps==false){
 		caps= true;
 		$("#"+e.key.toLowerCase()).toggleClass("pressed");
 		$('.letter').toggleClass('uppercase');
 	}
-
 	else if(e.key.toLowerCase()=="capslock" && caps==true) {
 		$("#"+e.key.toLowerCase()).toggleClass("pressed");
 		$('.letter').toggleClass('uppercase');
 		caps=false;
 	}
-
 	else $("#"+e.key.toLowerCase() ).addClass("pressed");
 }
 
 // Function called on KeyUp to reset the key by removing class = 'pressed'
 function release(e) {
-
 	if((e.which>=186 && e.which<=192)|| (e.which>=219 && e.which<=222)){
 		$("#"+e.code.toLowerCase()).removeClass("pressed");
 	}
-
 	if(e.key.toLowerCase()=="alt" || e.key.toLowerCase()=="shift" || e.key.toLowerCase()=="meta"){
 		$("#"+e.code.toLowerCase()).removeClass("pressed");
 	}
@@ -120,7 +103,6 @@ function highlightNextKey(params){
 
 function promptKey2(key){
 	//if($('li[data-keycode="'+key+'"]'[0]).hasClass('prompt')){
-
 		$($('li[data-keycode="'+key+'"]')[0]).toggleClass("prompt")
 	//}
 }
@@ -128,9 +110,8 @@ function promptKey2(key){
 // Function to highlight any key passed as input
 function promptKey(key){
 	// Handling all key types
-	if(key.length==1)
-		$("#"+key.toLowerCase()).toggleClass("prompt");
-	else{
+	if(key.length==1) $("#"+key.toLowerCase()).toggleClass("prompt");
+	else {
 		if(key.toLowerCase()=='ctrl'||key.toLowerCase()=='control')
 			$("#control").toggleClass("prompt");
 		if(key.toLowerCase()=='command' || key.toLowerCase()=='cmd'|| key.toLowerCase()=="meta")
@@ -158,54 +139,48 @@ function promptKey(key){
 
 // Function to read the next combination of keys and highlight it on keyboard
 function readText(){
-
 	quesNo = sessionStorage.getItem("questionNo")
 	if(quesNo!=null){
 		commandText = allData[parseInt(quesNo)-1].answer
 		answerkeys = allData[parseInt(quesNo)-1].keys
+		//commandText = "A+Control"  //$("#textdiv").text(); // Will be taken from some other list type of a source.
+									//Each command will have an associated question text used in writeQuestion
+		var speed = 50
+		var i = 0;
 
-	//commandText = "A+Control"  //$("#textdiv").text(); // Will be taken from some other list type of a source.
-								//Each command will have an associated question text used in writeQuestion
-	var speed = 50
+		// Call writeQuestion to add question on the top textarea
+		writeQuestion(allData[parseInt(sessionStorage.getItem("questionNo"))-1].question)
 
-	var i = 0;
+		$.each(answerkeys , function(index, val) {
+			reqKeys.push(val)
+			// Highlight the prompt keys
+			promptKey2(val)
+		});
 
-	// Call writeQuestion to add question on the top textarea
-	writeQuestion(allData[parseInt(sessionStorage.getItem("questionNo"))-1].question)
+		/* commandText.split('+').forEach(function(c) {
+			if(c.toLowerCase()=="command"){
+				reqKeys.push("meta")
+			}else if(c.toLowerCase()=="option"){
+				reqKeys.push("alt")
+			}
+			else{
+				reqKeys.push(c)
+			}
+			// Highlight the prompt keys
+			promptKey(c)
 
-	$.each(answerkeys , function(index, val) {
-		reqKeys.push(val)
-		// Highlight the prompt keys
-		promptKey2(val)
+		}); */
 
-	});
-
-	/* commandText.split('+').forEach(function(c) {
-		if(c.toLowerCase()=="command"){
-			reqKeys.push("meta")
-		}else if(c.toLowerCase()=="option"){
-			reqKeys.push("alt")
-		}
-		else{
-			reqKeys.push(c)
-		}
-		// Highlight the prompt keys
-		promptKey(c)
-
-	}); */
-
-	// When the reqKeys combination is pressed, onSuccess function is called
-	runOnKeys(
-    {
-      onSuccess: () => onSuccess(...reqKeys),
-      onIncorrect: () => onIncorrect()
-    },
-		quesNo,
-		...reqKeys
-	);
-
-	//key(commandText, function(){ onSuccess(...reqKeys)});
-
+		// When the reqKeys combination is pressed, onSuccess function is called
+		runOnKeys(
+	    {
+	      onSuccess: () => onSuccess(...reqKeys),
+	      onIncorrect: () => onIncorrect()
+	    },
+			quesNo,
+			...reqKeys
+		);
+		//key(commandText, function(){ onSuccess(...reqKeys)});
 	} // END IF for sessionStorage check
 }
 
@@ -221,8 +196,7 @@ function writeQuestion(question) {
 		typingSpeed: 2
 	});
 
-	typewriter.typeString(question)
-    .start();
+	typewriter.typeString(question).start();
 }
 
 function clearIncorrectIndication() {
@@ -250,12 +224,7 @@ function runOnKeys(callbacks, quesNo, ...keySet) {
   let pressed = new Set();
 
   document.addEventListener('keydown', function(event) {
-  	event.cancelBubble = true;
     event.preventDefault();
-    event.stopPropagation();
-
-    console.log(event);
-
     clearIncorrectIndication();
 		if(sessionStorage.getItem("questionNo")!=null){
 			if(quesNo!=sessionStorage.getItem("questionNo")){
@@ -274,20 +243,19 @@ function runOnKeys(callbacks, quesNo, ...keySet) {
       }
     }
 
-    // All the required keys are pressed
+  	// All the required keys are pressed
     pressed.clear();
-
-    callbacks.onSuccess();
+  	callbacks.onSuccess();
   });
 
   document.addEventListener('keyup', function(event) {
 	  event.preventDefault();
 	  if(sessionStorage.getItem("questionNo")!=null){
-			if(quesNo!=sessionStorage.getItem("questionNo")){
+			if(quesNo!=sessionStorage.getItem("questionNo")) {
 				return;
 			}
 		}
-    pressed.delete(event.keyCode);
+  	pressed.delete(event.keyCode);
 		release(event);
   });
 
