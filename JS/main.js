@@ -175,6 +175,7 @@ function readText(){
 
 function writeQuestion(question) {
   if(typewriter!=null) {
+    typewriter.stop();
     $('#textdiv span').first().text('');
   } else {
     typewriter = new Typewriter(document.getElementById('textdiv'), {
