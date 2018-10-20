@@ -24,31 +24,27 @@ function nextQuestion(){
   if(sessionStorage.getItem("questionNo")!=null){
     if(parseInt(sessionStorage.getItem("questionNo"))<parseInt(sessionStorage.getItem("totalCount"))){
       sessionStorage.setItem("questionNo", parseInt(sessionStorage.getItem("questionNo"))+1);
+    } else {
+      sessionStorage.setItem("questionNo","1");
     }
-    else sessionStorage.setItem("questionNo","1");
-    }
-    // Un-Highlight the prompt keys.
-  $.each( reqKeys, function( index, key ){
-    if($($('li[data-keycode="'+key+'"]')[0]).hasClass('prompt')){
-      promptKey2(key)
-    }
-    /* $("#"+key.toLowerCase()).toggleClass("prompt")
-    if(key.toLowerCase()=="meta"){
-      $("#metaleft").toggleClass("prompt")
-    }
-    if(key.toLowerCase()=='alt')
-      $("#optionleft").toggleClass("prompt"); */
-  });
-  // Reset the reqKeys
+  }
+  clearPromptKeys();
+  clearPressedKeys();
   reqKeys = [];
   readText();
-  }
+}
 
-  function retry(){
-    // Hide the Try again button
-    $("#retryButton").toggleClass("on");
-    readText();
+function prevQuestion() {
+  if(sessionStorage.getItem("questionNo")!=null){
+    if(parseInt(sessionStorage.getItem("questionNo")) > 1) {
+      sessionStorage.setItem("questionNo", parseInt(sessionStorage.getItem("questionNo"))-1);
+    }
   }
+  clearPromptKeys();
+  clearPressedKeys();
+  reqKeys = [];
+  readText();
+}
 
   // Function called on KeyDown to show Pressed key by adding class = 'pressed'
 function handle(e) {
@@ -178,17 +174,14 @@ function readText(){
 }
 
 function writeQuestion(question) {
-  if(typewriter!=null)
-  {
-    typewriter.deleteAll();
+  if(typewriter!=null) {
+    $('#textdiv span').first().text('');
+  } else {
+    typewriter = new Typewriter(document.getElementById('textdiv'), {
+      loop: false,
+      delay: 10
+    });
   }
-  var newfield = document.getElementById('textdiv');
-
-  typewriter = new Typewriter(newfield, {
-    loop: false,
-    typingSpeed: 2
-  });
-
   typewriter.typeString(question).start();
 }
 
