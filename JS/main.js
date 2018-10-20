@@ -252,19 +252,17 @@ document.addEventListener('keydown', function(event) {
     keyCode = CHROME_LEFT_COMMAND_CODE;
   }
 
+  // Make left and right command key the same
+  if (keyCode == CHROME_RIGHT_COMMAND_CODE) {
+    keyCode = CHROME_LEFT_COMMAND_CODE;
+  }
+
   pressed.add(keyCode);
   handle(event);
   const keySet = new Set(reqKeys);
   if (keySet.size <= pressed.size) {
     for (let key of pressed) { // are all required keys pressed?
-      let registeredKey = key;
-
-      // Make left and right command key the same
-      if (key == CHROME_RIGHT_COMMAND_CODE) {
-        registeredKey = CHROME_LEFT_COMMAND_CODE;
-      }
-
-      if (!keySet.has(registeredKey)) {
+      if (!keySet.has(key)) {
         onIncorrect();
         return;
       }
@@ -285,6 +283,11 @@ document.addEventListener('keyup', function(event) {
   // If used in Firefox, change command key code to be the same as that of Chrome
   let keyCode = event.keyCode;
   if (navigator.userAgent.search('Firefox') > 0 && keyCode == FIREFOX_COMMAND_CODE) {
+    keyCode = CHROME_LEFT_COMMAND_CODE;
+  }
+  
+  // Make left and right command key the same
+  if (keyCode == CHROME_RIGHT_COMMAND_CODE) {
     keyCode = CHROME_LEFT_COMMAND_CODE;
   }
 
