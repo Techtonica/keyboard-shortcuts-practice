@@ -3,6 +3,8 @@ var caps = false;
 var allData ;
 var reqKeys = []
 var typewriter;
+var quesNo;
+let pressed = new Set();
 
 $(document).ready(function() {
   //$("#retryButton").toggleClass("on");
@@ -171,15 +173,6 @@ function readText(){
 
     }); */
 
-// When the reqKeys combination is pressed, onSuccess function is called
-runOnKeys(
-  {
-    onSuccess: () => onSuccess(...reqKeys),
-    onIncorrect: () => onIncorrect()
-  },
-  quesNo,
-  ...reqKeys
-);
     //key(commandText, function(){ onSuccess(...reqKeys)});
   } // END IF for sessionStorage check
 }
@@ -213,50 +206,44 @@ function onIncorrect() {
 };
 
 // Function to execute when correct keys are pressed.
-function onSuccess(...keys){
+function onSuccess(keys){
   $("#textdiv").text("Correct Keys pressed!")
   clearPromptKeys();
   setTimeout(nextQuestion,1000);
 }
 
-// Function to keep track when correct keys are pressed with a call back Success function as onSuccess()
-function runOnKeys(callbacks, quesNo, ...keySet) {
-  let pressed = new Set();
-
-  document.addEventListener('keydown', function(event) {
-    event.preventDefault();
-    clearIncorrectIndication();
-    if(sessionStorage.getItem("questionNo")!=null){
-      if(quesNo!=sessionStorage.getItem("questionNo")){
-        return;
-      }
+document.addEventListener('keydown', function(event) {
+  event.preventDefault();
+  clearIncorrectIndication();
+  if(sessionStorage.getItem("questionNo")!=null){
+    if(quesNo!=sessionStorage.getItem("questionNo")){
+      return;
     }
+  }
 
-    pressed.add(event.keyCode);
-    handle(event);
-    for (let key of keySet) { // are all required keys pressed?
-      if (!pressed.has(key)) {
-        if (pressed.size > 1) {	
-          callbacks.onIncorrect();
-        }
-        return;
+  pressed.add(event.keyCode);
+  handle(event);
+  for (let key of reqKeys) { // are all required keys pressed?
+    if (!pressed.has(key)) {
+      if (pressed.size > 1) {
+        onIncorrect();
       }
+      return;
     }
+  }
 
-    // All the required keys are pressed
-    pressed.clear();
-    callbacks.onSuccess();
-  });
+  // All the required keys are pressed
+  pressed.clear();
+  onSuccess(reqKeys);
+});
 
-  document.addEventListener('keyup', function(event) {
-    event.preventDefault();
-    if(sessionStorage.getItem("questionNo")!=null){
-      if(quesNo!=sessionStorage.getItem("questionNo")) {
-        return;
-      }
+document.addEventListener('keyup', function(event) {
+  event.preventDefault();
+  if(sessionStorage.getItem("questionNo")!=null){
+    if(quesNo!=sessionStorage.getItem("questionNo")) {
+      return;
     }
-    pressed.delete(event.keyCode);
-    release(event);
-  });
-
-}
+  }
+  pressed.delete(event.keyCode);
+  release(event);
+});
