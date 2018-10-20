@@ -7,7 +7,7 @@ var quesNo;
 let pressed = new Set();
 
 // Constant for Chrome left and right command key value
-const LEFT_COMMAND = 93;
+const LEFT_COMMAND = 91;
 const RIGHT_COMMAND = 93;
 
 $(document).ready(function() {
