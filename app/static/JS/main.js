@@ -20,7 +20,7 @@ const CHROME_RIGHT_COMMAND_STRING = 'MetaRight';
 $(document).ready(function() {
   //$("#retryButton").toggleClass("on");
   //alert($('li[data-keycode="test"]').attr('id'));
-  $.getJSON( "JS/shortcuts.json", function( data ) {
+  $.getJSON( "/static/JS/shortcuts.json", function( data ) {
     allData = data;
     if(sessionStorage.getItem("questionNo")==null){
       sessionStorage.setItem("questionNo", "1");

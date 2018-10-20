@@ -1,3 +1,9 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -5,16 +11,18 @@
 
     <title>Keyboard</title>
 </head>
+{% block app_content %}
+
 <body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-  <script src="https://unpkg.com/typewriter-effect/dist/core.js"></script>
+    <script src="https://unpkg.com/typewriter-effect/dist/core.js"></script>
     <script src="{{url_for('static', filename='JS/confetti.js')}}"></script>
     <script src="{{url_for('static', filename='JS/main.js')}}"></script>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='CSS/main.css') }}"></head>
 <div id="container">
     <div id="read">
-      <a id="prevButton" class="prev img-button" href="javascript:prevQuestion();"><img src="images/arrow_left.png"></img></a>
+      <a id="prevButton" class="prev img-button" href="javascript:prevQuestion();"><img src="/static/images/arrow_left.png"></img></a>
       <div id="textdiv"></div>
       <a id="nextButton" class="next img-button" href="javascript:nextQuestion();"><img src="/static/images/arrow_right.png"></img></a>
     </div>
@@ -102,5 +110,7 @@
     <textarea id="write" rows="6" cols="60"></textarea>
 </div>
 </body>
+{% endblock %}
+
 </html>
 
