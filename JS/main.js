@@ -200,17 +200,23 @@ function clearPromptKeys() {
   $('.prompt').removeClass('prompt');
 };
 
+function clearPressedKeys() {
+  pressed.clear();
+  $('.pressed').removeClass('pressed');
+};
+
 function onIncorrect() {
   $('#textdiv').effect("shake", { distance: 3 });
   $("#read").addClass('incorrect');
+  setTimeout(clearPressedKeys, 500);
 };
 
 // Function to execute when correct keys are pressed.
 function onSuccess(){
-  pressed.clear();
   $("#textdiv").text("Correct Keys pressed!")
   clearPromptKeys();
-  setTimeout(nextQuestion,1000);
+  clearPressedKeys();
+  setTimeout(nextQuestion, 1000);
 }
 
 document.addEventListener('keydown', function(event) {
