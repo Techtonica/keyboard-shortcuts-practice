@@ -2,15 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-     
+
     <title>Keyboard</title>
-    <link rel="stylesheet" type="text/css" href="CSS/main.css" />
-</head>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='CSS/main.css') }}"></head>
 <body>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/TypewriterJS/1.0.0/typewriter.min.js"></script>
-	<script src="JS/main.js"></script>	
+    <script src="{{url_for('static', filename='JS/main.js')}}"></script>
 <div id="container">
 	<!-- <button id="retryButton" type="button" onclick="retry();">Try Again</button>
 	<button id="nextButton" type="button" onclick="nextQuestion();">Next Shortcut</button> -->
@@ -92,7 +91,7 @@
 		<li class="option" id="altright" data-keycode="18">option</li>
 		<li class="arrows" id="arrowleft" data-keycode="37">&#9664;</li>
 		<li><div class="arrows" id="arrowup" data-keycode="38">&#9650;</div><div class="arrows" id="arrowdown" data-keycode="40">&#9660;</div></li>
-		<li class="arrows" id="arrowright" data-keycode="39">&#9658;</li>		
+		<li class="arrows" id="arrowright" data-keycode="39">&#9658;</li>
 	</ul>
     <textarea id="write" rows="6" cols="60"></textarea>
 </div>
