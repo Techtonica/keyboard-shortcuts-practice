@@ -207,7 +207,7 @@ function onIncorrect() {
 
 // Function to execute when correct keys are pressed.
 function onSuccess(){
-  $("#textdiv").text("Correct Keys pressed!")
+  $('#textdiv span').first().text('Correct Keys pressed!');
   clearPromptKeys();
   clearPressedKeys();
   confetti($("#confetti").get(0), { spread: 180, startVelocity: 50, elementCount: 150 });
