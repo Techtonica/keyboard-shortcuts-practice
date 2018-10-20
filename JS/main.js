@@ -230,17 +230,17 @@ document.addEventListener('keydown', function(event) {
 
   pressed.add(event.keyCode);
   handle(event);
-  for (let key of reqKeys) { // are all required keys pressed?
-    if (!pressed.has(key)) {
-      if (pressed.size > 1) {
+  const keySet = new Set(reqKeys);
+  if (keySet.size <= pressed.size) {
+    for (let key of pressed) { // are all required keys pressed?
+      if (!keySet.has(key)) {
         onIncorrect();
+        return;
       }
-      return;
     }
+    // All the required keys are pressed
+    onSuccess();
   }
-
-  // All the required keys are pressed
-  onSuccess();
 });
 
 document.addEventListener('keyup', function(event) {
