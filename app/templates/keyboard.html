@@ -4,7 +4,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
     <title>Keyboard</title>
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='CSS/main.css') }}"></head>
 </head>
 <body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -12,11 +11,12 @@
   <script src="https://unpkg.com/typewriter-effect/dist/core.js"></script>
     <script src="{{url_for('static', filename='JS/confetti.js')}}"></script>
     <script src="{{url_for('static', filename='JS/main.js')}}"></script>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='CSS/main.css') }}"></head>
 <div id="container">
-    <button id="prevButton" type="button" onclick="prevQuestion();">&lt;&lt; previous</button>
-    <button id="nextButton" type="button" onclick="nextQuestion();">next &gt;&gt;</button>
     <div id="read">
+      <a id="prevButton" class="prev img-button" href="javascript:prevQuestion();"><img src="images/arrow_left.png"></img></a>
       <div id="textdiv"></div>
+      <a id="nextButton" class="next img-button" href="javascript:nextQuestion();"><img src="/static/images/arrow_right.png"></img></a>
     </div>
     <div id="confetti"></div>
     <ul id="keyboard">

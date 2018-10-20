@@ -1,6 +1,7 @@
 #container {
 margin: 100px auto;
 width: 680px;
+text-align: center;
 }
 body {
 font: 71%/1.5 Verdana, Sans-Serif;
@@ -18,7 +19,7 @@ border: 1px solid #f9f9f9;
 -webkit-border-radius: 5px;
 }
 #read {
-margin: 10px 0 5px;
+margin: 10px 0 -15px;
 padding: 15px;
 width: 648px;
 height: 200px;
@@ -26,14 +27,37 @@ font: 2.5em/1.5 Verdana, Sans-Serif;
 background: rgb(0,147,181);
 color: white;
 border: 1px solid #f9f9f9;
-overflow: hidden;
 -moz-border-radius: 5px;
 -webkit-border-radius: 5px;
 white-space:inherit;
+text-align: left;
+position: relative;
+}
+#confetti {
+  display: inline-block;
 }
 #read.incorrect {
   background-color: rgb(180,96,96) !important;
 }
+
+.img-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.next {
+  right: -80pt;
+}
+
+.prev {
+  left: -80pt;
+}
+
+.img-button img {
+  width: 24pt;
+}
+
 #keyboard {
 background: #0000004d;
 -moz-border-radius: 5px;
@@ -86,24 +110,24 @@ width: 224px;
 height: 55px;
 }
 #keyboard .esc{
-	width: 42.28px;
-	height: 25px;
+    width: 42.28px;
+    height: 25px;
 }
 
 #keyboard .shift {
 width: 102px;
 }
 #keyboard .command{
-	width: 56px;
-	height: 55px;
+    width: 56px;
+    height: 55px;
 }
 #keyboard .arrows{
-	line-height: 20px;
-	height: 20px;
+    line-height: 20px !important;
+    height: 20px !important;
 }
 
 #keyboard .option, #keyboard .control, #keyboard .function{
-	height: 55px;
+    height: 55px;
 }
 #keyboard .special {
 height: 25px;
@@ -111,7 +135,7 @@ width: 42.28px;
 }
 div .arrows{
 -moz-border-radius: 5px;
--webkit-border-radius: 5px;	
+-webkit-border-radius: 5px;
 }
 .on {
 display: none;

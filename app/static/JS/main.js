@@ -6,14 +6,21 @@ var typewriter;
 var quesNo;
 let pressed = new Set();
 
-// Constant for Chrome left and right command key value
-const LEFT_COMMAND = 91;
-const RIGHT_COMMAND = 93;
+// event.keyCode Chrome and Firefox
+const CHROME_LEFT_COMMAND_CODE = 91;
+const CHROME_RIGHT_COMMAND_CODE = 93;
+const FIREFOX_COMMAND_CODE = 224;
+
+// e.code for Chrome and Firefox
+const FIREFOX_LEFT_COMMAND_STRING = 'OSLeft';
+const FIREFOX_RIGHT_COMMAND_STRING = 'OSRight';
+const CHROME_LEFT_COMMAND_STRING = 'MetaLeft';
+const CHROME_RIGHT_COMMAND_STRING = 'MetaRight';
 
 $(document).ready(function() {
   //$("#retryButton").toggleClass("on");
   //alert($('li[data-keycode="test"]').attr('id'));
-  $.getJSON( "/static/JS/shortcuts.json", function( data ) {
+  $.getJSON( "JS/shortcuts.json", function( data ) {
     allData = data;
     if(sessionStorage.getItem("questionNo")==null){
       sessionStorage.setItem("questionNo", "1");
@@ -63,7 +70,13 @@ function handle(e) {
     $("#"+e.code.toLowerCase()).toggleClass("pressed");
   }
   if(e.key.toLowerCase()=="alt" || e.key.toLowerCase()=="shift" || e.key.toLowerCase()=="meta"){
-    $("#"+e.code.toLowerCase()).toggleClass("pressed");
+    let keyString = e.code;
+    if(e.code == FIREFOX_LEFT_COMMAND_STRING) {
+      keyString = CHROME_LEFT_COMMAND_STRING
+    } else if (e.code == FIREFOX_RIGHT_COMMAND_STRING) {
+      keyString = CHROME_RIGHT_COMMAND_STRING
+    }
+    $("#"+keyString.toLowerCase()).toggleClass("pressed");
   }
   if(e.key.toLowerCase()=="capslock" && caps==false){
     caps= true;
@@ -84,7 +97,13 @@ function release(e) {
     $("#"+e.code.toLowerCase()).removeClass("pressed");
   }
   if(e.key.toLowerCase()=="alt" || e.key.toLowerCase()=="shift" || e.key.toLowerCase()=="meta"){
-    $("#"+e.code.toLowerCase()).removeClass("pressed");
+    let keyString = e.code;
+    if(e.code == FIREFOX_LEFT_COMMAND_STRING) {
+      keyString = CHROME_LEFT_COMMAND_STRING
+    } else if (e.code == FIREFOX_RIGHT_COMMAND_STRING) {
+      keyString = CHROME_RIGHT_COMMAND_STRING
+    }
+    $("#"+keyString.toLowerCase()).removeClass("pressed");
   }
   if(e.code.toLowerCase()=="space"){
     $("#space").removeClass("pressed");
@@ -227,19 +246,23 @@ document.addEventListener('keydown', function(event) {
     }
   }
 
-  pressed.add(event.keyCode);
+  // If used in Firefox, change command key code to be the same as that of Chrome
+  let keyCode = event.keyCode;
+  if (navigator.userAgent.search('Firefox') > 0 && keyCode == FIREFOX_COMMAND_CODE) {
+    keyCode = CHROME_LEFT_COMMAND_CODE;
+  }
+
+  // Make left and right command key the same
+  if (keyCode == CHROME_RIGHT_COMMAND_CODE) {
+    keyCode = CHROME_LEFT_COMMAND_CODE;
+  }
+
+  pressed.add(keyCode);
   handle(event);
   const keySet = new Set(reqKeys);
   if (keySet.size <= pressed.size) {
     for (let key of pressed) { // are all required keys pressed?
-      let registeredKey = key;
-
-      // Make left and right command key the same
-      if (key == RIGHT_COMMAND) {
-        registeredKey = LEFT_COMMAND;
-      }
-
-      if (!keySet.has(registeredKey)) {
+      if (!keySet.has(key)) {
         onIncorrect();
         return;
       }
@@ -256,7 +279,19 @@ document.addEventListener('keyup', function(event) {
       return;
     }
   }
-  pressed.delete(event.keyCode);
+
+  // If used in Firefox, change command key code to be the same as that of Chrome
+  let keyCode = event.keyCode;
+  if (navigator.userAgent.search('Firefox') > 0 && keyCode == FIREFOX_COMMAND_CODE) {
+    keyCode = CHROME_LEFT_COMMAND_CODE;
+  }
+
+  // Make left and right command key the same
+  if (keyCode == CHROME_RIGHT_COMMAND_CODE) {
+    keyCode = CHROME_LEFT_COMMAND_CODE;
+  }
+
+  pressed.delete(keyCode);
   release(event);
 });
 
