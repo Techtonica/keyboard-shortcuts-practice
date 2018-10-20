@@ -113,3 +113,5 @@ dmypy.json
 bin/
 pip-selfcheck.json
 pyvenv.cfg
+app.db
+migrations/
