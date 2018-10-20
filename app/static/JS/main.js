@@ -7,7 +7,7 @@ var typewriter;
 $(document).ready(function() {
 	//$("#retryButton").toggleClass("on");
 	//alert($('li[data-keycode="test"]').attr('id'));
-	$.getJSON( "JS/shortcuts.json", function( data ) {
+	$.getJSON( "shortcuts.json", function( data ) {
 		allData = data;
 		if(sessionStorage.getItem("questionNo")==null){
 			sessionStorage.setItem("questionNo", "1");
