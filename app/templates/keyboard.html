@@ -5,31 +5,36 @@
 
     <title>Keyboard</title>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='CSS/main.css') }}"></head>
+</head>
 <body>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/TypewriterJS/1.0.0/typewriter.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://unpkg.com/typewriter-effect/dist/core.js"></script>
+    <script src="{{url_for('static', filename='JS/confetti.js')}}"></script>
     <script src="{{url_for('static', filename='JS/main.js')}}"></script>
 <div id="container">
-	<!-- <button id="retryButton" type="button" onclick="retry();">Try Again</button>
-	<button id="nextButton" type="button" onclick="nextQuestion();">Next Shortcut</button> -->
-    <div id="read"><div id="textdiv"> </div></div>
+    <button id="prevButton" type="button" onclick="prevQuestion();">&lt;&lt; previous</button>
+    <button id="nextButton" type="button" onclick="nextQuestion();">next &gt;&gt;</button>
+    <div id="read">
+      <div id="textdiv"></div>
+    </div>
+    <div id="confetti"></div>
     <ul id="keyboard">
-		<li class="esc" id="escape" data-keycode="27">esc</li>
-		<li class="special" id="f1" data-keycode="112">F1</li>
-		<li class="special" id="f2" data-keycode="113">F2</li>
-		<li class="special" id="f3" data-keycode="114">F3</li>
-		<li class="special" id="f4" data-keycode="115">F4</li>
-		<li class="special" id="f5" data-keycode="116">F5</li>
-		<li class="special" id="f6" data-keycode="117">F6</li>
-		<li class="special" id="f7" data-keycode="118">F7</li>
-		<li class="special" id="f8" data-keycode="119">F8</li>
-		<li class="special" id="f9" data-keycode="120">F9</li>
-		<li class="special" id="f10" data-keycode="121">F10</li>
-		<li class="special" id="f11" data-keycode="122">F11</li>
-		<li class="special" id="f12" data-keycode="123">F12</li>
-		<li class="special lastitem" id="f13" data-keycode="124">TBD</li>
-		<li class="symbol" id="backquote" data-keycode="192"><span class="off">~`</span><span class="on">~</span><span class="on">`</span></li>
+        <li class="esc" id="escape" data-keycode="27">esc</li>
+        <li class="special" id="f1" data-keycode="112">F1</li>
+        <li class="special" id="f2" data-keycode="113">F2</li>
+        <li class="special" id="f3" data-keycode="114">F3</li>
+        <li class="special" id="f4" data-keycode="115">F4</li>
+        <li class="special" id="f5" data-keycode="116">F5</li>
+        <li class="special" id="f6" data-keycode="117">F6</li>
+        <li class="special" id="f7" data-keycode="118">F7</li>
+        <li class="special" id="f8" data-keycode="119">F8</li>
+        <li class="special" id="f9" data-keycode="120">F9</li>
+        <li class="special" id="f10" data-keycode="121">F10</li>
+        <li class="special" id="f11" data-keycode="122">F11</li>
+        <li class="special" id="f12" data-keycode="123">F12</li>
+        <li class="special lastitem" id="f13" data-keycode="124">TBD</li>
+        <li class="symbol" id="backquote" data-keycode="192"><span class="off">~`</span><span class="on">~</span><span class="on">`</span></li>
         <li class="symbol" id="1" data-keycode="49"><span class="off">!1</span><span class="on">!</span><span class="on">1</span></li>
         <li class="symbol" id="2" data-keycode="50"><span class="off">@2</span><span class="on">@</span><span class="on">2</span></li>
         <li class="symbol" id="3" data-keycode="51"><span class="off">#3</span><span class="on">#</span><span class="on">3</span></li>
@@ -43,7 +48,7 @@
         <li class="symbol" id="minus" data-keycode="189"><span class="off">_-</span><span class="on">_</span><span class="on">-</span></li>
         <li class="symbol" id="equal" data-keycode="187"><span class="off">+=</span><span class="on">+</span><span class="on">=</span></li>
         <li class="delete lastitem" id="backspace" data-keycode="8">delete</li>
-		<li class="tab" id="tab" data-keycode="9">tab</li>
+        <li class="tab" id="tab" data-keycode="9">tab</li>
         <li class="letter" id="q" data-keycode="81">q</li>
         <li class="letter" id="w" data-keycode="87">w</li>
         <li class="letter" id="e" data-keycode="69">e</li>
@@ -54,10 +59,10 @@
         <li class="letter" id="i" data-keycode="73">i</li>
         <li class="letter" id="o" data-keycode="79">o</li>
         <li class="letter" id="p" data-keycode="80">p</li>
-		<li class="symbol" id="bracketleft" data-keycode="219">{[</li>
-		<li class="symbol" id="bracketright" data-keycode="221">]}</li>
-		<li class="symbol" id="backslash" data-keycode="220">|\</li>
-		<li class="capslock" id="capslock" data-keycode="20">caps lock</li>
+        <li class="symbol" id="bracketleft" data-keycode="219">{[</li>
+        <li class="symbol" id="bracketright" data-keycode="221">]}</li>
+        <li class="symbol" id="backslash" data-keycode="220">|\</li>
+        <li class="capslock" id="capslock" data-keycode="20">caps lock</li>
         <li class="letter" id="a" data-keycode="65">a</li>
         <li class="letter" id="s" data-keycode="83">s</li>
         <li class="letter" id="d" data-keycode="68">d</li>
@@ -70,7 +75,7 @@
         <li class="symbol" id="semicolon" data-keycode="186"><span class="off">: ;</span><span class="on" id=";">;</span><span class="on" id=":">:</span></li>
         <li class="symbol" id="quote" data-keycode="222"><span class="off">' &quot;</span><span id="'" class="on">'</span><span class="on" id="quot">&quot;</span></li>
         <li class="return lastitem" id="enter" data-keycode="13">return</li>
-		<li class="shift" id="shiftleft" data-keycode="16">shift</li>
+        <li class="shift" id="shiftleft" data-keycode="16">shift</li>
         <li class="letter" id="z" data-keycode="90">z</li>
         <li class="letter" id="x" data-keycode="88">x</li>
         <li class="letter" id="c" data-keycode="67">c</li>
@@ -82,18 +87,20 @@
         <li class="symbol" id="period" data-keycode="190"><span class="off">&gt; .</span><span class="on">.</span><span class="on">&gt;</span></li>
         <li class="symbol" id="slash" data-keycode="191"><span class="off">? /</span><span class="on">/</span><span class="on">?</span></li>
         <li class="shift lastitem" id="shiftright" data-keycode="16">shift</li>
-		<li class="function" id="fnc" data-keycode="fn">fn</li>
-		<li class="control" id="control" data-keycode="17"><span>control</span></li>
-		<li class="option" id="altleft" data-keycode="18">option</li>
-		<li class="command" id="metaleft" data-keycode="91">command</li>
+        <li class="function" id="fnc" data-keycode="fn">fn</li>
+        <li class="control" id="control" data-keycode="17"><span>control</span></li>
+        <li class="option" id="altleft" data-keycode="18">option</li>
+        <li class="command" id="metaleft" data-keycode="91">command</li>
         <li class="space" id="space" data-keycode="32">&nbsp;</li>
-		<li class="command" id="metaright" data-keycode="91">command</li>
-		<li class="option" id="altright" data-keycode="18">option</li>
-		<li class="arrows" id="arrowleft" data-keycode="37">&#9664;</li>
-		<li><div class="arrows" id="arrowup" data-keycode="38">&#9650;</div><div class="arrows" id="arrowdown" data-keycode="40">&#9660;</div></li>
-		<li class="arrows" id="arrowright" data-keycode="39">&#9658;</li>
-	</ul>
+        <li class="command" id="metaright" data-keycode="91">command</li>
+        <li class="option" id="altright" data-keycode="18">option</li>
+        <li class="arrows" id="arrowleft" data-keycode="37" style ="margin-top: 20px;" >&#9664;</li>
+        <li  class="arrows"><div class="arrows" id="arrowup" data-keycode="38">&#9650;</div></li>
+        <li class="arrows" id="arrowright" data-keycode="39"  style ="margin-top: 20px;" >&#9658;</li>
+        <li  class="arrows" style="margin-top: -15px;margin-left: 48px;"><div id="arrowdown" data-keycode="40">&#9660;</div></li>
+    </ul>
     <textarea id="write" rows="6" cols="60"></textarea>
 </div>
 </body>
 </html>
+

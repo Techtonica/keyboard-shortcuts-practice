@@ -1,4 +1,4 @@
-[{
+[ {
     "answer": "control+a",
     "question": "How do you go to the beginning of the line you are currently typing on?",
     "keys": [17, 65]
@@ -109,6 +109,11 @@
     "keys": [91, 78]
   },
   {
+    "answer": "command+t",
+    "question": "How do you open a new tab?",
+    "keys": [91, 84]
+  },
+  {
     "answer": "command+o",
     "question": "How do you open the selected item, or open a dialog to select a file to open?",
     "keys": [91, 79]
@@ -122,11 +127,6 @@
     "answer": "command+s",
     "question": "How do you save the current document?",
     "keys": [91, 83]
-  },
-  {
-    "answer": "command+w",
-    "question": "How do you close the front (active) window?",
-    "keys": [91, 87]
   },
   {
     "answer": "command+Option+w",
