@@ -1,0 +1,34 @@
+Ctrl-A How do you go to the beginning of the line you are currently typing on?
+Ctrl-E How do you go to the end of the line you are currently typing on?
+Ctrl-Q How do you clears everything on current line?
+Ctrl-L How do you clear the screen using the control key?
+Ctrl-K How do you cut everything forward to end of line?
+Ctrl-U How do you cut everything backwards to beginning of line?
+Ctrl-W How do you cut one word backwards using white space as delimiter?
+Ctrl-Y How do you paste whatever was cut by the last cut command?
+Command-X How do you cut the selected item and copy it to the clipboard?
+Command-C How do you copy the selected item to the clipboard?
+Command-V How do you paste the contents of the clipboard into the current document or app?
+Command-Z How do you undo the previous command?
+Command-Shift-Z How do you redo to reverse the undo command?
+Command-A	How do you select All items?
+Command-F How do you find items in a document or open a Find window?
+Command-G	How do you find Again? (Find the next occurrence of the item previously found.)
+Command-H	How do you hide the windows of the front app?
+Command-Option-H How do you view the front app but hide all other apps?
+Command-K How do you clear the screen using the command key?
+Command-M	How do you minimize the front window to the Dock?
+Command-Option-M How do you minimize all windows of the front app?
+Command-N How do you open a new document or window?
+Command-O How do you open the selected item, or open a dialog to select a file to open?
+Command-P How do you print the current document?
+Command-S How do you save the current document?
+Command-W	How do you close the front window?
+Command-Option-W How do you close all windows of the app?
+Command-Q How do you quit the app?
+Option-Command-Esc How do you force quit?
+Command–Space bar How do you show or hide the Spotlight search field?
+Command-Tab How do you switch to the next most recently used app among your open apps?
+Shift-Command-Tilde (~) How do you switch to the next most recently used window of the front app?
+Shift-Command-3 How do you take a screenshot of the entire screen?
+Command-Comma (,) How do you open preferences for the front app?

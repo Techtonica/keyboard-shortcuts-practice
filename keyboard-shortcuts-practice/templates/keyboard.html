@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+     
+    <title>Keyboard</title>
+    <link rel="stylesheet" type="text/css" href="CSS/main.css" />
+</head>
+<body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="JS/main.js"></script>
+<div id="container">
+    <textarea id="write" rows="6" cols="60"></textarea>
+	
+    <ul id="keyboard">
+		<li class="esc" id="escape">esc</li>
+		<li class="special" id="f1">F1</li>
+		<li class="special" id="f2">F2</li>
+		<li class="special" id="f3">F3</li>
+		<li class="special" id="f4">F4</li>
+		<li class="special" id="f5">F5</li>
+		<li class="special" id="f6">F6</li>
+		<li class="special" id="f7">F7</li>
+		<li class="special" id="f8">F8</li>
+		<li class="special" id="f9">F9</li>
+		<li class="special" id="f10">F10</li>
+		<li class="special" id="f11">F11</li>
+		<li class="special" id="f12">F12</li>
+		<li class="special lastitem" id="f13">TBD</li>
+		<li class="symbol"><span class="off">~`</span><span class="on">~</span><span class="on">`</span></li>
+        <li class="symbol"><span class="off">!1</span><span class="on">!</span><span class="on">1</span></li>
+        <li class="symbol"><span class="off">@2</span><span class="on">@</span><span class="on">2</span></li>
+        <li class="symbol"><span class="off">#3</span><span class="on">#</span><span class="on">3</span></li>
+        <li class="symbol"><span class="off">$4</span><span class="on">$</span><span class="on">4</span></li>
+        <li class="symbol"><span class="off">%5</span><span class="on">%</span><span class="on">5</span></li>
+        <li class="symbol"><span class="off">^6</span><span class="on">^</span><span class="on">6</span></li>
+        <li class="symbol"><span class="off">&amp;7</span><span class="on">&amp;</span><span class="on">7</span></li>
+        <li class="symbol"><span class="off">*8</span><span class="on">*</span><span class="on">8</span></li>
+        <li class="symbol"><span class="off">(9</span><span class="on">(</span><span class="on">9</span></li>
+        <li class="symbol"><span class="off">)0</span><span class="on">)</span><span class="on">0</span></li>
+        <li class="symbol"><span class="off">_-</span><span class="on">_</span><span class="on">-</span></li>
+        <li class="symbol"><span class="off">+=</span><span class="on">+</span><span class="on">=</span></li>
+        <li class="delete lastitem" id="backspace">delete</li>
+		<li class="tab" id="tab">tab</li>
+        <li class="letter" id="q">q</li>
+        <li class="letter" id="w">w</li>
+        <li class="letter" id="e">e</li>
+        <li class="letter" id="r">r</li>
+        <li class="letter" id="t">t</li>
+        <li class="letter" id="y">y</li>
+        <li class="letter" id="u">u</li>
+        <li class="letter" id="i">i</li>
+        <li class="letter" id="o">o</li>
+        <li class="letter" id="p">p</li>
+		<li class="symbol" id="left-brac">{[</li>
+		<li class="symbol" id="right-brac">]}</li>
+		<li class="symbol" id="pipes">|\</li>
+		<li class="capslock" id="capslock">caps lock</li>
+        <li class="letter" id="a">a</li>
+        <li class="letter" id="s">s</li>
+        <li class="letter" id="d">d</li>
+        <li class="letter" id="f">f</li>
+        <li class="letter" id="g">g</li>
+        <li class="letter" id="h">h</li>
+        <li class="letter" id="j">j</li>
+        <li class="letter" id="k">k</li>
+        <li class="letter" id="l">l</li>
+        <li class="symbol"><span class="off">: ;</span><span class="on" id=";">;</span><span class="on" id=":">:</span></li>
+        <li class="symbol"><span class="off">' &quot;</span><span id="'" class="on">'</span><span class="on" id="quot">&quot;</span></li>
+        <li class="return lastitem" id="enter">return</li>
+		<li class="shift" id="shiftleft">shift</li>
+        <li class="letter" id="z">z</li>
+        <li class="letter" id="x">x</li>
+        <li class="letter" id="c">c</li>
+        <li class="letter" id="v">v</li>
+        <li class="letter" id="b">b</li>
+        <li class="letter" id="n">n</li>
+        <li class="letter" id="m">m</li>
+        <li class="symbol"><span class="off">&lt; ,</span><span class="on">,</span><span class="on">&lt;</span></li>
+        <li class="symbol"><span class="off">&gt; .</span><span class="on">.</span><span class="on">&gt;</span></li>
+        <li class="symbol"><span class="off">? /</span><span class="on">/</span><span class="on">?</span></li>
+        <li class="shift lastitem" id="shiftright">shift</li>
+		<li class="function" id="fnc">fn</li>
+		<li class="control" id="controlleft">control</li>
+		<li class="option" id="optionleft">option</li>
+		<li class="command" id="commandleft">command</li>
+        <li class="space" id="space">&nbsp;</li>
+		<li class="command" id="commandright">command</li>
+		<li class="option" id="optionright">option</li>
+		<li class="arrows" id="leftarrow">&#9664;</li>
+		<li><div class="arrows" id="toparrow">&#9650;</div><div class="arrows" id="downarrow">&#9660;</div></li>
+		<li class="arrows" id="rightarrow">&#9658;</li>		
+	</ul>
+	
+	<div id="read"><div id="textdiv"> </div></div>
+</div>
+</body>
+</html>
