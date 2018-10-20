@@ -29,12 +29,17 @@ If you would like to contribute to the curriculum, please [sign up here](https:/
 
 Try the current version of the app [here](https://techtonica.github.io/keyboard-shortcuts-practice/).
 
-#### Troubleshooting
+#### Running Locally
 
-Error: *Cross origin requests are only supported for protocol schemes*
+This branch of the keyboard shortcuts practice uses Python3.6 and Flask as a backend. 
 
-You cannot preview this correctly in the browser due to security restrictions. To view on your machine, you can use http-server.
-
-* `npm install -g http-server`
-* `http-server` (in this repository's local working directory)
-* `open http://127.0.0.1:8080`
+`git clone https://github.com/Techtonica/keyboard-shortcuts-practice.git`
+`cd keyboard-shortcuts-practice`
+`python3 -m venv . # create a virtual environment`
+`source bin/activate # activate virtual environment`
+`pip install -r requirements.txt`
+`export FLASK_APP=keyboard_shortcuts_practice.py`
+`flask db init`
+`flask db migrate -m "create tables" # run migrations to create tables`
+`flask db upgrade`
+`flask run`
