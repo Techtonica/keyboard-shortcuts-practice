@@ -129,11 +129,6 @@
     "keys": [91, 83]
   },
   {
-    "answer": "command+w",
-    "question": "How do you close the front (active) window?",
-    "keys": [91, 87]
-  },
-  {
     "answer": "command+Option+w",
     "question": "How do you close all windows of the app?",
     "keys": [91, 18, 87]
