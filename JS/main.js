@@ -6,6 +6,10 @@ var typewriter;
 var quesNo;
 let pressed = new Set();
 
+// Constant for Chrome left and right command key value
+const LEFT_COMMAND = 93;
+const RIGHT_COMMAND = 93;
+
 $(document).ready(function() {
   //$("#retryButton").toggleClass("on");
   //alert($('li[data-keycode="test"]').attr('id'));
@@ -228,6 +232,13 @@ document.addEventListener('keydown', function(event) {
   const keySet = new Set(reqKeys);
   if (keySet.size <= pressed.size) {
     for (let key of pressed) { // are all required keys pressed?
+      let registeredKey = key;
+      
+      // Make left and right command key the same
+      if (key == RIGHT_COMMAND) {
+        registeredKey = LEFT_COMMAND;
+      }
+
       if (!keySet.has(key)) {
         onIncorrect();
         return;
