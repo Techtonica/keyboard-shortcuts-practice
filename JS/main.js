@@ -236,7 +236,7 @@ function runOnKeys(callbacks, quesNo, ...keySet) {
 		handle(event);
     for (let key of keySet) { // are all required keys pressed?
       if (!pressed.has(key)) {
-        if (pressed.size > 1) {
+        if (pressed.size > 1) {	
           callbacks.onIncorrect();
         }
         return;

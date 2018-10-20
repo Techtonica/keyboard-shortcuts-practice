@@ -98,8 +98,8 @@ width: 102px;
 	height: 55px;
 }
 #keyboard .arrows{
-	line-height: 20px;
-	height: 20px;
+	line-height: 20px !important;
+	height: 20px !important;
 }
 
 #keyboard .option, #keyboard .control, #keyboard .function{
