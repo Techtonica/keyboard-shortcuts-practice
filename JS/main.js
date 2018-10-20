@@ -258,6 +258,7 @@ window.addEventListener('focus', function (e) {
   // Chrome disables capturing certain commands like:
   // Cmd+n, Cmd+t, Cmd+w
   // Here, we're using window refocus to progress the game
+  clearPressedKeys();
   if (reqKeys[0] && reqKeys[1] && reqKeys[0] === 91 &&
     (reqKeys[1] === 78 || reqKeys[1] === 87 || reqKeys[1] === 84)) {
     onSuccess();
