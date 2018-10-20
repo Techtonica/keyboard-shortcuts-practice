@@ -115,3 +115,4 @@ pip-selfcheck.json
 pyvenv.cfg
 app.db
 migrations/
+.DS_Store
