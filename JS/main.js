@@ -206,7 +206,8 @@ function onIncorrect() {
 };
 
 // Function to execute when correct keys are pressed.
-function onSuccess(keys){
+function onSuccess(){
+  pressed.clear();
   $("#textdiv").text("Correct Keys pressed!")
   clearPromptKeys();
   setTimeout(nextQuestion,1000);
@@ -233,8 +234,7 @@ document.addEventListener('keydown', function(event) {
   }
 
   // All the required keys are pressed
-  pressed.clear();
-  onSuccess(reqKeys);
+  onSuccess();
 });
 
 document.addEventListener('keyup', function(event) {
@@ -246,4 +246,14 @@ document.addEventListener('keyup', function(event) {
   }
   pressed.delete(event.keyCode);
   release(event);
+});
+
+window.addEventListener('focus', function (e) {
+  // Chrome disables capturing certain commands like:
+  // Cmd+n, Cmd+t, Cmd+w
+  // Here, we're using window refocus to progress the game
+  if (reqKeys[0] && reqKeys[1] && reqKeys[0] === 91 &&
+    (reqKeys[1] === 78 || reqKeys[1] === 87 || reqKeys[1] === 84)) {
+    onSuccess();
+  }
 });

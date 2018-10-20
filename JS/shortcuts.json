@@ -109,6 +109,11 @@
     "keys": [91, 78]
   },
   {
+    "answer": "command+t",
+    "question": "How do you open a new tab?",
+    "keys": [91, 84]
+  },
+  {
     "answer": "command+o",
     "question": "How do you open the selected item, or open a dialog to select a file to open?",
     "keys": [91, 79]
