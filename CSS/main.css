@@ -1,6 +1,7 @@
 #container {
 margin: 100px auto;
 width: 680px;
+text-align: center;
 }
 body {
 font: 71%/1.5 Verdana, Sans-Serif;
@@ -18,7 +19,7 @@ border: 1px solid #f9f9f9;
 -webkit-border-radius: 5px;
 }
 #read {
-margin: 10px 0 5px;
+margin: 10px 0 -15px;
 padding: 15px;
 width: 648px;
 height: 200px;
@@ -30,6 +31,10 @@ overflow: hidden;
 -moz-border-radius: 5px;
 -webkit-border-radius: 5px;
 white-space:inherit;
+text-align: left;
+}
+#confetti {
+  display: inline-block;
 }
 #read.incorrect {
   background-color: rgb(180,96,96) !important;

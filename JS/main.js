@@ -216,6 +216,7 @@ function onSuccess(){
   $("#textdiv").text("Correct Keys pressed!")
   clearPromptKeys();
   clearPressedKeys();
+  confetti($("#confetti").get(0), { spread: 180, startVelocity: 50, elementCount: 150 });
   setTimeout(nextQuestion, 1000);
 }
 
