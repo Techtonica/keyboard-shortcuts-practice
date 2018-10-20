@@ -27,11 +27,11 @@ font: 2.5em/1.5 Verdana, Sans-Serif;
 background: rgb(0,147,181);
 color: white;
 border: 1px solid #f9f9f9;
-overflow: hidden;
 -moz-border-radius: 5px;
 -webkit-border-radius: 5px;
 white-space:inherit;
 text-align: left;
+position: relative;
 }
 #confetti {
   display: inline-block;
@@ -39,6 +39,25 @@ text-align: left;
 #read.incorrect {
   background-color: rgb(180,96,96) !important;
 }
+
+.img-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.next {
+  right: -80pt;
+}
+
+.prev {
+  left: -80pt;
+}
+
+.img-button img {
+  width: 24pt;
+}
+
 #keyboard {
 background: #0000004d;
 -moz-border-radius: 5px;

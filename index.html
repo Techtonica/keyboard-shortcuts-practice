@@ -13,9 +13,9 @@
 	<script src="JS/confetti.js"></script>	
 	<script src="JS/main.js"></script>	
 <div id="container">
-    <button id="prevButton" type="button" onclick="prevQuestion();">&lt;&lt; previous</button>
-    <button id="nextButton" type="button" onclick="nextQuestion();">next &gt;&gt;</button>
     <div id="read">
+      <a id="prevButton" class="prev img-button" href="javascript:prevQuestion();"><img src="/images/arrow_left.png"></img></a>
+      <a id="nextButton" class="next img-button" href="javascript:nextQuestion();"><img src="/images/arrow_right.png"></img></a>
       <div id="textdiv"></div>
     </div>
     <div id="confetti"></div>
