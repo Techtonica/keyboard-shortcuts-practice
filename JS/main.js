@@ -239,7 +239,7 @@ document.addEventListener('keydown', function(event) {
         registeredKey = LEFT_COMMAND;
       }
 
-      if (!keySet.has(key)) {
+      if (!keySet.has(registeredKey)) {
         onIncorrect();
         return;
       }
