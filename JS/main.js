@@ -29,6 +29,8 @@ $(document).ready(function() {
     // Call readText()
     readText()
   })
+
+  $('.container').css('height', window.outerHeight);
 });
 
 function nextQuestion(){
