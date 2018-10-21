@@ -1,43 +1,4 @@
-[ {
-    "answer": "control+a",
-    "question": "How do you go to the beginning of the line you are currently typing on?",
-    "keys": [17, 65]
-  },
-  {
-    "answer": "control+e",
-    "question": "How do you go to the end of the line you are currently typing on?",
-    "keys": [17, 69]
-  },
-  {
-    "answer": "control+q",
-    "question": "How do you clear everything on the current line?",
-    "keys": [17, 81]
-  },
-  {
-    "answer": "control+l",
-    "question": "How do you clear the screen using the control key?",
-    "keys": [17, 76]
-  },
-  {
-    "answer": "control+k",
-    "question": "How do you cut everything forward to the end of the line?",
-    "keys": [17, 75]
-  },
-  {
-    "answer": "control+u",
-    "question": "How do you cut everything backwards to the beginning of the line?",
-    "keys": [17, 85]
-  },
-  {
-    "answer": "control+w",
-    "question": "How do you cut one word backwards using white space as the delimiter?",
-    "keys": [17, 87]
-  },
-  {
-    "answer": "control+y",
-    "question": "How do you paste whatever was cut by the last cut command?",
-    "keys": [17, 89]
-  },
+[
   {
     "answer": "command+x",
     "question": "How do you cut the selected item and copy it to the clipboard?",
@@ -129,16 +90,6 @@
     "keys": [91, 83]
   },
   {
-    "answer": "command+Option+w",
-    "question": "How do you close all windows of the app?",
-    "keys": [91, 18, 87]
-  },
-  {
-    "answer": "command+q",
-    "question": "How do you quit the app?",
-    "keys": [91, 81]
-  },
-  {
     "answer": "Option+command+Esc",
     "question": "How do you force quit?",
     "keys": [18, 91, 27]
@@ -159,6 +110,46 @@
     "keys": [16 ,91, 192]
   },
   {
+    "answer": "control+a",
+    "question": "How do you go to the beginning of the line you are currently typing on?",
+    "keys": [17, 65]
+  },
+  {
+    "answer": "control+e",
+    "question": "How do you go to the end of the line you are currently typing on?",
+    "keys": [17, 69]
+  },
+  {
+    "answer": "control+q",
+    "question": "How do you clear everything on the current line?",
+    "keys": [17, 81]
+  },
+  {
+    "answer": "control+l",
+    "question": "How do you clear the screen using the control key?",
+    "keys": [17, 76]
+  },
+  {
+    "answer": "control+k",
+    "question": "How do you cut everything forward to the end of the line?",
+    "keys": [17, 75]
+  },
+  {
+    "answer": "control+u",
+    "question": "How do you cut everything backwards to the beginning of the line?",
+    "keys": [17, 85]
+  },
+  {
+    "answer": "control+w",
+    "question": "How do you cut one word backwards using white space as the delimiter?",
+    "keys": [17, 87]
+  },
+  {
+    "answer": "control+y",
+    "question": "How do you paste whatever was cut by the last cut command?",
+    "keys": [17, 89]
+  },
+  {
     "answer": "Shift+command+3",
     "question": "How do you take a screenshot of the entire screen?",
     "keys": [16 ,91, 51]
@@ -167,4 +158,5 @@
     "answer": "command+Comma(,)",
     "question": "How do you open preferences for the front app?",
     "keys": [91, 188]
-  }]
+  }
+]
