@@ -3,6 +3,14 @@
   margin: 0px auto;
 }
 
+.image-container {
+  width: 800px;
+}
+
+.image-container img {
+  width: 800px;
+}
+
 body {
   font: 71%/1.5 Verdana, Sans-Serif;
   color: #37474F;
@@ -43,7 +51,7 @@ body {
   height: 180px;
   font: 2.5em/1.5 'Roboto', Sans-Serif;
   background: white;
-  color: #4a4a4a9c;
+  color: #37474F;
   border: 1px solid #f9f9f9;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -115,12 +123,13 @@ body {
 #keyboard .tab,  #keyboard .delete{
   width: 72px;
 }
-.pressed{
-  background: #51d87ee0 !important;
-}
 .prompt{
   color: white;
-  background: blue !important;
+  background: #03a678 !important;
+}
+.pressed{
+  color: white;
+  background: #3455db !important;
 }
 .uppercase {
   text-transform: uppercase;
