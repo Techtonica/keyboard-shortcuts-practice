@@ -116,7 +116,7 @@ width: 80px;
 width: 72px;
 }
 .pressed{
-background: orange !important;
+background: #51d87ee0 !important;
 }
 .prompt{
   color: white;
