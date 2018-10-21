@@ -67,6 +67,10 @@ body {
   border: 6px solid #ff000080 !important;
 }
 
+.cheatsheet {
+  margin-top: 20px;
+}
+
 .img-button {
   position: absolute;
   top: 50%;
