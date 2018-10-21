@@ -4,9 +4,9 @@
 }
 
 body {
-font: 71%/1.5 Verdana, Sans-Serif;
-color: #37474F;
-margin: 0;
+  font: 71%/1.5 Verdana, Sans-Serif;
+  color: #37474F;
+  margin: 0;
 }
 
 #top {
@@ -26,31 +26,31 @@ margin: 0;
 }
 
 #write {
-margin: 0 0 5px;
-padding: 5px;
-width: 667px;
-height: 200px;
-font: 1em/1.5 Verdana, Sans-Serif;
-background: #fff;
-border: 1px solid #f9f9f9;
--moz-border-radius: 5px;
--webkit-border-radius: 5px;
+  margin: 0 0 5px;
+  padding: 5px;
+  width: 667px;
+  height: 200px;
+  font: 1em/1.5 Verdana, Sans-Serif;
+  background: #fff;
+  border: 1px solid #f9f9f9;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
 }
 #read {
-margin: 10px 0 -15px;
-padding: 15px;
-width: 648px;
-height: 180px;
-font: 2.5em/1.5 'Roboto', Sans-Serif;
-background: white;
-color: #4a4a4a9c;
-border: 1px solid #f9f9f9;
--moz-border-radius: 5px;
--webkit-border-radius: 5px;
-white-space:inherit;
-text-align: left;
-position: relative;
-border: 6px solid white;
+  margin: 10px 0 -15px;
+  padding: 15px;
+  width: 648px;
+  height: 180px;
+  font: 2.5em/1.5 'Roboto', Sans-Serif;
+  background: white;
+  color: #4a4a4a9c;
+  border: 1px solid #f9f9f9;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  white-space:inherit;
+  text-align: left;
+  position: relative;
+  border: 6px solid white;
 }
 #confetti {
   display: inline-block;
@@ -78,56 +78,56 @@ border: 6px solid white;
 }
 
 #keyboard {
-background: #ECEFF1;
--moz-border-radius: 5px;
--webkit-border-radius: 5px;
-margin: 0;
-padding: 2px;
-list-style: none;
-overflow:auto;
-font-family: 'Roboto', sans-serif;;
+  background: #ECEFF1;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  margin: 0;
+  padding: 2px;
+  list-style: none;
+  overflow:auto;
+  font-family: 'Roboto', sans-serif;;
 }
 
 #keyboard li {
-float: left;
-margin: 2px;
-width: 40px;
-height: 40px;
-line-height: 40px;
-text-align: center;
-background: #fff;
-border: 1px solid #f9f9f9;
--moz-border-radius: 5px;
--webkit-border-radius: 5px;
+  float: left;
+  margin: 2px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #f9f9f9;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
 }
 .tab{
-clear: left;
+  clear: left;
 }
 .lastitem {
-margin-right: 0;
+  margin-right: 0;
 }
 #keyboard .return {
-width: 77px;
+  width: 77px;
 }
 #keyboard .capslock {
-width: 80px;
+  width: 80px;
 }
 #keyboard .tab,  #keyboard .delete{
-width: 72px;
+  width: 72px;
 }
 .pressed{
-background: #51d87ee0 !important;
+  background: #51d87ee0 !important;
 }
 .prompt{
   color: white;
   background: blue !important;
 }
 .uppercase {
-text-transform: uppercase;
+  text-transform: uppercase;
 }
 #keyboard .space {
-width: 224px;
-height: 55px;
+  width: 224px;
+  height: 55px;
 }
 
 #keyboard .double {
@@ -137,14 +137,14 @@ height: 55px;
 }
 
 #keyboard .shift {
-width: 102px;
+  width: 102px;
 }
 #keyboard .command{
   width: 56px;
 }
 #keyboard .arrows{
-	line-height: 20px !important;
-	height: 20px !important;
+  line-height: 20px !important;
+  height: 20px !important;
 }
 
 #keyboard .option, #keyboard .control, #keyboard .function, #keyboard .command {
@@ -153,15 +153,15 @@ width: 102px;
 }
 
 #keyboard .special {
-height: 25px;
-line-height: 25px;
-width: 42.28px;
+  height: 25px;
+  line-height: 25px;
+  width: 42.28px;
 }
 
 div .arrows{
--moz-border-radius: 5px;
--webkit-border-radius: 5px;	
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;	
 }
 .on {
-display: none;
+  display: none;
 }
