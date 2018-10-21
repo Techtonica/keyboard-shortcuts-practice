@@ -30,7 +30,7 @@ $(document).ready(function() {
     readText()
   })
 
-  $('.container').css('height', window.outerHeight);
+  $('.container').css('height', window.innerHeight);
 });
 
 function nextQuestion(){
