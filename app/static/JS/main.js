@@ -29,6 +29,11 @@ $(document).ready(function() {
     // Call readText()
     readText()
   })
+
+  $('.container').css('height', $(window).height());
+  $(window).on('resize', function() {
+    $('.container').css('height', $(window).height());
+  });
 });
 
 function nextQuestion(){

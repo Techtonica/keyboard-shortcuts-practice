@@ -1,12 +1,30 @@
-#container {
-margin: 100px auto;
-width: 680px;
-text-align: center;
+.container {
+  height: 800px;
+  margin: 0px auto;
 }
-body {
+
+/*body {
 font: 71%/1.5 Verdana, Sans-Serif;
-background: #eee;
+color: #37474F;
+margin: 0;
+}*/
+
+#top {
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f2f3f4;
+  flex-direction: column;
 }
+
+#bottom {
+  height: 50%;
+  background-color: white;
+  width: 680px;
+  margin: 70px auto;
+}
+
 #write {
 margin: 0 0 5px;
 padding: 5px;
@@ -22,22 +40,23 @@ border: 1px solid #f9f9f9;
 margin: 10px 0 -15px;
 padding: 15px;
 width: 648px;
-height: 200px;
-font: 2.5em/1.5 Verdana, Sans-Serif;
-background: rgb(0,147,181);
-color: white;
+height: 180px;
+font: 2.5em/1.5 'Roboto', Sans-Serif;
+background: white;
+color: #4a4a4a9c;
 border: 1px solid #f9f9f9;
 -moz-border-radius: 5px;
 -webkit-border-radius: 5px;
 white-space:inherit;
 text-align: left;
 position: relative;
+border: 6px solid white;
 }
 #confetti {
   display: inline-block;
 }
 #read.incorrect {
-  background-color: rgb(180,96,96) !important;
+  border: 6px solid #ff000080 !important;
 }
 
 .img-button {
@@ -59,13 +78,14 @@ position: relative;
 }
 
 #keyboard {
-background: #0000004d;
+background: #ECEFF1;
 -moz-border-radius: 5px;
 -webkit-border-radius: 5px;
 margin: 0;
 padding: 2px;
 list-style: none;
 overflow:auto;
+font-family: 'Roboto', sans-serif;;
 }
 
 #keyboard li {
@@ -109,30 +129,35 @@ text-transform: uppercase;
 width: 224px;
 height: 55px;
 }
-#keyboard .esc{
-    width: 42.28px;
-    height: 25px;
+
+#keyboard .double {
+  line-height: 17px;
+  padding-top: 2px;
+  height: 38px;
 }
 
 #keyboard .shift {
 width: 102px;
 }
 #keyboard .command{
-    width: 56px;
-    height: 55px;
+  width: 56px;
 }
 #keyboard .arrows{
-    line-height: 20px !important;
-    height: 20px !important;
+  line-height: 20px !important;
+  height: 20px !important;
 }
 
-#keyboard .option, #keyboard .control, #keyboard .function{
-    height: 55px;
+#keyboard .option, #keyboard .control, #keyboard .function, #keyboard .command {
+  height: 55px;
+  line-height: 55px;
 }
+
 #keyboard .special {
 height: 25px;
+line-height: 25px;
 width: 42.28px;
 }
+
 div .arrows{
 -moz-border-radius: 5px;
 -webkit-border-radius: 5px;
