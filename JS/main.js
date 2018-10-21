@@ -30,7 +30,10 @@ $(document).ready(function() {
     readText()
   })
 
-  $('.container').css('height', window.innerHeight);
+  $('.container').css('height', $(window).height());
+  $(window).on('resize', function() {
+    $('.container').css('height', $(window).height());
+  });
 });
 
 function nextQuestion(){
