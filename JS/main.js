@@ -17,6 +17,9 @@ const FIREFOX_RIGHT_COMMAND_STRING = 'OSRight';
 const CHROME_LEFT_COMMAND_STRING = 'MetaLeft';
 const CHROME_RIGHT_COMMAND_STRING = 'MetaRight';
 
+// this tracks when we started asking for the current key command
+let questionStartMS = 0;
+
 $(document).ready(function() {
   //$("#retryButton").toggleClass("on");
   //alert($('li[data-keycode="test"]').attr('id'));
@@ -28,6 +31,7 @@ $(document).ready(function() {
     }
     // Call readText()
     readText()
+    updateTimingDisplay();
   })
 
   $('.container').css('height', $(window).height());
@@ -36,7 +40,7 @@ $(document).ready(function() {
   });
 });
 
-function nextQuestion(){
+function nextQuestion() {
   if(sessionStorage.getItem("questionNo")!=null){
     if(parseInt(sessionStorage.getItem("questionNo"))<parseInt(sessionStorage.getItem("totalCount"))){
       sessionStorage.setItem("questionNo", parseInt(sessionStorage.getItem("questionNo"))+1);
@@ -46,6 +50,7 @@ function nextQuestion(){
   }
   clearPromptKeys();
   clearPressedKeys();
+  updateTimingDisplay();
   reqKeys = [];
   readText();
 }
@@ -58,6 +63,7 @@ function prevQuestion() {
   }
   clearPromptKeys();
   clearPressedKeys();
+  updateTimingDisplay();
   reqKeys = [];
   readText();
 }
@@ -212,6 +218,9 @@ function writeQuestion(question) {
     });
   }
   typewriter.typeString(question).start();
+
+  // and, finally, mark the beginning of asking the question
+  questionStartMS = Date.now();
 }
 
 function clearIncorrectIndication() {
@@ -227,6 +236,24 @@ function clearPressedKeys() {
   $('.pressed').removeClass('pressed');
 };
 
+function updateTimingDisplay() {
+  var questionNo = sessionStorage.getItem('questionNo');
+  // grab the last bits of timing data
+  var timings = getHistory(questionNo).slice(-3);
+
+  // and then drop them into the boxes
+  timings.forEach(function(t, idx) {
+    var element = $('#timing-' + idx);
+    element.html(t / 1000 + ' sec');
+    element.show();
+  })
+
+  // hide the boxes if we don't have timing data
+  for (var i = timings.length; i < 3; i++) {
+    $('#timing-' + i).hide();
+  }
+}
+
 function onIncorrect() {
   $('#textdiv').effect("shake", { distance: 3 });
   $("#read").addClass('incorrect');
@@ -235,6 +262,8 @@ function onIncorrect() {
 
 // Function to execute when correct keys are pressed.
 function onSuccess(){
+  recordAnswer(sessionStorage.getItem("questionNo"), Date.now() - questionStartMS);
+  saveHistory();
   $('#textdiv span').first().text('Correct Keys pressed!');
   clearPromptKeys();
   clearPressedKeys();
