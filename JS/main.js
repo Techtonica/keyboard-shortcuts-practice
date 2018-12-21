@@ -203,7 +203,7 @@ function readText(){
 
 function writeQuestion(question) {
   if(typewriter!=null) {
-    typewriter.stop();
+      typewriter.state.eventQueue = [];
     $('#textdiv span').first().text('');
   } else {
     typewriter = new Typewriter(document.getElementById('textdiv'), {
