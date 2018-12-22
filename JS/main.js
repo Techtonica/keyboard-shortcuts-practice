@@ -17,6 +17,9 @@ const FIREFOX_RIGHT_COMMAND_STRING = 'OSRight';
 const CHROME_LEFT_COMMAND_STRING = 'MetaLeft';
 const CHROME_RIGHT_COMMAND_STRING = 'MetaRight';
 
+// this tracks when we started asking for the current key command
+let questionStartMS = 0;
+
 $(document).ready(function() {
   //$("#retryButton").toggleClass("on");
   //alert($('li[data-keycode="test"]').attr('id'));
@@ -28,6 +31,7 @@ $(document).ready(function() {
     }
     // Call readText()
     readText()
+    updateTimingDisplay();
   })
 
   $('.container').css('height', $(window).height());
@@ -36,7 +40,7 @@ $(document).ready(function() {
   });
 });
 
-function nextQuestion(){
+function nextQuestion() {
   if(sessionStorage.getItem("questionNo")!=null){
     if(parseInt(sessionStorage.getItem("questionNo"))<parseInt(sessionStorage.getItem("totalCount"))){
       sessionStorage.setItem("questionNo", parseInt(sessionStorage.getItem("questionNo"))+1);
@@ -46,6 +50,7 @@ function nextQuestion(){
   }
   clearPromptKeys();
   clearPressedKeys();
+  updateTimingDisplay();
   reqKeys = [];
   readText();
 }
@@ -58,6 +63,7 @@ function prevQuestion() {
   }
   clearPromptKeys();
   clearPressedKeys();
+  updateTimingDisplay();
   reqKeys = [];
   readText();
 }
@@ -212,6 +218,9 @@ function writeQuestion(question) {
     });
   }
   typewriter.typeString(question).start();
+
+  // and, finally, mark the beginning of asking the question
+  questionStartMS = Date.now();
 }
 
 function clearIncorrectIndication() {
@@ -227,19 +236,76 @@ function clearPressedKeys() {
   $('.pressed').removeClass('pressed');
 };
 
+function updateTimingDisplay() {
+  $('#timing-feedback').html('');
+  var questionNo = sessionStorage.getItem('questionNo');
+  // grab the last bits of timing data
+  var timings = getHistory(questionNo).slice(-3);
+
+  // and then drop them into the boxes
+  timings.forEach(function(t, idx) {
+    var element = $('#timing-' + idx);
+    element.html(t / 1000 + ' sec');
+    element.show();
+  })
+
+  // hide the boxes if we don't have timing data
+  for (var i = timings.length; i < 3; i++) {
+    $('#timing-' + i).hide();
+  }
+}
+
 function onIncorrect() {
   $('#textdiv').effect("shake", { distance: 3 });
   $("#read").addClass('incorrect');
   setTimeout(clearPressedKeys, 500);
 };
 
+function handleTimingFeedback(questionNo, curMS) {
+  var previousTimings = getHistory(questionNo);
+  if (previousTimings.length == 0) {
+    return;
+  }
+
+  var average = previousTimings.reduce(
+    function(acc, cur) { return acc + cur },
+    0,
+  ) / previousTimings.length;
+
+  var delta = average - curMS;
+
+  var template = null;
+  if (delta > 0) {
+    template = "<br/>You were <span style='color:green;'>faster</span> by ${delta} sec!";
+  }
+  if (delta < 0) {
+    template = "<br/>You were <span style='color:red;'>slower</span> by ${delta} sec.";
+  }
+  if (template === null) {
+    return;
+  }
+
+  // convert MS to S
+  delta = Math.abs(delta) / 1000;
+  // now we want to trunate to 2 decimals; the `+` will let us only use 2
+  // decimals if we actually need them, e.g., we want 1.5 not 1.50
+  // cf. https://stackoverflow.com/a/12830454
+  delta = +delta.toFixed(2);
+  $('#timing-feedback').html(template.replace('${delta}', delta));
+}
+
 // Function to execute when correct keys are pressed.
-function onSuccess(){
+function onSuccess() {
+  var questionNo = sessionStorage.getItem("questionNo");
+  var thisAnswerMS = Date.now() - questionStartMS;
+  handleTimingFeedback(questionNo, thisAnswerMS);
+  recordAnswer(questionNo, thisAnswerMS);
+  saveHistory();
   $('#textdiv span').first().text('Correct Keys pressed!');
   clearPromptKeys();
   clearPressedKeys();
   confetti($("#confetti").get(0), { spread: 180, startVelocity: 50, elementCount: 150 });
-  setTimeout(nextQuestion, 1000);
+  setTimeout(nextQuestion, 1500);
 }
 
 document.addEventListener('keydown', function(event) {
@@ -290,7 +356,7 @@ document.addEventListener('keyup', function(event) {
   if (navigator.userAgent.search('Firefox') > 0 && keyCode == FIREFOX_COMMAND_CODE) {
     keyCode = CHROME_LEFT_COMMAND_CODE;
   }
-  
+
   // Make left and right command key the same
   if (keyCode == CHROME_RIGHT_COMMAND_CODE) {
     keyCode = CHROME_LEFT_COMMAND_CODE;

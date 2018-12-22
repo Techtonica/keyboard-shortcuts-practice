@@ -11,17 +11,24 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://unpkg.com/typewriter-effect/dist/core.js"></script>
-    <script src="JS/confetti.js"></script>	
-    <script src="JS/main.js"></script>	
+    <script src="JS/confetti.js"></script>
+    <script src="JS/history.js"></script>
+    <script src="JS/main.js"></script>
     <div class="container">
       <div id="top">
         <div id="read">
           <a id="prevButton" class="prev img-button" href="javascript:prevQuestion();"><img src="images/arrow_left.png"></img></a>
           <div id="textdiv"></div>
+          <div id="timing-feedback"></div>
           <a id="nextButton" class="next img-button" href="javascript:nextQuestion();"><img src="images/arrow_right.png"></img></a>
         </div>
         <a class="cheatsheet" href="cheatsheet.html">Cheat Sheet</a>
         <div id="confetti"></div>
+      </div>
+      <div id="timings" class="timing-container">
+        <div id="timing-0" class="timing-entry"></div>
+        <div id="timing-1" class="timing-entry"></div>
+        <div id="timing-2" class="timing-entry"></div>
       </div>
       <div id="bottom">
         <ul id="keyboard">
@@ -102,7 +109,7 @@
           <li class="arrows" id="arrowleft" data-keycode="37" style ="margin-top: 20px;" >&#9664;</li>
           <li  class="arrows"><div class="arrows" id="arrowup" data-keycode="38">&#9650;</div></li>
           <li class="arrows" id="arrowright" data-keycode="39"  style ="margin-top: 20px;" >&#9658;</li>
-          <li  class="arrows" style="margin-top: -15px;margin-left: 48px;"><div id="arrowdown" data-keycode="40">&#9660;</div></li>		
+          <li  class="arrows" style="margin-top: -15px;margin-left: 48px;"><div id="arrowdown" data-keycode="40">&#9660;</div></li>
         </ul>
       </div>
   </body>

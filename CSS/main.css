@@ -178,3 +178,16 @@ div .arrows{
 .on {
   display: none;
 }
+
+.timing-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.timing-entry {
+  background: lightblue;
+  padding: 1em;
+  border-radius: 4px;
+  margin: -1.5em 1em 0em 1em;
+}
