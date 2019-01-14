@@ -3,6 +3,10 @@
   margin: 0px auto;
 }
 
+.center-horizontally {
+  margin: 0px auto;
+}
+
 .image-container {
   width: 800px;
 }
