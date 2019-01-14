@@ -3,8 +3,8 @@
   margin: 0px auto;
 }
 
-.center-horizontally {
-  margin: 0px auto;
+.center-text-horizontally {
+  text-align: center;
 }
 
 .image-container {
