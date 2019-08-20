@@ -37,4 +37,6 @@ You cannot preview this correctly in the browser due to security restrictions. T
 
 * `npm install -g http-server`
 * `http-server` (in this repository's local working directory)
-* `open http://127.0.0.1:8080`
+* `open http://127.0.0.1:8080
+
+If the browser shows ERR_INVALID_REDIRECT either add '/index.html' to the url ('http://127.0.0.1:8080/index.html') or downgrade your http-server version by running 'npm install -g http-server@0.9.0'.
