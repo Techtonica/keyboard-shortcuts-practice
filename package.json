@@ -1,0 +1,23 @@
+{
+  "name": "keyboard-shortcuts-practice",
+  "version": "1.0.0",
+  "description": "[Techtonica](https://techtonica.org) is a nonprofit that provides free tech training with stipends and job placement to women and non-binary adults with low incomes.",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Techtonica/keyboard-shortcuts-practice.git"
+  },
+  "author": "Techtonica",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Techtonica/keyboard-shortcuts-practice/issues"
+  },
+  "homepage": "https://github.com/Techtonica/keyboard-shortcuts-practice#readme",
+  "dependencies": {
+    "http-server": "^0.11.1"
+  }
+}
