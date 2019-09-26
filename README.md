@@ -8,10 +8,22 @@ This project should train and test users to use the quicker keyboard shortcuts i
 
 Our goal for the backend project is to create a persistant app where users can sign in, practice with the app, and save their progress. That way, the next time they sign in, they can pick up where they left off rather than starting at the beginning.
 
-### Creative Commons Open-Source License
-This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/legalcode).
+### Running the project
 
-[![CC BY-SA 4.0](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/legalcode)
+1. Clone the project by running `git clone https://github.com/Techtonica/keyboard-shortcuts-practice.git` in your terminal
+2. Run `cd keyboard-shortcuts-practice` to get into the root directory
+3. Run `git pull` to make sure you have the latest changes
+4. Run `git checkout backend` to go to the backend branch. This is the ONLY branch that we will be working in.
+5. Run `npm install -g http-server` to install http-server
+6. In the root directory, activate the server by running `http-server` 
+7. Navigate to `http://127.0.0.1:8080` in your browser. Your project should be running at this point.
+8. If that's doesn't work, try `http://127.0.0.1:8080/index.html`, more details in the troubleshooting section below.
+9. You should be good to go at this point!
+10. See your pull requests here: https://github.com/Techtonica/keyboard-shortcuts-practice/pulls
+
+#### Troubleshooting
+
+If the browser shows ERR_INVALID_REDIRECT either add '/index.html' to the url ('http://127.0.0.1:8080/index.html') or downgrade your http-server version by running 'npm install -g http-server@0.9.0'.
 
 ### Contributing
 
@@ -24,6 +36,7 @@ If you would like to contribute to the curriculum, please [sign up here](https:/
 Try the current version of the app [here](https://techtonica.github.io/keyboard-shortcuts-practice/).
 
 **Get started:**
+- Reach out to one of Techtonica's admin and send us your username so we can add you as a contributor.
 - Click a "to-do" issue link and add yourself as the assignee, and pull it into the "in progress" column. If we can't add you as contributor, just make a fork of this repo and make a PR with your changes.  (If you know someone connected to Techtonica, they may be able to add you to our slack channel.)
 
 **While working:**
@@ -34,14 +47,7 @@ Try the current version of the app [here](https://techtonica.github.io/keyboard-
 **Completed curriculum:**
 - Place a "completed" label on the issue once you've completed it, and leave comments about your work if you like. Grazie Mille!!
 
-#### Troubleshooting
+### Creative Commons Open-Source License
+This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/legalcode).
 
-Error: *Cross origin requests are only supported for protocol schemes*
-
-You cannot preview this correctly in the browser due to security restrictions. To view on your machine, you can use http-server.
-
-* `npm install -g http-server`
-* `http-server` (in this repository's local working directory)
-* `open http://127.0.0.1:8080
-
-If the browser shows ERR_INVALID_REDIRECT either add '/index.html' to the url ('http://127.0.0.1:8080/index.html') or downgrade your http-server version by running 'npm install -g http-server@0.9.0'.
+[![CC BY-SA 4.0](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/legalcode)
