@@ -4,7 +4,9 @@
 We discovered that our participants need an app similar to typing practice websites out there, but for Mac OS X keyboard shortcuts. Try the current version of the app [here](https://techtonica.github.io/keyboard-shortcuts-practice/).
 
 
-This project should train and test users to use the quicker keyboard shortcuts ([starting with those outlined here](https://github.com/Techtonica/keyboard-shortcuts-practice/issues/3)) instead of a mouse and the GUI.
+This project should train and test users to use the quicker keyboard shortcuts instead of a mouse and the GUI. The app gets more challenging as you progress through the commands.
+
+Our goal for the backend project is to create a persistant app where users can sign in, practice with the app, and save their progress. That way, the next time they sign in, they can pick up where they left off rather than starting at the beginning.
 
 ### Creative Commons Open-Source License
 This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/legalcode).
