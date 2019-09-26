@@ -10,12 +10,12 @@ Our goal for the backend project is to create a persistant app where users can s
 
 ### Running the project
 
-1. Clone the project by running `git clone https://github.com/Techtonica/keyboard-shortcuts-practice.git` in your terminal
-2. Run `cd keyboard-shortcuts-practice` to get into the root directory
-3. Run `git pull` to make sure you have the latest changes
+1. Clone the project by running `git clone https://github.com/Techtonica/keyboard-shortcuts-practice.git` in your terminal.
+2. Run `cd keyboard-shortcuts-practice` to get into the root directory.
+3. Run `git pull` to make sure you have the latest changes.
 4. Run `git checkout backend` to go to the backend branch. This is the ONLY branch that we will be working in.
-5. Run `npm install -g http-server` to install http-server
-6. In the root directory, activate the server by running `http-server` 
+5. Run `npm install` to install all the packages.
+6. Run `npm start` to start the server.
 7. Navigate to `http://127.0.0.1:8080` in your browser. Your project should be running at this point.
 8. If that's doesn't work, try `http://127.0.0.1:8080/index.html`, more details in the troubleshooting section below.
 9. You should be good to go at this point!
