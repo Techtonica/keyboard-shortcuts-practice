@@ -19,6 +19,8 @@
   "homepage": "https://github.com/Techtonica/keyboard-shortcuts-practice#readme",
   "dependencies": {
     "http-server": "^0.11.1",
-    "pg": "^7.12.1"
+    "mysql": "^2.17.1",
+    "pg": "^7.12.1",
+    "sequelize": "^5.19.2"
   }
 }
