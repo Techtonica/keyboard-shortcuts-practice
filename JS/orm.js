@@ -1,19 +1,21 @@
 // access config/env variables
 //var config = require("./config.js");
-const dotenv = require("dotenv"); 
-dotenv.config();
+require('dotenv').config();
+console.log(`${process.env.URL}`);
 
 // setting up ORM
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize( `${process.env.url}`, {
-});
+var sequelize = new Sequelize(`${process.env.URL}`);
+
 
 // define basic model for a user
-var User = sequelize.define('User', {
+const Model = Sequelize.Model;
+class User extends Model {}
+User.init({
   uid: Sequelize.INTEGER,
   q_number: Sequelize.STRING,
   last_login: Sequelize.DATE
-});
+}, { sequelize, modelName: 'user' });
 
 // testing database connection
 sequelize
