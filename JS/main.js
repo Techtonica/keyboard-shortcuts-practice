@@ -377,3 +377,5 @@ window.addEventListener('focus', function (e) {
     onSuccess();
   }
 });
+
+sequelize.close(); 
