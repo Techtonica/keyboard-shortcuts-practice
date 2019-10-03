@@ -31,6 +31,7 @@ $(document).ready(function() {
     }
     // Call readText()
     readText()
+    
     updateTimingDisplay();
   })
 

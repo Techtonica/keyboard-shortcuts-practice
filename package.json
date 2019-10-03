@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Techtonica/keyboard-shortcuts-practice#readme",
   "dependencies": {
-    "http-server": "^0.11.1"
+    "http-server": "^0.11.1",
+    "request": "^2.88.0"
   }
 }
