@@ -15,15 +15,12 @@ Our goal for the backend project is to create a persistant app where users can s
 3. Run `git pull` to make sure you have the latest changes.
 4. Run `git checkout backend` to go to the backend branch. This is the ONLY branch that we will be working in.
 5. Run `npm install` to install all the packages.
-6. Run `npm start` to start the server.
-7. Navigate to `http://127.0.0.1:8080` in your browser. Your project should be running at this point.
-8. If that's doesn't work, try `http://127.0.0.1:8080/index.html`, more details in the troubleshooting section below.
-9. You should be good to go at this point!
-10. See your pull requests here: https://github.com/Techtonica/keyboard-shortcuts-practice/pulls
+6. Run `npm start` to start the server. (While developing, you can run `npm run dev` instead which will start up nodemon - nodemon listens for changes in .js, .ejs, and .json files and restarts the server for you.)
+7. Navigate to `http://127.0.0.1:3000` or `localhost:3000` in your browser. Your project should be running at this point.
+8. You should be good to go at this point!
+9. See your pull requests here: https://github.com/Techtonica/keyboard-shortcuts-practice/pulls
 
 #### Troubleshooting
-
-If the browser shows ERR_INVALID_REDIRECT either add '/index.html' to the url ('http://127.0.0.1:8080/index.html') or downgrade your http-server version by running 'npm install -g http-server@0.9.0'.
 
 ### Contributing
 
