@@ -25,9 +25,9 @@ $(document).ready(function() {
   //alert($('li[data-keycode="test"]').attr('id'));
   $.getJSON( "JS/shortcuts.json", function( data ) {
     allData = data;
-    if(sessionStorage.getItem("questionNo")==null){
-      sessionStorage.setItem("questionNo", "1");
-      sessionStorage.setItem("totalCount", Object.keys(allData).length);
+    if(localStorage.getItem("questionNo")==null){
+      localStorage.setItem("questionNo", "1");
+      localStorage.setItem("totalCount", Object.keys(allData).length);
     }
     // Call readText()
     readText()
@@ -41,11 +41,11 @@ $(document).ready(function() {
 });
 
 function nextQuestion() {
-  if(sessionStorage.getItem("questionNo")!=null){
-    if(parseInt(sessionStorage.getItem("questionNo"))<parseInt(sessionStorage.getItem("totalCount"))){
-      sessionStorage.setItem("questionNo", parseInt(sessionStorage.getItem("questionNo"))+1);
+  if(localStorage.getItem("questionNo")!=null){
+    if(parseInt(localStorage.getItem("questionNo"))<parseInt(localStorage.getItem("totalCount"))){
+      localStorage.setItem("questionNo", parseInt(localStorage.getItem("questionNo"))+1);
     } else {
-      sessionStorage.setItem("questionNo","1");
+      localStorage.setItem("questionNo","1");
     }
   }
   clearPromptKeys();
@@ -56,9 +56,9 @@ function nextQuestion() {
 }
 
 function prevQuestion() {
-  if(sessionStorage.getItem("questionNo")!=null){
-    if(parseInt(sessionStorage.getItem("questionNo")) > 1) {
-      sessionStorage.setItem("questionNo", parseInt(sessionStorage.getItem("questionNo"))-1);
+  if(localStorage.getItem("questionNo")!=null){
+    if(parseInt(localStorage.getItem("questionNo")) > 1) {
+      localStorage.setItem("questionNo", parseInt(localStorage.getItem("questionNo"))-1);
     }
   }
   clearPromptKeys();
@@ -171,7 +171,7 @@ function promptKey(key){
 
 // Function to read the next combination of keys and highlight it on keyboard
 function readText(){
-  quesNo = sessionStorage.getItem("questionNo")
+  quesNo = localStorage.getItem("questionNo")
   if(quesNo!=null){
     commandText = allData[parseInt(quesNo)-1].answer
     answerkeys = allData[parseInt(quesNo)-1].keys
@@ -181,7 +181,7 @@ function readText(){
     var i = 0;
 
     // Call writeQuestion to add question on the top textarea
-    writeQuestion(allData[parseInt(sessionStorage.getItem("questionNo"))-1].question)
+    writeQuestion(allData[parseInt(localStorage.getItem("questionNo"))-1].question)
 
     $.each(answerkeys , function(index, val) {
       reqKeys.push(val)
@@ -204,7 +204,7 @@ function readText(){
     }); */
 
     //key(commandText, function(){ onSuccess(...reqKeys)});
-  } // END IF for sessionStorage check
+  } // END IF for localStorage check
 }
 
 function writeQuestion(question) {
@@ -238,7 +238,7 @@ function clearPressedKeys() {
 
 function updateTimingDisplay() {
   $('#timing-feedback').html('');
-  var questionNo = sessionStorage.getItem('questionNo');
+  var questionNo = localStorage.getItem('questionNo');
   // grab the last bits of timing data
   var timings = getHistory(questionNo).slice(-3);
 
@@ -296,7 +296,7 @@ function handleTimingFeedback(questionNo, curMS) {
 
 // Function to execute when correct keys are pressed.
 function onSuccess() {
-  var questionNo = sessionStorage.getItem("questionNo");
+  var questionNo = localStorage.getItem("questionNo");
   var thisAnswerMS = Date.now() - questionStartMS;
   handleTimingFeedback(questionNo, thisAnswerMS);
   recordAnswer(questionNo, thisAnswerMS);
@@ -311,8 +311,8 @@ function onSuccess() {
 document.addEventListener('keydown', function(event) {
   event.preventDefault();
   clearIncorrectIndication();
-  if(sessionStorage.getItem("questionNo")!=null){
-    if(quesNo!=sessionStorage.getItem("questionNo")){
+  if(localStorage.getItem("questionNo")!=null){
+    if(quesNo!=localStorage.getItem("questionNo")){
       return;
     }
   }
@@ -345,8 +345,8 @@ document.addEventListener('keydown', function(event) {
 
 document.addEventListener('keyup', function(event) {
   event.preventDefault();
-  if(sessionStorage.getItem("questionNo")!=null){
-    if(quesNo!=sessionStorage.getItem("questionNo")) {
+  if(localStorage.getItem("questionNo")!=null){
+    if(quesNo!=localStorage.getItem("questionNo")) {
       return;
     }
   }
