@@ -59,9 +59,6 @@ Prepare for contributing by following these beginner-friendly steps.
     <img src="/images/make-pr-to-backend.png" alt="making a pull request to the backend branch" title="make a pr to backend" width="350" height="200" />
 1. See your pull requests here: https://github.com/Techtonica/keyboard-shortcuts-practice/pulls
 
-**Completed curriculum:**
-- Place a "completed" label on the issue once you've completed it, and leave comments about your work if you like. Grazie Mille!!
-
 ### Creative Commons Open-Source License
 This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/legalcode).
 
