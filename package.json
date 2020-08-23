@@ -4,7 +4,8 @@
   "description": "[Techtonica](https://techtonica.org) is a nonprofit that provides free tech training with stipends and job placement to women and non-binary adults with low incomes.",
   "main": "index.js",
   "scripts": {
-    "start": "http-server",
+    "start": "node app.js",
+    "dev": "nodemon -e js,ejs,json app.js",
     "test": "mocha"
   },
   "repository": {
@@ -18,6 +19,19 @@
   },
   "homepage": "https://github.com/Techtonica/keyboard-shortcuts-practice#readme",
   "dependencies": {
-    "http-server": "^0.11.1"
+    "dotenv": "^8.1.0",
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "http-server": "^0.11.1",
+    "morgan": "^1.9.1",
+    "mysql": "^2.17.1",
+    "path": "^0.12.7",
+    "pg": "^7.12.1",
+    "pg-hstore": "^2.3.3",
+    "request": "^2.88.0",
+    "sequelize": "^5.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.1"
   }
 }
