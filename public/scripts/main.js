@@ -23,7 +23,7 @@ let questionStartMS = 0;
 $(document).ready(function() {
   //$("#retryButton").toggleClass("on");
   //alert($('li[data-keycode="test"]').attr('id'));
-  $.getJSON( "JS/shortcuts.json", function( data ) {
+  $.getJSON( "scripts/shortcuts.json", function( data ) {
     allData = data;
     if(localStorage.getItem("questionNo")==null){
       localStorage.setItem("questionNo", "1");
@@ -31,6 +31,7 @@ $(document).ready(function() {
     }
     // Call readText()
     readText()
+    
     updateTimingDisplay();
   })
 
@@ -376,3 +377,5 @@ window.addEventListener('focus', function (e) {
     onSuccess();
   }
 });
+
+sequelize.close(); 
