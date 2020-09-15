@@ -18,14 +18,14 @@ Prepare for contributing by following these beginner-friendly steps.
 1. Run `git checkout backend` to go to the backend feature branch. This is the *only* branch that we will be working in.
 1. Follow [the steps to run the project locally](/README.md/#running-the-project).
 1. Run `git remote add upstream https://github.com/Techtonica/keyboard-shortcuts-practice.git`.  This is so that you can refer to the original project owned by Techtonica as the `upstream` version.
-1. Run `git remove -v` to test that you can get updates from Techtonica's repo. [You should see something like this](https://github.com/anitab-org/mentorship-android/wiki/Fork,-Clone-&-Remote#remote). If it shows an error that you don't have permission, contact a Tectonica admin. You can still get started without this part, but you'll need it soon.
+1. Run `git remote -v` to test that you can get updates from Techtonica's repo. [You should see something like this](https://github.com/anitab-org/mentorship-android/wiki/Fork,-Clone-&-Remote#remote). If it shows an error that you don't have permission, contact a Tectonica admin. You can still get started without this part, but you'll need it soon.
 
 ### Get started
 1. Choose an issue in the "To Do" column of [this board](https://github.com/Techtonica/keyboard-shortcuts-practice/projects/4).
 1. Leave a comment that you would like to pick up the issue.
 1. Read the description, and make sure to ask questions about anything that is unclear.
 1. Start on your forked repo's `backend` branch with `git checkout backend`.
-1. Make sure you have the latest version of the project with `git pull upstream/backend`.
+1. Make sure you have the latest version of the project with `git pull upstream backend` or `git merge upstream/backend`.
 1. Create a new branch with `git checkout -b <new-branch-name>`. The name should include the issue number and the topic you're working in.  For example, if its about adding a GET request, your command could be `git checkout -b add-get-request`.
 1. Make and commit your changes on this new branch, and make a PR when you're ready. [Here are some directions on the process](http://www.dasblinkenlichten.com/how-to-create-a-github-pull-request-pr/).
 1. When creating your PR, be sure to make your pull request to the `backend` feature branch: 
