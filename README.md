@@ -10,7 +10,8 @@ We discovered that our participants need an app similar to typing practice websi
 
 This project should train and test users to use the quicker keyboard shortcuts instead of a mouse and the GUI. The app gets more challenging as you progress through the commands.
 
-Our goal for the backend project is to create a persistant app where users can sign in, practice with the app, and save their progress. That way, the next time they sign in, they can pick up where they left off rather than starting at the beginning.
+Our goal for the backend project is to create a persistent app where users 
+can sign in, practice with the app, and save their progress. That way, the next time they sign in, they can pick up where they left off rather than starting at the beginning.
 
 ## Running the project
 
