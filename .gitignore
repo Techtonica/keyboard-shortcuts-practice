@@ -1,4 +1,4 @@
 .DS_Store
 .env
 node_modules/
-database.sqlite
+dev-db.sqlite
