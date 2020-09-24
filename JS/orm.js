@@ -1,33 +1,31 @@
 const Sequelize = require("sequelize");
-const { DB_URL, isDevelopment } = require("./config.js");
+const { DB_URL } = require("./config.js");
 
-const setupSequelize = () => {
-  if (isDevelopment()) {
-    return new Sequelize({
-      dialect: "sqlite",
-      storage: "database.sqlite",
-    });
-  } else {
-    return new Sequelize(DB_URL || "postgres://localhost/keyboard-practice");
-  }
-};
-const sequelize = setupSequelize();
+const sequelize = new Sequelize(DB_URL);
 
 // define basic model for a user
 const Model = Sequelize.Model;
 class User extends Model {}
 User.init(
   {
-    uid: Sequelize.INTEGER,
     q_number: Sequelize.STRING,
     last_login: Sequelize.DATE,
+    id: {
+      type: Sequelize.STRING,
+      primaryKey: true,
+    },
   },
-  { sequelize, modelName: "user", timestamps: false }
+  {
+    sequelize,
+    modelName: "user",
+    createdAt: "created_at",
+    updatedAt: "updated_at",
+  }
 );
 
 const connectToDb = async () => {
   await sequelize.authenticate();
-  await User.sync();
+  await sequelize.sync();
 };
 
 module.exports = {
