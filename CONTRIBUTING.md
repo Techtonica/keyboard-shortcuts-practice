@@ -29,5 +29,6 @@ Prepare for contributing by following these beginner-friendly steps.
 1. Create a new branch with `git checkout -b <new-branch-name>`. The name should include the issue number and the topic you're working in.  For example, if its about issue #67: adding a GET request, your command could be `git checkout -b 67__add-get-request`.
 1. Make and commit your changes on this new branch, and make a PR when you're ready. [Here are some directions on the process](http://www.dasblinkenlichten.com/how-to-create-a-github-pull-request-pr/).
 1. When creating your PR, be sure to make your pull request to the `backend` feature branch: 
+
     <img src="/images/make-pr-to-backend.png" alt="making a pull request to the backend branch" title="make a pr to backend" width="350" height="200" />
 1. See your pull requests here: https://github.com/Techtonica/keyboard-shortcuts-practice/pulls
