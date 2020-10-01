@@ -17,6 +17,24 @@ const FIREFOX_RIGHT_COMMAND_STRING = 'OSRight';
 const CHROME_LEFT_COMMAND_STRING = 'MetaLeft';
 const CHROME_RIGHT_COMMAND_STRING = 'MetaRight';
 
+// Key names to ID
+const keyToId = {
+  ctrl: 'control',
+  control: 'control',
+  command: 'metaleft',
+  cmd: 'metaleft',
+  meta: 'metaleft',
+  fn: 'fnc',
+  alt: 'optionleft',
+  shift: 'shiftleft',
+  esc: 'escape',
+  tab: 'tab',
+  'space bar': 'space',
+  'tilde(~)': 'tilde',
+  'comma(,)': 'comma',
+  'underscore(_)': 'minus'
+};
+
 // this tracks when we started asking for the current key command
 let questionStartMS = 0;
 
@@ -142,31 +160,9 @@ function promptKey2(key){
 // Function to highlight any key passed as input
 function promptKey(key){
   // Handling all key types
-  if(key.length==1) $("#"+key.toLowerCase()).toggleClass("prompt");
-  else {
-    if(key.toLowerCase()=='ctrl'||key.toLowerCase()=='control')
-      $("#control").toggleClass("prompt");
-    if(key.toLowerCase()=='command' || key.toLowerCase()=='cmd'|| key.toLowerCase()=="meta")
-      $("#metaleft").toggleClass("prompt");
-    if(key.toLowerCase()=='fn')
-      $("#fnc").toggleClass("prompt");
-    if(key.toLowerCase()=='alt')
-      $("#optionleft").toggleClass("prompt");
-    if(key.toLowerCase()=='shift')
-      $("#shiftleft").toggleClass("prompt");
-    if(key.toLowerCase()=='esc')
-      $("#escape").toggleClass("prompt");
-    if(key.toLowerCase()=='space bar')
-      $("#space").toggleClass("prompt");
-    if(key.toLowerCase()=='tab')
-      $("#tab").toggleClass("prompt");
-    if(key.toLowerCase()=='tilde(~)')
-      $("#tilde").toggleClass("prompt");
-    if(key.toLowerCase()=='comma(,)')
-      $("#comma").toggleClass("prompt");
-    if(key.toLowerCase()=='underscore(_)')
-      $("#minus").toggleClass("prompt");
-  }
+  key = key.toLowerCase();
+  id = key.length == 1 ? key : keyToId[key];
+  if (id) $('#' + id).toggleClass('prompt');
 }
 
 // Function to read the next combination of keys and highlight it on keyboard
