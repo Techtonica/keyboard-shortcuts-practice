@@ -176,6 +176,7 @@ function readText(){
   if(quesNo!=null){
     commandText = allData[parseInt(quesNo)-1].answer
     answerkeys = allData[parseInt(quesNo)-1].keys
+    type = allData[parseInt(quesNo) - 1].shortcutType
     //commandText = "A+Control"  //$("#textdiv").text(); // Will be taken from some other list type of a source.
     //Each command will have an associated question text used in writeQuestion
     var speed = 50
@@ -189,6 +190,9 @@ function readText(){
       // Highlight the prompt keys
       promptKey2(val)
     });
+
+    // update shortcut type 
+    $('#shortcut-tag').first().text(type + ' Shortcut')
 
     /* commandText.split('+').forEach(function(c) {
       if(c.toLowerCase()=="command"){
