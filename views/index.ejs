@@ -14,14 +14,15 @@
     <!-- <script src="scripts/confetti.js"></script>
     <script src="scripts/history.js"></script>
     <script src="scripts/main.js"></script> -->
+    
   
     <div class="container">
       <div id="top">
         <div id="read">
-          <a id="prevButton" class="prev img-button" href="javascript:prevQuestion();"><img src="images/arrow_left.png"></img></a>
+          <a id="prevButton" class="prev img-button" onclick="prevQuestion()"><img src="images/arrow_left.png"></img></a>
           <div id="textdiv"></div>
           <div id="timing-feedback"></div>
-          <a id="nextButton" class="next img-button" href="javascript:nextQuestion();"><img src="images/arrow_right.png"></img></a>
+          <a id="nextButton" class="next img-button" onclick="nextQuestion()"><img src="images/arrow_right.png"></img></a>
         </div>
         <a class="cheatsheet" href="cheatsheet">Cheat Sheet</a>
         <div id="confetti"></div>
@@ -116,6 +117,6 @@
       <div>
         <p class="center-text-horizontally">This project is open-source! <a href="https://github.com/Techtonica/keyboard-shortcuts-practice">Look at the code and contribute here</a>.</p>
       </div>
-      <script type="text/javascript" src="/js/bundle.js"></script>
+      <script src="/js/bundle.js"></script>
   </body>
 </html>

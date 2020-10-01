@@ -5,7 +5,7 @@ module.exports = {
         path: __dirname + "/dist",
         filename: "bundle.js",
         libraryTarget: 'var',
-        library: 'EntryPoint'
+        library: 'ui'
     },
     
     mode: "development",

@@ -1,4 +1,8 @@
 // Global variable to keep track of CapsLock
+
+var history = require("./history");
+var confetti = require("./confetti");
+
 var caps = false;
 var allData ;
 var reqKeys = []
@@ -41,7 +45,7 @@ $(document).ready(function() {
   });
 });
 
-function nextQuestion() {
+window.nextQuestion = function() {
   if(localStorage.getItem("questionNo")!=null){
     if(parseInt(localStorage.getItem("questionNo"))<parseInt(localStorage.getItem("totalCount"))){
       localStorage.setItem("questionNo", parseInt(localStorage.getItem("questionNo"))+1);
@@ -56,7 +60,7 @@ function nextQuestion() {
   readText();
 }
 
-function prevQuestion() {
+window.prevQuestion = function() {
   if(localStorage.getItem("questionNo")!=null){
     if(parseInt(localStorage.getItem("questionNo")) > 1) {
       localStorage.setItem("questionNo", parseInt(localStorage.getItem("questionNo"))-1);
@@ -241,7 +245,8 @@ function updateTimingDisplay() {
   $('#timing-feedback').html('');
   var questionNo = localStorage.getItem('questionNo');
   // grab the last bits of timing data
-  var timings = getHistory(questionNo).slice(-3);
+  var timings = history.getHistory(questionNo).slice(-3);
+
 
   // and then drop them into the boxes
   timings.forEach(function(t, idx) {
@@ -263,7 +268,7 @@ function onIncorrect() {
 };
 
 function handleTimingFeedback(questionNo, curMS) {
-  var previousTimings = getHistory(questionNo);
+  var previousTimings = history.getHistory(questionNo);
   if (previousTimings.length == 0) {
     return;
   }
