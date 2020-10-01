@@ -27,6 +27,7 @@ UserAnswers.init(
   {
     id:{
       primaryKey : true,
+      autoIncrement: true,
       type: Sequelize.INTEGER,
     },
     user_id:{
