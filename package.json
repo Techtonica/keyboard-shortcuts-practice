@@ -6,8 +6,10 @@
   "scripts": {
     "start": "npm run dev",
     "start:prod": "NODE_ENV=production node app.js",
-    "dev": "NODE_ENV=development nodemon",
-    "test": "mocha"
+    "dev": "",
+    "test": "mocha",
+    "build": "webpack",
+    "watch": "webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -34,7 +36,10 @@
     "sqlite3": "^5.0.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.1"
+    "nodemon": "^2.0.1",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12",
+    "webpack-node-externals": "^2.5.2"
   },
   "nodemonConfig": {
     "execMap": {

@@ -2,7 +2,7 @@ const path = require("path");
 const morgan = require("morgan");
 const express = require("express");
 const bodyParser = require("body-parser");
-const { connectToDb } = require("./JS/orm");
+//const { connectToDb } = require("./JS/orm");
 
 const app = express();
 app.use(morgan("dev")); //morgan gives us useful logging
@@ -12,6 +12,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static("public"));
+app.use('/js', express.static(path.resolve('dist')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -23,7 +24,7 @@ app.use((req, res) => {
 });
 
 const startServer = async () => {
-  await connectToDb();
+ // await connectToDb();
   const port = process.env.port || 3000;
   app.listen(port, () => {
     console.log(`Listening on http://localhost:${port} :-D`);

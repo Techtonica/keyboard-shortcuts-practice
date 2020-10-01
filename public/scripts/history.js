@@ -97,3 +97,7 @@ function recordAnswer(questionNo, timeSpentMS) {
     _history[questionNo].push(timeSpentMS);
     return true;
 }
+
+module.exports = {
+    getHistory: getHistory,
+  };

@@ -129,9 +129,9 @@ function release(e) {
 // May have to be removed. Not being used currently
 function highlightNextKey(params){
   $("#"+nxt.toLowerCase()).toggleClass("pressed");
-  <!-- var params = { width:1680, height:1050 }; -->
-    <!-- var str = jQuery.param( params ); -->
-    <!-- $( "#results" ).text( str ); -->
+  // <!-- var params = { width:1680, height:1050 }; -->
+  //   <!-- var str = jQuery.param( params ); -->
+  //   <!-- $( "#results" ).text( str ); -->
 }
 
 function promptKey2(key){
