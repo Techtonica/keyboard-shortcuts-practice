@@ -22,7 +22,7 @@ let questionStartMS = 0;
 
 function setContainerHeight() {
   let containerEls = document.getElementsByClassName("container");
-  let height = $(window).height();
+  let height = document.body.scrollHeight;
   for (let i = 0; i < containerEls.length; i++) {
     containerEls[i].height = height;
   }
@@ -54,10 +54,12 @@ function removeClass(el, className) {
   return setClass(el, className, false);
 }
 
-$(document).ready(function() {
+window.addEventListener("load", function() {
   //toggleClass(document.getElementById(retryButton), "on");
   //alert($('li[data-keycode="test"]').attr('id'));
-  $.getJSON( "scripts/shortcuts.json", function( data ) {
+  fetch( "scripts/shortcuts.json").then(function(r) {
+    return r.json();
+  }).then(function( data ) {
     allData = data;
     if(localStorage.getItem("questionNo")==null){
       localStorage.setItem("questionNo", "1");
@@ -67,7 +69,7 @@ $(document).ready(function() {
     readText()
 
     updateTimingDisplay();
-  })
+  });
 
   setContainerHeight();
   window.addEventListener("resize", setContainerHeight);
@@ -152,11 +154,14 @@ function release(e) {
   }
   if(e.key.toLowerCase()=="capslock"){
     toggleClass(document.getElementById(e.key.toLowerCase()), "pressed");
-    $('.letter').toggleClass('uppercase');
+    let letterEls = document.getElementsByClassName("letter");
+    for (let i = 0; i < letterEls.length; i++) {
+      toggleClass(letterEls[i], "uppercase");
+    }
     caps=false;
   }
   else{
-    $("#"+e.key.toLowerCase() ).removeClass("pressed");
+    removeClass(document.getElementById(e.key.toLowerCase()), "pressed");
   }
 }
 
@@ -170,7 +175,7 @@ function highlightNextKey(params){
 
 function promptKey2(key){
   //if($('li[data-keycode="'+key+'"]'[0]).hasClass('prompt')){
-  $($('li[data-keycode="'+key+'"]')[0]).toggleClass("prompt")
+  toggleClass(document.querySelector('li[data-keycode="'+key+'"]'), "prompt");
   //}
 }
 
@@ -218,11 +223,11 @@ function readText(){
     // Call writeQuestion to add question on the top textarea
     writeQuestion(allData[parseInt(localStorage.getItem("questionNo"))-1].question)
 
-    $.each(answerkeys , function(index, val) {
+    for (const val of answerkeys) {
       reqKeys.push(val)
       // Highlight the prompt keys
       promptKey2(val)
-    });
+    }
 
     /* commandText.split('+').forEach(function(c) {
       if(c.toLowerCase()=="command"){
@@ -285,20 +290,24 @@ function updateTimingDisplay() {
 
   // and then drop them into the boxes
   timings.forEach(function(t, idx) {
-    let element = $('#timing-' + idx);
-    element.html(t / 1000 + ' sec');
-    element.show();
+    let element = document.getElementById('timing-' + idx);
+    if (element) {
+      element.innerHTML = t / 1000 + ' sec';
+      element.style.display = "initial";
+    }
   })
 
   // hide the boxes if we don't have timing data
   for (let i = timings.length; i < 3; i++) {
-    $('#timing-' + i).hide();
+    let el = document.getElementById('timing-' + i);
+    if (el) el.style.display = "hidden";
   }
 }
 
 function onIncorrect() {
-  $('#textdiv').effect("shake", { distance: 3 });
-  addClass(document.getElementById(read), "incorrect");
+  let el = document.getElementById("textdiv");
+  //$('#textdiv').effect("shake", { distance: 3 }); // going to comment this because animations are a mess
+  addClass(document.getElementById("read"), "incorrect");
   setTimeout(clearPressedKeys, 500);
 };
 
@@ -417,5 +426,3 @@ window.addEventListener('focus', function (e) {
     onSuccess();
   }
 });
-
-sequelize.close();
