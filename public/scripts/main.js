@@ -351,6 +351,7 @@ function onSuccess() {
   clearPromptKeys();
   clearPressedKeys();
   confetti(document.getElementById("confetti"), { spread: 180, startVelocity: 50, elementCount: 150 });
+  createUserAnswer(questionNo, true, thisAnswerMS);
   setTimeout(nextQuestion, 1500);
 }
 
@@ -422,3 +423,24 @@ window.addEventListener('focus', function (e) {
     onSuccess();
   }
 });
+
+function createUserAnswer(questionNo, isCorrect, elapsedTimeMs){
+  let requestBody = {
+    userId: 'guest',
+    isCorrect: isCorrect,
+    elapsedTimeMs: elapsedTimeMs
+  }
+  
+  fetch(document.URL + 'user/answers/question/' + questionNo, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(requestBody)
+  }).catch(error => {
+    // TODO: handle error messages in a better way
+    console.log(error);
+  })
+}
+
+//sequelize.close(); 
