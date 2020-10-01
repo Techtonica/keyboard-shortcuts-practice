@@ -350,12 +350,8 @@ function onSuccess() {
   document.querySelector('#textdiv span').innerText = 'Correct Keys pressed!';
   clearPromptKeys();
   clearPressedKeys();
-<<<<<<< HEAD
-  confetti($("#confetti").get(0), { spread: 180, startVelocity: 50, elementCount: 150 });
-  createUserAnswer(questionNo, true, thisAnswerMS);
-=======
   confetti(document.getElementById("confetti"), { spread: 180, startVelocity: 50, elementCount: 150 });
->>>>>>> 9c9d786e03aace8a00564ffa3c6674da304f297c
+  createUserAnswer(questionNo, true, thisAnswerMS);
   setTimeout(nextQuestion, 1500);
 }
 
