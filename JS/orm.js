@@ -22,7 +22,38 @@ User.init(
     updatedAt: "updated_at",
   }
 );
-
+class UserAnswers extends Model{}
+UserAnswers.init(
+  {
+    id:{
+      primaryKey : true,
+      type: Sequelize.INTEGER,
+    },
+    user_id:{
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    question_number:{
+      type: Sequelize.INTEGER,
+      allowNull: false
+    },
+    is_correct:{
+      type: Sequelize.BOOLEAN,
+      allowNull: false
+    },
+    elapsed_time_ms:{
+      type: Sequelize.INTEGER,
+      allowNull: false
+    },
+  },{
+    sequelize,
+    modelName: "user_answers",
+    createdAt: 'created_at',
+    updatedAt: false
+  }
+);
+User.hasOne(UserAnswers, {foreignKey: 'user_id'});
+UserAnswers.belongsTo(User,{foreignKey: 'user_id'});
 const connectToDb = async () => {
   await sequelize.authenticate();
   await sequelize.sync();
