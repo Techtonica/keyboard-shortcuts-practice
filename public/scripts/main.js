@@ -378,4 +378,3 @@ window.addEventListener('focus', function (e) {
   }
 });
 
-sequelize.close(); 
