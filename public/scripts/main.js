@@ -430,8 +430,8 @@ function createUserAnswer(questionNo, isCorrect, elapsedTimeMs){
     isCorrect: isCorrect,
     elapsedTimeMs: elapsedTimeMs
   }
-
-  fetch('http://localhost:3000/user/answers/question/' + questionNo, {
+  
+  fetch(document.URL + 'user/answers/question/' + questionNo, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
