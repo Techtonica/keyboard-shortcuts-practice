@@ -23,17 +23,19 @@ let questionStartMS = 0;
 $(document).ready(function() {
   //$("#retryButton").toggleClass("on");
   //alert($('li[data-keycode="test"]').attr('id'));
-  $.getJSON( "scripts/shortcuts.json", function( data ) {
-    allData = data;
+  
+  fetch('scripts/shortcuts.json')
+  .then(response => response.json())
+  .then(data => {
+    allData=data
     if(localStorage.getItem("questionNo")==null){
       localStorage.setItem("questionNo", "1");
       localStorage.setItem("totalCount", Object.keys(allData).length);
     }
-    // Call readText()
-    readText()
-    
-    updateTimingDisplay();
-  })
+     readText()
+     updateTimingDisplay()
+  }
+     );
 
   $('.container').css('height', $(window).height());
   $(window).on('resize', function() {
