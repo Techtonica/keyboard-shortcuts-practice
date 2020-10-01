@@ -95,11 +95,6 @@ function handle(e) {
     $("#"+e.key.toLowerCase()).toggleClass("pressed");
     $('.letter').toggleClass('uppercase');
   }
-  else if(e.key.toLowerCase()=="capslock" && caps==true) {
-    $("#"+e.key.toLowerCase()).toggleClass("pressed");
-    $('.letter').toggleClass('uppercase');
-    caps=false;
-  }
   else $("#"+e.key.toLowerCase() ).addClass("pressed");
 }
 
