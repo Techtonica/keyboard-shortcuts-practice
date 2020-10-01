@@ -95,3 +95,13 @@ function confetti(root, {
 
   animate(root, fettis, decay);
 }
+
+module.exports = {
+  createElements: createElements,
+  randomPhysics: randomPhysics,
+  updateFetti: updateFetti,
+  animate: animate,
+  confetti: confetti
+
+
+};

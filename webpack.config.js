@@ -8,5 +8,5 @@ module.exports = {
         library: 'ui'
     },
     
-    mode: "development",
+    mode: "production",
 }

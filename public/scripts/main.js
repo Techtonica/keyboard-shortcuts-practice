@@ -1,7 +1,7 @@
 // Global variable to keep track of CapsLock
 
 var history = require("./history");
-var confetti = require("./confetti");
+var confettiImport = require("./confetti");
 
 var caps = false;
 var allData ;
@@ -305,12 +305,12 @@ function onSuccess() {
   var questionNo = localStorage.getItem("questionNo");
   var thisAnswerMS = Date.now() - questionStartMS;
   handleTimingFeedback(questionNo, thisAnswerMS);
-  recordAnswer(questionNo, thisAnswerMS);
-  saveHistory();
+  history.recordAnswer(questionNo, thisAnswerMS);
+  history.saveHistory();
   $('#textdiv span').first().text('Correct Keys pressed!');
   clearPromptKeys();
   clearPressedKeys();
-  confetti($("#confetti").get(0), { spread: 180, startVelocity: 50, elementCount: 150 });
+  confettiImport.confetti($("#confetti").get(0), { spread: 180, startVelocity: 50, elementCount: 150 });
   setTimeout(nextQuestion, 1500);
 }
 
