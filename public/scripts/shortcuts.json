@@ -135,49 +135,49 @@
     "answer": "control+a",
     "question": "How do you go to the beginning of the line you are currently typing on?",
     "keys": [17, 65], 
-    "shortcutType": "mac"
+    "shortcutType": "shell"
   },
   {
     "answer": "control+e",
     "question": "How do you go to the end of the line you are currently typing on?",
     "keys": [17, 69], 
-    "shortcutType": "mac"
+    "shortcutType": "shell"
   },
   {
     "answer": "control+q",
     "question": "How do you clear everything on the current line?",
     "keys": [17, 81], 
-    "shortcutType": "mac"
+    "shortcutType": "shell"
   },
   {
     "answer": "control+l",
     "question": "How do you clear the screen using the control key?",
     "keys": [17, 76], 
-    "shortcutType": "mac"
+    "shortcutType": "shell"
   },
   {
     "answer": "control+k",
     "question": "How do you cut everything forward to the end of the line?",
     "keys": [17, 75], 
-    "shortcutType": "mac"
+    "shortcutType": "shell"
   },
   {
     "answer": "control+u",
     "question": "How do you cut everything backwards to the beginning of the line?",
     "keys": [17, 85], 
-    "shortcutType": "mac"
+    "shortcutType": "shell"
   },
   {
     "answer": "control+w",
     "question": "How do you cut one word backwards using white space as the delimiter?",
     "keys": [17, 87], 
-    "shortcutType": "mac"
+    "shortcutType": "shell"
   },
   {
     "answer": "control+y",
     "question": "How do you paste whatever was cut by the last cut command?",
     "keys": [17, 89], 
-    "shortcutType": "mac"
+    "shortcutType": "shell"
   },
   {
     "answer": "Shift+command+3",

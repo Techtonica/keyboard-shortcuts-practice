@@ -191,8 +191,13 @@ function readText(){
       promptKey2(val)
     });
 
-    // update shortcut type 
+    // update shortcut type
     $('#shortcut-tag').first().text(type + ' Shortcut')
+    if(type == 'mac') {
+      $('#shortcut-tag').first().css('background-color', '#3455db')
+    } else {
+      $('#shortcut-tag').first().css('background-color', '#4b2142')
+    }
 
     /* commandText.split('+').forEach(function(c) {
       if(c.toLowerCase()=="command"){
