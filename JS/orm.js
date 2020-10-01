@@ -52,7 +52,7 @@ UserAnswers.init(
     updatedAt: false
   }
 );
-User.hasOne(UserAnswers, {foreignKey: 'user_id'});
+User.hasMany(UserAnswers, {foreignKey: 'user_id'});
 UserAnswers.belongsTo(User,{foreignKey: 'user_id'});
 const connectToDb = async () => {
   await sequelize.authenticate();
@@ -62,4 +62,5 @@ const connectToDb = async () => {
 module.exports = {
   User,
   connectToDb,
+  UserAnswers
 };
