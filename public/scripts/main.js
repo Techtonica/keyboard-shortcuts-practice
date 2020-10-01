@@ -5,6 +5,7 @@ var reqKeys = []
 var typewriter;
 var quesNo;
 let pressed = new Set();
+var commandDown = false;
 
 // event.keyCode Chrome and Firefox
 const CHROME_LEFT_COMMAND_CODE = 91;
@@ -82,6 +83,9 @@ function handle(e) {
     $("#"+e.code.toLowerCase()).toggleClass("pressed");
   }
   if(e.key.toLowerCase()=="alt" || e.key.toLowerCase()=="shift" || e.key.toLowerCase()=="meta"){
+    if (e.key.toLowerCase()=="meta") {
+      commandDown = true;
+    }
     let keyString = e.code;
     if(e.code == FIREFOX_LEFT_COMMAND_STRING) {
       keyString = CHROME_LEFT_COMMAND_STRING
@@ -100,7 +104,14 @@ function handle(e) {
     $('.letter').toggleClass('uppercase');
     caps=false;
   }
-  else $("#"+e.key.toLowerCase() ).addClass("pressed");
+  else {
+    if (commandDown) {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    }
+    $("#"+e.key.toLowerCase() ).addClass("pressed");
+  }
 }
 
 // Function called on KeyUp to reset the key by removing class = 'pressed'
@@ -109,6 +120,9 @@ function release(e) {
     $("#"+e.code.toLowerCase()).removeClass("pressed");
   }
   if(e.key.toLowerCase()=="alt" || e.key.toLowerCase()=="shift" || e.key.toLowerCase()=="meta"){
+    if (e.key.toLowerCase()=="meta") {
+      commandDown = false;
+    }
     let keyString = e.code;
     if(e.code == FIREFOX_LEFT_COMMAND_STRING) {
       keyString = CHROME_LEFT_COMMAND_STRING
