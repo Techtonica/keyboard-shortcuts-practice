@@ -17,6 +17,24 @@ const FIREFOX_RIGHT_COMMAND_STRING = 'OSRight';
 const CHROME_LEFT_COMMAND_STRING = 'MetaLeft';
 const CHROME_RIGHT_COMMAND_STRING = 'MetaRight';
 
+// Key names to ID
+const keyToId = {
+  ctrl: 'control',
+  control: 'control',
+  command: 'metaleft',
+  cmd: 'metaleft',
+  meta: 'metaleft',
+  fn: 'fnc',
+  alt: 'optionleft',
+  shift: 'shiftleft',
+  esc: 'escape',
+  tab: 'tab',
+  'space bar': 'space',
+  'tilde(~)': 'tilde',
+  'comma(,)': 'comma',
+  'underscore(_)': 'minus'
+};
+
 // this tracks when we started asking for the current key command
 let questionStartMS = 0;
 
@@ -182,31 +200,9 @@ function promptKey2(key){
 // Function to highlight any key passed as input
 function promptKey(key){
   // Handling all key types
-  if(key.length==1) toggleClass(document.getElementById(key.toLowerCase()), "prompt");
-  else {
-    if(key.toLowerCase()=='ctrl'||key.toLowerCase()=='control')
-      toggleClass(document.getElementById("control"), "prompt");
-    if(key.toLowerCase()=='command' || key.toLowerCase()=='cmd'|| key.toLowerCase()=="meta")
-      toggleClass(document.getElementById("metaleft"), "prompt");
-    if(key.toLowerCase()=='fn')
-      toggleClass(document.getElementById("fnc"), "prompt");
-    if(key.toLowerCase()=='alt')
-      toggleClass(document.getElementById("optionleft"), "prompt");
-    if(key.toLowerCase()=='shift')
-      toggleClass(document.getElementById("shiftleft"), "prompt");
-    if(key.toLowerCase()=='esc')
-      toggleClass(document.getElementById("escape"), "prompt");
-    if(key.toLowerCase()=='space bar')
-      toggleClass(document.getElementById("space"), "prompt");
-    if(key.toLowerCase()=='tab')
-      toggleClass(document.getElementById("tab"), "prompt");
-    if(key.toLowerCase()=='tilde(~)')
-      toggleClass(document.getElementById("tilde"), "prompt");
-    if(key.toLowerCase()=='comma(,)')
-      toggleClass(document.getElementById("comma"), "prompt");
-    if(key.toLowerCase()=='underscore(_)')
-      toggleClass(document.getElementById("minus"), "prompt");
-  }
+  key = key.toLowerCase();
+  id = key.length == 1 ? key : keyToId[key];
+  if (id) toggleClass(document.getElementById(id), 'prompt');
 }
 
 // Function to read the next combination of keys and highlight it on keyboard
