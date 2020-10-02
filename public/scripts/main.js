@@ -1,9 +1,9 @@
 // Global variable to keep track of CapsLock
-var caps = false;
-var allData ;
-var reqKeys = []
-var typewriter;
-var quesNo;
+let caps = false;
+let allData ;
+let reqKeys = []
+let typewriter;
+let quesNo;
 let pressed = new Set();
 
 // event.keyCode Chrome and Firefox
@@ -38,10 +38,46 @@ const keyToId = {
 // this tracks when we started asking for the current key command
 let questionStartMS = 0;
 
-$(document).ready(function() {
-  //$("#retryButton").toggleClass("on");
+function setContainerHeight() {
+  let containerEls = document.getElementsByClassName("container");
+  let height = document.body.scrollHeight;
+  for (let i = 0; i < containerEls.length; i++) {
+    containerEls[i].height = height;
+  }
+}
+
+function toggleClass(el, className) {
+  if (!el) return;
+  let classes = el.className.split(" ");
+  let indexOfClass = classes.indexOf(className);
+  if (indexOfClass !== -1) classes.splice(indexOfClass, 1);
+  else classes.push(className);
+  el.className = classes.join(" ");
+}
+
+function setClass(el, className, setTo) {
+  if (!el) return;
+  let classes = el.className.split(" ");
+  let indexOfClass = classes.indexOf(className);
+  if (indexOfClass !== -1) classes.splice(indexOfClass, 1);
+  if (setTo) classes.push(className);
+  el.className = classes.join(" ");
+}
+
+function addClass(el, className) {
+  return setClass(el, className, true);
+}
+
+function removeClass(el, className) {
+  return setClass(el, className, false);
+}
+
+window.addEventListener("load", function() {
+  //toggleClass(document.getElementById(retryButton), "on");
   //alert($('li[data-keycode="test"]').attr('id'));
-  $.getJSON( "scripts/shortcuts.json", function( data ) {
+  fetch( "scripts/shortcuts.json").then(function(r) {
+    return r.json();
+  }).then(function( data ) {
     allData = data;
     if(localStorage.getItem("questionNo")==null){
       localStorage.setItem("questionNo", "1");
@@ -49,14 +85,12 @@ $(document).ready(function() {
     }
     // Call readText()
     readText()
-    
-    updateTimingDisplay();
-  })
 
-  $('.container').css('height', $(window).height());
-  $(window).on('resize', function() {
-    $('.container').css('height', $(window).height());
+    updateTimingDisplay();
   });
+
+  setContainerHeight();
+  window.addEventListener("resize", setContainerHeight);
 });
 
 function nextQuestion() {
@@ -89,15 +123,15 @@ function prevQuestion() {
 
   // Function called on KeyDown to show Pressed key by adding class = 'pressed'
 function handle(e) {
-  var text1 = e.type +
+  let text1 = e.type +
     ' key=' + e.key +
     ' code=' + e.code
 
   if(e.code.toLowerCase()=="space"){
-    $("#space").toggleClass("pressed");
+    toggleClass(document.getElementById("space"), "pressed");
   }
   if((e.which>=186 && e.which<=192)|| (e.which>=219 && e.which<=222)){
-    $("#"+e.code.toLowerCase()).toggleClass("pressed");
+    toggleClass(document.getElementById(e.code.toLowerCase()), "pressed");
   }
   if(e.key.toLowerCase()=="alt" || e.key.toLowerCase()=="shift" || e.key.toLowerCase()=="meta"){
     let keyString = e.code;
@@ -106,12 +140,15 @@ function handle(e) {
     } else if (e.code == FIREFOX_RIGHT_COMMAND_STRING) {
       keyString = CHROME_RIGHT_COMMAND_STRING
     }
-    $("#"+keyString.toLowerCase()).toggleClass("pressed");
+    toggleClass(document.getElementById(keyString.toLowerCase()), "pressed");
   }
   if(e.key.toLowerCase()=="capslock" && caps==false){
     caps= true;
-    $("#"+e.key.toLowerCase()).toggleClass("pressed");
-    $('.letter').toggleClass('uppercase');
+    toggleClass(document.getElementById(e.key.toLowerCase()), "pressed");
+    let letterEls = document.getElementsByClassName("letter");
+    for (let i = 0; i < letterEls.length; i++) {
+      toggleClass(letterEls[i], "uppercase");
+    }
   }
   else{ 
     if(document.querySelector("#"+e.key.toLowerCase() ))
@@ -140,10 +177,13 @@ function release(e) {
       document.querySelector("#space").classList.remove("pressed");
   }
   if(e.key.toLowerCase()=="capslock"){
-    $("#"+e.key.toLowerCase()).toggleClass("pressed");
-    $('.letter').toggleClass('uppercase');
+    toggleClass(document.getElementById(e.key.toLowerCase()), "pressed");
+    let letterEls = document.getElementsByClassName("letter");
+    for (let i = 0; i < letterEls.length; i++) {
+      toggleClass(letterEls[i], "uppercase");
+    }
     caps=false;
-  } 
+  }
   else{
     if(document.querySelector("#"+e.key.toLowerCase() ))
       document.querySelector("#"+e.key.toLowerCase() ).classList.remove("pressed");
@@ -152,15 +192,15 @@ function release(e) {
 
 // May have to be removed. Not being used currently
 function highlightNextKey(params){
-  $("#"+nxt.toLowerCase()).toggleClass("pressed");
-  <!-- var params = { width:1680, height:1050 }; -->
-    <!-- var str = jQuery.param( params ); -->
+  toggleClass(document.getElementById(nxt.toLowerCase()), "pressed");
+  <!-- let params = { width:1680, height:1050 }; -->
+    <!-- let str = jQuery.param( params ); -->
     <!-- $( "#results" ).text( str ); -->
 }
 
 function promptKey2(key){
   //if($('li[data-keycode="'+key+'"]'[0]).hasClass('prompt')){
-  $($('li[data-keycode="'+key+'"]')[0]).toggleClass("prompt")
+  toggleClass(document.querySelector('li[data-keycode="'+key+'"]'), "prompt");
   //}
 }
 
@@ -169,7 +209,7 @@ function promptKey(key){
   // Handling all key types
   key = key.toLowerCase();
   id = key.length == 1 ? key : keyToId[key];
-  if (id) $('#' + id).toggleClass('prompt');
+  if (id) toggleClass(document.getElementById(id), 'prompt');
 }
 
 // Function to read the next combination of keys and highlight it on keyboard
@@ -180,17 +220,17 @@ function readText(){
     answerkeys = allData[parseInt(quesNo)-1].keys
     //commandText = "A+Control"  //$("#textdiv").text(); // Will be taken from some other list type of a source.
     //Each command will have an associated question text used in writeQuestion
-    var speed = 50
-    var i = 0;
+    let speed = 50
+    let i = 0;
 
     // Call writeQuestion to add question on the top textarea
     writeQuestion(allData[parseInt(localStorage.getItem("questionNo"))-1].question)
 
-    $.each(answerkeys , function(index, val) {
+    for (const val of answerkeys) {
       reqKeys.push(val)
       // Highlight the prompt keys
       promptKey2(val)
-    });
+    }
 
     /* commandText.split('+').forEach(function(c) {
       if(c.toLowerCase()=="command"){
@@ -213,7 +253,7 @@ function readText(){
 function writeQuestion(question) {
   if(typewriter!=null) {
       typewriter.state.eventQueue = [];
-    $('#textdiv span').first().text('');
+    document.querySelector('#textdiv span').innerText = "";
   } else {
     typewriter = new Typewriter(document.getElementById('textdiv'), {
       loop: false,
@@ -236,6 +276,7 @@ function clearPromptKeys() {
     document.querySelector('.prompt').classList.remove('prompt');
 };
 
+
 function clearPressedKeys() {
   pressed.clear();
   if(document.querySelector('.pressed'))
@@ -243,21 +284,24 @@ function clearPressedKeys() {
 };
 
 function updateTimingDisplay() {
-  $('#timing-feedback').html('');
-  var questionNo = localStorage.getItem('questionNo');
+  document.getElementById('timing-feedback').innerHTML = "";
+  let questionNo = localStorage.getItem('questionNo');
   // grab the last bits of timing data
-  var timings = getHistory(questionNo).slice(-3);
+  let timings = getHistory(questionNo).slice(-3);
 
   // and then drop them into the boxes
   timings.forEach(function(t, idx) {
-    var element = $('#timing-' + idx);
-    element.html(t / 1000 + ' sec');
-    element.show();
+    let element = document.getElementById('timing-' + idx);
+    if (element) {
+      element.innerHTML = t / 1000 + ' sec';
+      element.style.display = "initial";
+    }
   })
 
   // hide the boxes if we don't have timing data
-  for (var i = timings.length; i < 3; i++) {
-    $('#timing-' + i).hide();
+  for (let i = timings.length; i < 3; i++) {
+    let el = document.getElementById('timing-' + i);
+    if (el) el.style.display = "hidden";
   }
 }
 
@@ -269,19 +313,19 @@ function onIncorrect() {
 };
 
 function handleTimingFeedback(questionNo, curMS) {
-  var previousTimings = getHistory(questionNo);
+  let previousTimings = getHistory(questionNo);
   if (previousTimings.length == 0) {
     return;
   }
 
-  var average = previousTimings.reduce(
+  let average = previousTimings.reduce(
     function(acc, cur) { return acc + cur },
     0,
   ) / previousTimings.length;
 
-  var delta = average - curMS;
+  let delta = average - curMS;
 
-  var template = null;
+  let template = null;
   if (delta > 0) {
     template = "<br/>You were <span style='color:green;'>faster</span> by ${delta} sec!";
   }
@@ -298,20 +342,20 @@ function handleTimingFeedback(questionNo, curMS) {
   // decimals if we actually need them, e.g., we want 1.5 not 1.50
   // cf. https://stackoverflow.com/a/12830454
   delta = +delta.toFixed(2);
-  $('#timing-feedback').html(template.replace('${delta}', delta));
+  document.getElementById("timing-feedback").innerHTML = template.replace('${delta}', delta);
 }
 
 // Function to execute when correct keys are pressed.
 function onSuccess() {
-  var questionNo = localStorage.getItem("questionNo");
-  var thisAnswerMS = Date.now() - questionStartMS;
+  let questionNo = localStorage.getItem("questionNo");
+  let thisAnswerMS = Date.now() - questionStartMS;
   handleTimingFeedback(questionNo, thisAnswerMS);
   recordAnswer(questionNo, thisAnswerMS);
   saveHistory();
-  $('#textdiv span').first().text('Correct Keys pressed!');
+  document.querySelector('#textdiv span').innerText = 'Correct Keys pressed!';
   clearPromptKeys();
   clearPressedKeys();
-  confetti($("#confetti").get(0), { spread: 180, startVelocity: 50, elementCount: 150 });
+  confetti(document.getElementById("confetti"), { spread: 180, startVelocity: 50, elementCount: 150 });
   setTimeout(nextQuestion, 1500);
 }
 
@@ -383,5 +427,3 @@ window.addEventListener('focus', function (e) {
     onSuccess();
   }
 });
-
-sequelize.close(); 
