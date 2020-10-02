@@ -113,13 +113,17 @@ function handle(e) {
     $("#"+e.key.toLowerCase()).toggleClass("pressed");
     $('.letter').toggleClass('uppercase');
   }
-  else document.querySelector("#"+e.key.toLowerCase() ).classList.add("pressed");
+  else{ 
+    if(document.querySelector("#"+e.key.toLowerCase() ))
+      document.querySelector("#"+e.key.toLowerCase() ).classList.add("pressed");
+  }
 }
 
 // Function called on KeyUp to reset the key by removing class = 'pressed'
 function release(e) {
   if((e.which>=186 && e.which<=192)|| (e.which>=219 && e.which<=222)){
-    document.querySelector("#"+e.code.toLowerCase()).classList.remove("pressed");
+    if(document.querySelector("#"+e.code.toLowerCase()))
+      document.querySelector("#"+e.code.toLowerCase()).classList.remove("pressed");
   }
   if(e.key.toLowerCase()=="alt" || e.key.toLowerCase()=="shift" || e.key.toLowerCase()=="meta"){
     let keyString = e.code;
@@ -128,10 +132,12 @@ function release(e) {
     } else if (e.code == FIREFOX_RIGHT_COMMAND_STRING) {
       keyString = CHROME_RIGHT_COMMAND_STRING
     }
-    document.querySelector("#"+keyString.toLowerCase()).classList.remove("pressed");
+    if(document.querySelector("#"+keyString.toLowerCase()))
+      document.querySelector("#"+keyString.toLowerCase()).classList.remove("pressed");
   }
   if(e.code.toLowerCase()=="space"){
-    document.querySelector("#space").classList.remove("pressed");
+    if(document.querySelector("#space"))
+      document.querySelector("#space").classList.remove("pressed");
   }
   if(e.key.toLowerCase()=="capslock"){
     $("#"+e.key.toLowerCase()).toggleClass("pressed");
@@ -139,7 +145,8 @@ function release(e) {
     caps=false;
   } 
   else{
-    document.querySelector("#"+e.key.toLowerCase() ).classList.remove("pressed");
+    if(document.querySelector("#"+e.key.toLowerCase() ))
+      document.querySelector("#"+e.key.toLowerCase() ).classList.remove("pressed");
   }
 }
 
@@ -220,16 +227,19 @@ function writeQuestion(question) {
 }
 
 function clearIncorrectIndication() {
-  document.querySelector("#read").classList.remove('incorrect');
+  if(document.querySelector("#read"))
+    document.querySelector("#read").classList.remove('incorrect');
 };
 
 function clearPromptKeys() {
-  document.querySelector('.prompt').classList.remove('prompt');
+  if(document.querySelector('.prompt'))
+    document.querySelector('.prompt').classList.remove('prompt');
 };
 
 function clearPressedKeys() {
   pressed.clear();
-  document.querySelector('.pressed').classList.remove('pressed');
+  if(document.querySelector('.pressed'))
+    document.querySelector('.pressed').classList.remove('pressed');
 };
 
 function updateTimingDisplay() {
@@ -253,7 +263,8 @@ function updateTimingDisplay() {
 
 function onIncorrect() {
   $('#textdiv').effect("shake", { distance: 3 });
-  document.querySelector("#read").classList.add('incorrect');
+  if(document.querySelector("#read"))
+    document.querySelector("#read").classList.add('incorrect');
   setTimeout(clearPressedKeys, 500);
 };
 
