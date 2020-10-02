@@ -150,9 +150,9 @@ function release(e) {
 // May have to be removed. Not being used currently
 function highlightNextKey(params){
   $("#"+nxt.toLowerCase()).toggleClass("pressed");
-  <!-- var params = { width:1680, height:1050 }; -->
-    <!-- var str = jQuery.param( params ); -->
-    <!-- $( "#results" ).text( str ); -->
+  // <!-- var params = { width:1680, height:1050 }; -->
+  //   <!-- var str = jQuery.param( params ); -->
+  //   <!-- document.querySelector("#results").textContent = str; -->
 }
 
 function promptKey2(key){
@@ -176,7 +176,7 @@ function readText(){
     commandText = allData[parseInt(quesNo)-1].answer
     answerkeys = allData[parseInt(quesNo)-1].keys
     type = allData[parseInt(quesNo) - 1].shortcutType
-    //commandText = "A+Control"  //$("#textdiv").text(); // Will be taken from some other list type of a source.
+    //commandText = "A+Control"  // document.querySelector("#textdiv").textContent; // Will be taken from some other list type of a source.
     //Each command will have an associated question text used in writeQuestion
     var speed = 50
     var i = 0;
@@ -191,7 +191,7 @@ function readText(){
     });
 
     // update shortcut type
-    $('#shortcut-tag').first().text(type + ' Shortcut')
+    document.querySelector("#shortcut-tag").textContent = type + " Shortcut";
     if(type == 'mac') {
       $('#shortcut-tag').first().css('background-color', '#3455db')
     } else {
@@ -219,7 +219,7 @@ function readText(){
 function writeQuestion(question) {
   if(typewriter!=null) {
       typewriter.state.eventQueue = [];
-    $('#textdiv span').first().text('');
+      document.querySelector("#textdiv span").textContent = '';
   } else {
     typewriter = new Typewriter(document.getElementById('textdiv'), {
       loop: false,
@@ -315,7 +315,7 @@ function onSuccess() {
   handleTimingFeedback(questionNo, thisAnswerMS);
   recordAnswer(questionNo, thisAnswerMS);
   saveHistory();
-  $('#textdiv span').first().text('Correct Keys pressed!');
+  document.querySelector("#textdiv span").textContent = 'Correct Keys pressed!';
   clearPromptKeys();
   clearPressedKeys();
   confetti($("#confetti").get(0), { spread: 180, startVelocity: 50, elementCount: 150 });
