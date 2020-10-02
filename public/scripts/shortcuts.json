@@ -2,161 +2,193 @@
   {
     "answer": "command+x",
     "question": "How do you cut the selected item and copy it to the clipboard?",
-    "keys": [91, 88]
+    "keys": [91, 88],
+    "shortcutType": "mac"
   },
   {
     "answer": "command+c",
     "question": "How do you copy the selected item to the clipboard?",
-    "keys": [91, 67]
+    "keys": [91, 67],
+    "shortcutType": "mac"
   },
   {
     "answer": "command+v",
     "question": "How do you paste the contents of the clipboard into the current document or app?",
-    "keys": [91, 86]
+    "keys": [91, 86],
+    "shortcutType": "mac"
   },
   {
     "answer": "command+z",
     "question": "How do you undo the previous command?",
-    "keys": [91, 90]
+    "keys": [91, 90],
+    "shortcutType": "mac"
   },
   {
     "answer": "command+Shift+z",
     "question": "How do you redo to reverse the undo command?",
-    "keys": [91, 16, 90]
+    "keys": [91, 16, 90], 
+    "shortcutType": "mac"
   },
   {
     "answer": "command+a",
     "question": "How do you select all items?",
-    "keys": [91, 65]
+    "keys": [91, 65], 
+    "shortcutType": "mac"
   },
   {
     "answer": "command+f",
     "question": "How do you find items in a document or open a Find window?",
-    "keys": [91, 70]
+    "keys": [91, 70], 
+    "shortcutType": "mac"
   },
   {
     "answer": "command+g",
     "question": "How do you find the next occurrence of the item previously found?",
-    "keys": [91, 71]
+    "keys": [91, 71],
+    "shortcutType": "mac"
   },
   {
     "answer": "command+h",
     "question": "How do you hide the windows of the front (active) app?",
-    "keys": [91, 72]
+    "keys": [91, 72],
+    "shortcutType": "mac"
   },
   {
     "answer": "command+Option+h",
     "question": "How do you view the front (active) app but hide all other apps?",
-    "keys": [91, 18, 72]
+    "keys": [91, 18, 72],
+    "shortcutType": "mac"
   },
   {
     "answer": "command+k",
     "question": "How do you clear the screen using the command key?",
-    "keys": [91, 75]
+    "keys": [91, 75], 
+    "shortcutType": "mac"
   },
   {
     "answer": "command+m",
     "question": "How do you minimize the front window to the Dock?",
-    "keys": [91, 77]
+    "keys": [91, 77],
+    "shortcutType": "mac"
   },
   {
     "answer": "command+Option+m",
     "question": "How do you minimize all windows of the front app?",
-    "keys": [91, 18, 77]
+    "keys": [91, 18, 77],
+    "shortcutType": "mac"
   },
   {
     "answer": "command+n",
     "question": "How do you open a new document or window?",
-    "keys": [91, 78]
+    "keys": [91, 78], 
+    "shortcutType": "mac"
   },
   {
     "answer": "command+t",
     "question": "How do you open a new tab?",
-    "keys": [91, 84]
+    "keys": [91, 84], 
+    "shortcutType": "mac"
   },
   {
     "answer": "command+o",
     "question": "How do you open the selected item, or open a dialog to select a file to open?",
-    "keys": [91, 79]
+    "keys": [91, 79], 
+    "shortcutType": "mac"
   },
   {
     "answer": "command+p",
     "question": "How do you print the current document?",
-    "keys": [91, 80]
+    "keys": [91, 80],
+    "shortcutType": "mac"
   },
   {
     "answer": "command+s",
     "question": "How do you save the current document?",
-    "keys": [91, 83]
+    "keys": [91, 83], 
+    "shortcutType": "mac"
   },
   {
     "answer": "Option+command+Esc",
     "question": "How do you force quit?",
-    "keys": [18, 91, 27]
+    "keys": [18, 91, 27], 
+    "shortcutType": "mac"
   },
   {
     "answer": "command+Space",
     "question": "How do you show or hide the Spotlight search field?",
-    "keys": [91, 32]
+    "keys": [91, 32], 
+    "shortcutType": "mac"
   },
   {
     "answer": "command+Tab",
     "question": "How do you switch to the next most recently used app among your open apps?",
-    "keys": [91, 9]
+    "keys": [91, 9],
+    "shortcutType": "mac"
   },
   {
     "answer": "Shift+command+Tilde(~)",
     "question": "How do you switch to the next most recently used window of the front app?",
-    "keys": [16 ,91, 192]
+    "keys": [16 ,91, 192], 
+    "shortcutType": "mac"
   },
   {
     "answer": "control+a",
     "question": "How do you go to the beginning of the line you are currently typing on?",
-    "keys": [17, 65]
+    "keys": [17, 65], 
+    "shortcutType": "shell"
   },
   {
     "answer": "control+e",
     "question": "How do you go to the end of the line you are currently typing on?",
-    "keys": [17, 69]
+    "keys": [17, 69], 
+    "shortcutType": "shell"
   },
   {
     "answer": "control+q",
     "question": "How do you clear everything on the current line?",
-    "keys": [17, 81]
+    "keys": [17, 81], 
+    "shortcutType": "shell"
   },
   {
     "answer": "control+l",
     "question": "How do you clear the screen using the control key?",
-    "keys": [17, 76]
+    "keys": [17, 76], 
+    "shortcutType": "shell"
   },
   {
     "answer": "control+k",
     "question": "How do you cut everything forward to the end of the line?",
-    "keys": [17, 75]
+    "keys": [17, 75], 
+    "shortcutType": "shell"
   },
   {
     "answer": "control+u",
     "question": "How do you cut everything backwards to the beginning of the line?",
-    "keys": [17, 85]
+    "keys": [17, 85], 
+    "shortcutType": "shell"
   },
   {
     "answer": "control+w",
     "question": "How do you cut one word backwards using white space as the delimiter?",
-    "keys": [17, 87]
+    "keys": [17, 87], 
+    "shortcutType": "shell"
   },
   {
     "answer": "control+y",
     "question": "How do you paste whatever was cut by the last cut command?",
-    "keys": [17, 89]
+    "keys": [17, 89], 
+    "shortcutType": "shell"
   },
   {
     "answer": "Shift+command+3",
     "question": "How do you take a screenshot of the entire screen?",
-    "keys": [16 ,91, 51]
+    "keys": [16 ,91, 51], 
+    "shortcutType": "mac"
   },
   {
     "answer": "command+Comma(,)",
     "question": "How do you open preferences for the front app?",
-    "keys": [91, 188]
+    "keys": [91, 188], 
+    "shortcutType": "mac"
   }
 ]

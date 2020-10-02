@@ -26,8 +26,9 @@ Prepare for contributing by following these beginner-friendly steps.
 1. Read the description, and make sure to ask questions about anything that is unclear.
 1. Start on your forked repo's `backend` branch with `git checkout backend`.
 1. Make sure you have the latest version of the project with `git pull upstream backend` or `git merge upstream/backend`.
-1. Create a new branch with `git checkout -b <new-branch-name>`. The name should include the issue number and the topic you're working in.  For example, if its about adding a GET request, your command could be `git checkout -b add-get-request`.
+1. Create a new branch with `git checkout -b <new-branch-name>`. The name should be short and describe the topic you're working in.  For example, if its about adding a GET request for unser data, your command could be `git checkout -b add-user-get-request`.
 1. Make and commit your changes on this new branch, and make a PR when you're ready. [Here are some directions on the process](http://www.dasblinkenlichten.com/how-to-create-a-github-pull-request-pr/).
 1. When creating your PR, be sure to make your pull request to the `backend` feature branch: 
     <img src="/images/make-pr-to-backend.png" alt="making a pull request to the backend branch" title="make a pr to backend" width="350" height="200" />
 1. See your pull requests here: https://github.com/Techtonica/keyboard-shortcuts-practice/pulls
+1. In your new PR's description, add `Fixes #<issue number>`, for example `fixes #1`.  This will automatically close the issue once your PR is merged, and it will link the issue with your PR. Also add a description of what the PR is, and how reviewers can validate it.

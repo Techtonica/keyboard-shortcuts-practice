@@ -18,23 +18,42 @@ const FIREFOX_RIGHT_COMMAND_STRING = 'OSRight';
 const CHROME_LEFT_COMMAND_STRING = 'MetaLeft';
 const CHROME_RIGHT_COMMAND_STRING = 'MetaRight';
 
+// Key names to ID
+const keyToId = {
+  ctrl: 'control',
+  control: 'control',
+  command: 'metaleft',
+  cmd: 'metaleft',
+  meta: 'metaleft',
+  fn: 'fnc',
+  alt: 'optionleft',
+  shift: 'shiftleft',
+  esc: 'escape',
+  tab: 'tab',
+  'space bar': 'space',
+  'tilde(~)': 'tilde',
+  'comma(,)': 'comma',
+  'underscore(_)': 'minus'
+};
+
 // this tracks when we started asking for the current key command
 let questionStartMS = 0;
 
 $(document).ready(function() {
   //$("#retryButton").toggleClass("on");
   //alert($('li[data-keycode="test"]').attr('id'));
-  $.getJSON( "scripts/shortcuts.json", function( data ) {
-    allData = data;
-    if(localStorage.getItem("questionNo")==null){
+   fetch('scripts/shortcuts.json')
+  .then(response => response.json())
+  .then(data => {
+    allData=data
+    if(localStorage.getItem("questionNo")==null)
+    {
       localStorage.setItem("questionNo", "1");
       localStorage.setItem("totalCount", Object.keys(allData).length);
     }
-    // Call readText()
-    readText()
-    
-    updateTimingDisplay();
-  })
+     readText()
+     updateTimingDisplay()
+  });
 
   $('.container').css('height', $(window).height());
   $(window).on('resize', function() {
@@ -108,6 +127,7 @@ function handle(e) {
     if (commandDown) {
       e.preventDefault();
       e.stopPropagation();
+      $("#"+e.key.toLowerCase() ).addClass("pressed");
       return false;
     }
     $("#"+e.key.toLowerCase() ).addClass("pressed");
@@ -134,7 +154,11 @@ function release(e) {
   if(e.code.toLowerCase()=="space"){
     $("#space").removeClass("pressed");
   }
-  if(e.key.toLowerCase()=="capslock") return
+  if(e.key.toLowerCase()=="capslock"){
+    $("#"+e.key.toLowerCase()).toggleClass("pressed");
+    $('.letter').toggleClass('uppercase');
+    caps=false;
+  } 
   else{
     $("#"+e.key.toLowerCase() ).removeClass("pressed");
   }
@@ -157,31 +181,9 @@ function promptKey2(key){
 // Function to highlight any key passed as input
 function promptKey(key){
   // Handling all key types
-  if(key.length==1) $("#"+key.toLowerCase()).toggleClass("prompt");
-  else {
-    if(key.toLowerCase()=='ctrl'||key.toLowerCase()=='control')
-      $("#control").toggleClass("prompt");
-    if(key.toLowerCase()=='command' || key.toLowerCase()=='cmd'|| key.toLowerCase()=="meta")
-      $("#metaleft").toggleClass("prompt");
-    if(key.toLowerCase()=='fn')
-      $("#fnc").toggleClass("prompt");
-    if(key.toLowerCase()=='alt')
-      $("#optionleft").toggleClass("prompt");
-    if(key.toLowerCase()=='shift')
-      $("#shiftleft").toggleClass("prompt");
-    if(key.toLowerCase()=='esc')
-      $("#escape").toggleClass("prompt");
-    if(key.toLowerCase()=='space bar')
-      $("#space").toggleClass("prompt");
-    if(key.toLowerCase()=='tab')
-      $("#tab").toggleClass("prompt");
-    if(key.toLowerCase()=='tilde(~)')
-      $("#tilde").toggleClass("prompt");
-    if(key.toLowerCase()=='comma(,)')
-      $("#comma").toggleClass("prompt");
-    if(key.toLowerCase()=='underscore(_)')
-      $("#minus").toggleClass("prompt");
-  }
+  key = key.toLowerCase();
+  id = key.length == 1 ? key : keyToId[key];
+  if (id) $('#' + id).toggleClass('prompt');
 }
 
 // Function to read the next combination of keys and highlight it on keyboard
@@ -190,6 +192,7 @@ function readText(){
   if(quesNo!=null){
     commandText = allData[parseInt(quesNo)-1].answer
     answerkeys = allData[parseInt(quesNo)-1].keys
+    type = allData[parseInt(quesNo) - 1].shortcutType
     //commandText = "A+Control"  //$("#textdiv").text(); // Will be taken from some other list type of a source.
     //Each command will have an associated question text used in writeQuestion
     var speed = 50
@@ -203,6 +206,14 @@ function readText(){
       // Highlight the prompt keys
       promptKey2(val)
     });
+
+    // update shortcut type
+    $('#shortcut-tag').first().text(type + ' Shortcut')
+    if(type == 'mac') {
+      $('#shortcut-tag').first().css('background-color', '#3455db')
+    } else {
+      $('#shortcut-tag').first().css('background-color', '#4b2142')
+    }
 
     /* commandText.split('+').forEach(function(c) {
       if(c.toLowerCase()=="command"){
@@ -320,6 +331,7 @@ function onSuccess() {
   clearPromptKeys();
   clearPressedKeys();
   confetti($("#confetti").get(0), { spread: 180, startVelocity: 50, elementCount: 150 });
+  createUserAnswer(questionNo, true, thisAnswerMS);
   setTimeout(nextQuestion, 1500);
 }
 
@@ -392,4 +404,21 @@ window.addEventListener('focus', function (e) {
   }
 });
 
-sequelize.close(); 
+function createUserAnswer(questionNo, isCorrect, elapsedTimeMs){
+  let requestBody = {
+    userId: 'guest',
+    isCorrect: isCorrect,
+    elapsedTimeMs: elapsedTimeMs
+  }
+  
+  fetch(document.URL + 'user/answers/question/' + questionNo, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(requestBody)
+  }).catch(error => {
+    // TODO: handle error messages in a better way
+    console.log(error);
+  })
+}
