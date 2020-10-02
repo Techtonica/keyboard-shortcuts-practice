@@ -38,27 +38,39 @@ const keyToId = {
 // this tracks when we started asking for the current key command
 let questionStartMS = 0;
 
-$(document).ready(function() {
+$(document).ready(function () {
   //$("#retryButton").toggleClass("on");
   //alert($('li[data-keycode="test"]').attr('id'));
-   fetch('scripts/shortcuts.json')
-  .then(response => response.json())
-  .then(data => {
-    allData=data
-    if(localStorage.getItem("questionNo")==null)
-    {
-      localStorage.setItem("questionNo", "1");
-      localStorage.setItem("totalCount", Object.keys(allData).length);
-    }
-     readText()
-     updateTimingDisplay()
-  });
+  fetch('scripts/shortcuts.json')
+    .then(response => response.json()).then(data => {
+      allData = data
+      return getUserProgress()
+    }).then(response => {
+      if (!response.ok) {
+        const message = `An error has occured: ${response.status}`;
+        console.error(message)
+        return 1
+      }
+      return response.json()
+    })
+    .then(userProgress => {
+      if (localStorage.getItem("questionNo") == null) {
+        localStorage.setItem("questionNo", userProgress.currentQuestionNumber);
+        localStorage.setItem("totalCount", Object.keys(allData).length);
+      }
+      readText()
+      updateTimingDisplay()
+    });
 
   $('.container').css('height', $(window).height());
-  $(window).on('resize', function() {
+  $(window).on('resize', function () {
     $('.container').css('height', $(window).height());
   });
 });
+
+function getUserProgress() {
+  return fetch(document.URL + 'user/progress')
+}
 
 function nextQuestion() {
   if(localStorage.getItem("questionNo")!=null){

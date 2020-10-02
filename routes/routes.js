@@ -11,6 +11,10 @@ router.get('/cheatsheet', (req,res) => {
     res.render('cheatsheet');
 })
 
+router.get('/user/progress', (req, res) => {
+    res.send({ "userId": null,"currentQuestionNumber": 1})
+})
+
 router.post('/user/answers/question/:questionNumber', (req, res) => {
     if(req.body.id) {
 		return res.status(400).json({'message': 'ID should not be provided'});
