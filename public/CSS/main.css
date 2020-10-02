@@ -206,3 +206,19 @@ div .arrows{
   text-transform: capitalize;
   width: 100px;
 }
+
+#hint-checkbox-container {
+  width: 100%;
+  text-align: right;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+}
+
+#hint-checkbox-container span {
+  vertical-align: text-bottom;
+}
+
+#hint-checkbox-container #show-hint {
+  height: 1rem;
+  width: 1rem;
+}

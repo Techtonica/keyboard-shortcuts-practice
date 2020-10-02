@@ -5,6 +5,7 @@ var reqKeys = []
 var typewriter;
 var quesNo;
 let pressed = new Set();
+let isShowHint = true;
 
 // event.keyCode Chrome and Firefox
 const CHROME_LEFT_COMMAND_CODE = 91;
@@ -154,7 +155,11 @@ function highlightNextKey(params){
 
 function promptKey2(key){
   //if($('li[data-keycode="'+key+'"]'[0]).hasClass('prompt')){
-  $($('li[data-keycode="'+key+'"]')[0]).toggleClass("prompt")
+    if (isShowHint) {
+      $($('li[data-keycode="'+key+'"]')[0]).addClass("prompt")
+    } else {
+      $($('li[data-keycode="'+key+'"]')[0]).removeClass("prompt")
+    }
   //}
 }
 
@@ -166,8 +171,11 @@ function promptKey(key){
   if (id) $('#' + id).toggleClass('prompt');
 }
 
-// Function to read the next combination of keys and highlight it on keyboard
-function readText(){
+/**
+ * Function to read the next combination of keys and highlight it on keyboard
+ * @param withoutAnimation {boolean=} [withoutAnimation = false] flag to prevent typing question animation
+ */
+function readText(withoutAnimation){
   quesNo = localStorage.getItem("questionNo")
   if(quesNo!=null){
     commandText = allData[parseInt(quesNo)-1].answer
@@ -179,7 +187,9 @@ function readText(){
     var i = 0;
 
     // Call writeQuestion to add question on the top textarea
-    writeQuestion(allData[parseInt(localStorage.getItem("questionNo"))-1].question)
+    if (!withoutAnimation) {
+      writeQuestion(allData[parseInt(localStorage.getItem("questionNo"))-1].question)
+    }
 
     $.each(answerkeys , function(index, val) {
       reqKeys.push(val)
@@ -383,6 +393,12 @@ window.addEventListener('focus', function (e) {
     onSuccess();
   }
 });
+
+const showHintCheckbox = document.getElementById('show-hint');
+showHintCheckbox.addEventListener('change', function(e) {
+  isShowHint = e.target.checked;
+  readText(true)
+})
 
 function createUserAnswer(questionNo, isCorrect, elapsedTimeMs){
   let requestBody = {
