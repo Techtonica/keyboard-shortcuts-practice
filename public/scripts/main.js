@@ -53,11 +53,6 @@ $(document).ready(function() {
      readText()
      updateTimingDisplay()
   });
-
-  $('.container').css('height', $(window).height());
-  $(window).on('resize', function() {
-    $('.container').css('height', $(window).height());
-  });
 });
 
 function nextQuestion() {
