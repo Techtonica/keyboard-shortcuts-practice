@@ -126,13 +126,17 @@ function handle(e) {
     $("#"+e.key.toLowerCase()).toggleClass("pressed");
     $('.letter').toggleClass('uppercase');
   }
-  else $("#"+e.key.toLowerCase() ).addClass("pressed");
+  else{ 
+    if(document.querySelector("#"+e.key.toLowerCase() ))
+      document.querySelector("#"+e.key.toLowerCase() ).classList.add("pressed");
+  }
 }
 
 // Function called on KeyUp to reset the key by removing class = 'pressed'
 function release(e) {
   if((e.which>=186 && e.which<=192)|| (e.which>=219 && e.which<=222)){
-    $("#"+e.code.toLowerCase()).removeClass("pressed");
+    if(document.querySelector("#"+e.code.toLowerCase()))
+      document.querySelector("#"+e.code.toLowerCase()).classList.remove("pressed");
   }
   if(e.key.toLowerCase()=="alt" || e.key.toLowerCase()=="shift" || e.key.toLowerCase()=="meta"){
     let keyString = e.code;
@@ -141,10 +145,13 @@ function release(e) {
     } else if (e.code == FIREFOX_RIGHT_COMMAND_STRING) {
       keyString = CHROME_RIGHT_COMMAND_STRING
     }
-    $("#"+keyString.toLowerCase()).removeClass("pressed");
+
+    if(document.querySelector("#"+keyString.toLowerCase()))
+      document.querySelector("#"+keyString.toLowerCase()).classList.remove("pressed");
   }
   if(e.code.toLowerCase()=="space"){
-    $("#space").removeClass("pressed");
+    if(document.querySelector("#space"))
+      document.querySelector("#space").classList.remove("pressed");
   }
   if(e.key.toLowerCase()=="capslock"){
     $("#"+e.key.toLowerCase()).toggleClass("pressed");
@@ -152,16 +159,17 @@ function release(e) {
     caps=false;
   } 
   else{
-    $("#"+e.key.toLowerCase() ).removeClass("pressed");
+    if(document.querySelector("#"+e.key.toLowerCase() ))
+      document.querySelector("#"+e.key.toLowerCase() ).classList.remove("pressed");
   }
 }
 
 // May have to be removed. Not being used currently
 function highlightNextKey(params){
   $("#"+nxt.toLowerCase()).toggleClass("pressed");
-  <!-- var params = { width:1680, height:1050 }; -->
-    <!-- var str = jQuery.param( params ); -->
-    <!-- $( "#results" ).text( str ); -->
+  // <!-- var params = { width:1680, height:1050 }; -->
+  //   <!-- var str = jQuery.param( params ); -->
+  //   <!-- document.querySelector("#results").textContent = str; -->
 }
 
 function promptKey2(key){
@@ -185,7 +193,7 @@ function readText(){
     commandText = allData[parseInt(quesNo)-1].answer
     answerkeys = allData[parseInt(quesNo)-1].keys
     type = allData[parseInt(quesNo) - 1].shortcutType
-    //commandText = "A+Control"  //$("#textdiv").text(); // Will be taken from some other list type of a source.
+    //commandText = "A+Control"  // document.querySelector("#textdiv").textContent; // Will be taken from some other list type of a source.
     //Each command will have an associated question text used in writeQuestion
     var speed = 50
     var i = 0;
@@ -200,7 +208,7 @@ function readText(){
     });
 
     // update shortcut type
-    $('#shortcut-tag').first().text(type + ' Shortcut')
+    document.querySelector("#shortcut-tag").textContent = type + " Shortcut";
     if(type == 'mac') {
       $('#shortcut-tag').first().css('background-color', '#3455db')
     } else {
@@ -228,7 +236,7 @@ function readText(){
 function writeQuestion(question) {
   if(typewriter!=null) {
       typewriter.state.eventQueue = [];
-    $('#textdiv span').first().text('');
+      document.querySelector("#textdiv span").textContent = '';
   } else {
     typewriter = new Typewriter(document.getElementById('textdiv'), {
       loop: false,
@@ -242,16 +250,20 @@ function writeQuestion(question) {
 }
 
 function clearIncorrectIndication() {
-  $("#read").removeClass('incorrect');
+  if(document.querySelector("#read"))
+    document.querySelector("#read").classList.remove('incorrect');
 };
 
 function clearPromptKeys() {
-  $('.prompt').removeClass('prompt');
+  if(document.querySelector('.prompt'))
+    document.querySelector('.prompt').classList.remove('prompt');
 };
+
 
 function clearPressedKeys() {
   pressed.clear();
-  $('.pressed').removeClass('pressed');
+  if(document.querySelector('.pressed'))
+    document.querySelector('.pressed').classList.remove('pressed');
 };
 
 function updateTimingDisplay() {
@@ -275,7 +287,8 @@ function updateTimingDisplay() {
 
 function onIncorrect() {
   $('#textdiv').effect("shake", { distance: 3 });
-  $("#read").addClass('incorrect');
+  if(document.querySelector("#read"))
+    document.querySelector("#read").classList.add('incorrect');
   setTimeout(clearPressedKeys, 500);
 };
 
@@ -319,7 +332,7 @@ function onSuccess() {
   handleTimingFeedback(questionNo, thisAnswerMS);
   recordAnswer(questionNo, thisAnswerMS);
   saveHistory();
-  $('#textdiv span').first().text('Correct Keys pressed!');
+  document.querySelector("#textdiv span").textContent = 'Correct Keys pressed!';
   clearPromptKeys();
   clearPressedKeys();
   confetti($("#confetti").get(0), { spread: 180, startVelocity: 50, elementCount: 150 });
