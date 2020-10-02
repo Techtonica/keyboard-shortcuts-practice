@@ -18,7 +18,7 @@ can sign in, practice with the app, and save their progress. That way, the next 
 # Setting up Auth0 and creating an account
 1. Create a [free personal Auth0 account](https://auth0.com/)
 1. Create a `Regular Web Application`
-1. Run `mv .env.example .env` to create a .env file
+1. Run `cp .env.example .env` to create a .env file
 1. From the settings page of your Auth0 web application fill in the environment variables, ensuring that the `AUTH0_ISSUER_BASE_URL` is the Domain URL starting with `https://`
 
 ## Running the project

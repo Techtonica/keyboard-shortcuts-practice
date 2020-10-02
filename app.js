@@ -4,7 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const { auth } = require('express-openid-connect');
 const { connectToDb } = require("./JS/orm");
-const { auth_config } = require("./JS/auth0");
+const { authConfig } = require("./JS/auth0");
 
 const app = express();
 app.use(morgan("dev")); //morgan gives us useful logging
@@ -17,8 +17,8 @@ app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-if (auth_config != undefined) {
-  app.use(auth(auth_config)); // auth router attaches /login, /logout, and /callback routes to the baseURL
+if (authConfig) {
+  app.use(auth(authConfig)); // auth router attaches /login, /logout, and /callback routes to the baseURL
 }
 
 const routes = require("./routes/routes.js");
