@@ -69,7 +69,7 @@ $(document).ready(function () {
 });
 
 function getUserProgress() {
-  return fetch(document.URL + 'user/progress')
+  return fetch('user/progress')
 }
 
 function nextQuestion() {
