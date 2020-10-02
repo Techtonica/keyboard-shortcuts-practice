@@ -72,7 +72,7 @@ body {
 }
 
 .cheatsheet {
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .img-button {
@@ -194,4 +194,15 @@ div .arrows{
   padding: 1em;
   border-radius: 4px;
   margin: -1.5em 1em 0em 1em;
+}
+
+#shortcut-tag{
+  border-radius: 50px;
+  color: #ffffff;
+  font-size: 12px;
+  margin-top: 30px;
+  padding: 3px 10px;
+  text-align: center;
+  text-transform: capitalize;
+  width: 100px;
 }

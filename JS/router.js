@@ -1,1 +1,1 @@
-import { User } from 'orm.js';
+import { User, UserAnswers } from 'orm.js';
