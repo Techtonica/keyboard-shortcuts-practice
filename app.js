@@ -19,7 +19,7 @@ const routes = require("./routes/routes.js");
 app.use("/", routes);
 
 app.use((req, res) => {
-  res.status(404).render("not_found");
+  res.status(404).render("Not Found");
 });
 
 const startServer = async () => {
