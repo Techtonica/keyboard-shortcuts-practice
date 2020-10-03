@@ -21,6 +21,7 @@
   "homepage": "https://github.com/Techtonica/keyboard-shortcuts-practice#readme",
   "dependencies": {
     "dotenv": "^8.1.0",
+    "ecstatic": "^4.1.4",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "http-server": "^0.11.1",
