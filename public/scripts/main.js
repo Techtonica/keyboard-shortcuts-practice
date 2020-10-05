@@ -9,6 +9,7 @@ var reqKeys = []
 var typewriter;
 var quesNo;
 let pressed = new Set();
+let isShowHint = true;
 
 // event.keyCode Chrome and Firefox
 const CHROME_LEFT_COMMAND_CODE = 91;
@@ -156,12 +157,20 @@ function highlightNextKey(params){
   $("#"+nxt.toLowerCase()).toggleClass("pressed");
   // <!-- var params = { width:1680, height:1050 }; -->
   //   <!-- var str = jQuery.param( params ); -->
+
   //   <!-- $( "#results" ).text( str ); -->
+
+  //   <!-- document.querySelector("#results").textContent = str; -->
+
 }
 
 function promptKey2(key){
   //if($('li[data-keycode="'+key+'"]'[0]).hasClass('prompt')){
-  $($('li[data-keycode="'+key+'"]')[0]).toggleClass("prompt")
+    if (isShowHint) {
+      $($('li[data-keycode="'+key+'"]')[0]).addClass("prompt")
+    } else {
+      $($('li[data-keycode="'+key+'"]')[0]).removeClass("prompt")
+    }
   //}
 }
 
@@ -173,20 +182,25 @@ function promptKey(key){
   if (id) $('#' + id).toggleClass('prompt');
 }
 
-// Function to read the next combination of keys and highlight it on keyboard
-function readText(){
+/**
+ * Function to read the next combination of keys and highlight it on keyboard
+ * @param withoutAnimation {boolean=} [withoutAnimation = false] flag to prevent typing question animation
+ */
+function readText(withoutAnimation){
   quesNo = localStorage.getItem("questionNo")
   if(quesNo!=null){
     commandText = allData[parseInt(quesNo)-1].answer
     answerkeys = allData[parseInt(quesNo)-1].keys
     type = allData[parseInt(quesNo) - 1].shortcutType
-    //commandText = "A+Control"  //$("#textdiv").text(); // Will be taken from some other list type of a source.
+    //commandText = "A+Control"  // document.querySelector("#textdiv").textContent; // Will be taken from some other list type of a source.
     //Each command will have an associated question text used in writeQuestion
     var speed = 50
     var i = 0;
 
     // Call writeQuestion to add question on the top textarea
-    writeQuestion(allData[parseInt(localStorage.getItem("questionNo"))-1].question)
+    if (!withoutAnimation) {
+      writeQuestion(allData[parseInt(localStorage.getItem("questionNo"))-1].question)
+    }
 
     $.each(answerkeys , function(index, val) {
       reqKeys.push(val)
@@ -195,7 +209,7 @@ function readText(){
     });
 
     // update shortcut type
-    $('#shortcut-tag').first().text(type + ' Shortcut')
+    document.querySelector("#shortcut-tag").textContent = type + " Shortcut";
     if(type == 'mac') {
       $('#shortcut-tag').first().css('background-color', '#3455db')
     } else {
@@ -223,7 +237,7 @@ function readText(){
 function writeQuestion(question) {
   if(typewriter!=null) {
       typewriter.state.eventQueue = [];
-    $('#textdiv span').first().text('');
+      document.querySelector("#textdiv span").textContent = '';
   } else {
     typewriter = new Typewriter(document.getElementById('textdiv'), {
       loop: false,
@@ -318,9 +332,11 @@ function onSuccess() {
   var questionNo = localStorage.getItem("questionNo");
   var thisAnswerMS = Date.now() - questionStartMS;
   handleTimingFeedback(questionNo, thisAnswerMS);
-  history.recordAnswer(questionNo, thisAnswerMS);
-  history.saveHistory();
-  $('#textdiv span').first().text('Correct Keys pressed!');
+
+  recordAnswer(questionNo, thisAnswerMS);
+  saveHistory();
+  document.querySelector("#textdiv span").textContent = 'Correct Keys pressed!';
+
   clearPromptKeys();
   clearPressedKeys();
   confettiImport.confetti($("#confetti").get(0), { spread: 180, startVelocity: 50, elementCount: 150 });
@@ -396,6 +412,12 @@ window.addEventListener('focus', function (e) {
     onSuccess();
   }
 });
+
+const showHintCheckbox = document.getElementById('show-hint');
+showHintCheckbox.addEventListener('change', function(e) {
+  isShowHint = e.target.checked;
+  readText(true)
+})
 
 function createUserAnswer(questionNo, isCorrect, elapsedTimeMs){
   let requestBody = {
