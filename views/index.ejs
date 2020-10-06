@@ -118,6 +118,13 @@
         </ul>
       </div>
       <div>
+        <p>
+          <% if (currentUserId) { %>
+            You are logged in as <%= currentUserId %>. <a href="/logout">Logout</a>
+          <% } else { %>
+            You are not logged in. <a href="/login">Login</a> to save your progress!
+          <% } %>
+        </p>
         <p class="center-text-horizontally">This project is open-source! <a href="https://github.com/Techtonica/keyboard-shortcuts-practice">Look at the code and contribute here</a>.</p>
       </div>
   </body>

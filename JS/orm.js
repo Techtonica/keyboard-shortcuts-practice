@@ -62,5 +62,6 @@ const connectToDb = async () => {
 module.exports = {
   User,
   connectToDb,
-  UserAnswers
+  UserAnswers,
+  sequelize,
 };
