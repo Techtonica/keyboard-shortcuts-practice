@@ -42,7 +42,7 @@ router.get('/user/answers/question/:questionNumber', (req, res) => {
     let pageSize = 3; // TODO: define it in more stadarized way 
     
     User.findOne({ 
-        where: {id: req.body.userId}
+        where: {id: req.query.userId}
     }).then(user => {
         
         UserAnswers.findAll({
@@ -52,7 +52,7 @@ router.get('/user/answers/question/:questionNumber', (req, res) => {
             ],
             limit: pageSize
         }).then(userAnswers => {
-            return res.json({
+            return res.status(200).json({
                 previousTimingMs: userAnswers.map(userAnswer => userAnswer.elapsed_time_ms)
             })
         }).catch(error => {
