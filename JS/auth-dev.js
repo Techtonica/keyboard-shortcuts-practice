@@ -30,9 +30,9 @@ const setup = (app) => {
 
   app.get("/login", async (req, res) => {
     const userId = process.env.USER || "local";
-    const [user] = await User.findOrCreate({ where: { id: userId } });
-    user.last_login = new Date();
-    await user.save();
+    await User.findOrCreate({
+      where: { id: userId },
+    });
     req.session.userId = userId;
     res.redirect("/");
   });

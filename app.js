@@ -3,7 +3,7 @@ const path = require("path");
 const morgan = require("morgan");
 const express = require("express");
 const bodyParser = require("body-parser");
-const setupAuth = require("./JS/auth-setup");
+const { setupAuth } = require("./JS/auth-setup");
 const { connectToDb } = require("./JS/orm");
 const { port } = require("./JS/config");
 
