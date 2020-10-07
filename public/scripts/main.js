@@ -92,10 +92,11 @@ function handle(e) {
     ' code=' + e.code
 
   if(e.code.toLowerCase()=="space"){
-    $("#space").toggleClass("pressed");
+    document.querySelector('#space').classList.toggle("pressed");
+    //document.querySelector('#space').classList.toggle('pressed',e.code.toLowerCase()=="space")
   }
   if((e.which>=186 && e.which<=192)|| (e.which>=219 && e.which<=222)){
-    $("#"+e.code.toLowerCase()).toggleClass("pressed");
+    document.querySelector("#"+e.code.toLowerCase()).classList.toggle("pressed");
   }
   if(e.key.toLowerCase()=="alt" || e.key.toLowerCase()=="shift" || e.key.toLowerCase()=="meta"){
     if (e.key.toLowerCase()=="meta") {
@@ -107,26 +108,26 @@ function handle(e) {
     } else if (e.code == FIREFOX_RIGHT_COMMAND_STRING) {
       keyString = CHROME_RIGHT_COMMAND_STRING
     }
-    $("#"+keyString.toLowerCase()).toggleClass("pressed");
+    document.querySelector("#"+keyString.toLowerCase()).classList.toggle("pressed");
   }
   if(e.key.toLowerCase()=="capslock" && caps==false){
     caps= true;
-    $("#"+e.key.toLowerCase()).toggleClass("pressed");
-    $('.letter').toggleClass('uppercase');
+    document.querySelector("#"+e.key.toLowerCase()).classList.toggle("pressed");
+    document.querySelector('.letter').classList.toggle('uppercase');
   }
   else if(e.key.toLowerCase()=="capslock" && caps==true) {
-    $("#"+e.key.toLowerCase()).toggleClass("pressed");
-    $('.letter').toggleClass('uppercase');
+    document.querySelector("#"+e.key.toLowerCase()).classList.toggle("pressed");
+    document.querySelector('.letter').classList.toggle('uppercase');
     caps=false;
   }
   else {
     if (commandDown) {
       e.preventDefault();
       e.stopPropagation();
-      $("#"+e.key.toLowerCase() ).addClass("pressed");
+      document.querySelector("#"+e.key.toLowerCase()).classList.add("pressed");
       return false;
     }
-    $("#"+e.key.toLowerCase() ).addClass("pressed");
+    document.querySelector("#"+e.key.toLowerCase()).classList.add("pressed");
   }
 }
 
@@ -155,8 +156,8 @@ function release(e) {
       document.querySelector("#space").classList.remove("pressed");
   }
   if(e.key.toLowerCase()=="capslock"){
-    $("#"+e.key.toLowerCase()).toggleClass("pressed");
-    $('.letter').toggleClass('uppercase');
+    document.querySelector("#"+e.key.toLowerCase()).classList.toggle("pressed");
+    document.querySelector('.letter').classList.toggle('uppercase');
     caps=false;
   } 
   else{
@@ -167,7 +168,7 @@ function release(e) {
 
 // May have to be removed. Not being used currently
 function highlightNextKey(params){
-  $("#"+nxt.toLowerCase()).toggleClass("pressed");
+  document.querySelector("#"+nxt.toLowerCase()).classList.toggle("pressed");
   // <!-- var params = { width:1680, height:1050 }; -->
   //   <!-- var str = jQuery.param( params ); -->
   //   <!-- document.querySelector("#results").textContent = str; -->
@@ -188,7 +189,7 @@ function promptKey(key){
   // Handling all key types
   key = key.toLowerCase();
   id = key.length == 1 ? key : keyToId[key];
-  if (id) $('#' + id).toggleClass('prompt');
+  if (id) document.querySelector('#' + id).classList.toggle('prompt');
 }
 
 /**
