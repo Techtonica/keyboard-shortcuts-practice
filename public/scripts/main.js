@@ -324,8 +324,6 @@ function onSuccess() {
   var questionNo = localStorage.getItem("questionNo");
   var thisAnswerMS = Date.now() - questionStartMS;
   handleTimingFeedback(questionNo, thisAnswerMS);
-  recordAnswer(questionNo, thisAnswerMS);
-  saveHistory();
   document.querySelector("#textdiv span").textContent = 'Correct Keys pressed!';
   clearPromptKeys();
   clearPressedKeys();
