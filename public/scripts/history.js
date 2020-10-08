@@ -4,7 +4,7 @@
 async function getHistory(questionNo) {
     let url = new URL(document.URL + 'user/answers/question/' + questionNo);
     let params = {
-        userId: 'guest' // TODO: get actual userId
+        userId: 'guest'
     }
     url.search = new URLSearchParams(params).toString();
 
