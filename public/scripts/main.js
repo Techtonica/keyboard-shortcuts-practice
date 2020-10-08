@@ -5,6 +5,7 @@ var reqKeys = []
 var typewriter;
 var quesNo;
 let pressed = new Set();
+let commandDown = false;
 let isShowHint = true;
 
 // event.keyCode Chrome and Firefox
@@ -97,6 +98,9 @@ function handle(e) {
     $("#"+e.code.toLowerCase()).toggleClass("pressed");
   }
   if(e.key.toLowerCase()=="alt" || e.key.toLowerCase()=="shift" || e.key.toLowerCase()=="meta"){
+    if (e.key.toLowerCase()=="meta") {
+      commandDown = true;
+    }
     let keyString = e.code;
     if(e.code == FIREFOX_LEFT_COMMAND_STRING) {
       keyString = CHROME_LEFT_COMMAND_STRING
@@ -110,9 +114,19 @@ function handle(e) {
     $("#"+e.key.toLowerCase()).toggleClass("pressed");
     $('.letter').toggleClass('uppercase');
   }
-  else{ 
-    if(document.querySelector("#"+e.key.toLowerCase() ))
-      document.querySelector("#"+e.key.toLowerCase() ).classList.add("pressed");
+  else if(e.key.toLowerCase()=="capslock" && caps==true) {
+    $("#"+e.key.toLowerCase()).toggleClass("pressed");
+    $('.letter').toggleClass('uppercase');
+    caps=false;
+  }
+  else {
+    if (commandDown) {
+      e.preventDefault();
+      e.stopPropagation();
+      $("#"+e.key.toLowerCase() ).addClass("pressed");
+      return false;
+    }
+    $("#"+e.key.toLowerCase() ).addClass("pressed");
   }
 }
 
@@ -123,6 +137,9 @@ function release(e) {
       document.querySelector("#"+e.code.toLowerCase()).classList.remove("pressed");
   }
   if(e.key.toLowerCase()=="alt" || e.key.toLowerCase()=="shift" || e.key.toLowerCase()=="meta"){
+    if (e.key.toLowerCase()=="meta") {
+      commandDown = false;
+    }
     let keyString = e.code;
     if(e.code == FIREFOX_LEFT_COMMAND_STRING) {
       keyString = CHROME_LEFT_COMMAND_STRING
