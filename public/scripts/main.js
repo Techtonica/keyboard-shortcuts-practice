@@ -90,14 +90,14 @@ function handle(e) {
   var text1 = e.type +
     ' key=' + e.key +
     ' code=' + e.code
-
+  console.log(text1);
+  
   if(e.code.toLowerCase()=="space"){
     document.querySelector('#space').classList.toggle("pressed");
-    //document.querySelector('#space').classList.toggle('pressed',e.code.toLowerCase()=="space")
-  }
+  }else
   if((e.which>=186 && e.which<=192)|| (e.which>=219 && e.which<=222)){
     document.querySelector("#"+e.code.toLowerCase()).classList.toggle("pressed");
-  }
+  }else
   if(e.key.toLowerCase()=="alt" || e.key.toLowerCase()=="shift" || e.key.toLowerCase()=="meta"){
     if (e.key.toLowerCase()=="meta") {
       commandDown = true;
@@ -109,7 +109,7 @@ function handle(e) {
       keyString = CHROME_RIGHT_COMMAND_STRING
     }
     document.querySelector("#"+keyString.toLowerCase()).classList.toggle("pressed");
-  }
+  }else
   if(e.key.toLowerCase()=="capslock" && caps==false){
     caps= true;
     document.querySelector("#"+e.key.toLowerCase()).classList.toggle("pressed");
@@ -121,13 +121,14 @@ function handle(e) {
     caps=false;
   }
   else {
+    console.log(e);
+    document.querySelector("#"+e.key.toLowerCase()).classList.add("pressed");
     if (commandDown) {
       e.preventDefault();
       e.stopPropagation();
-      document.querySelector("#"+e.key.toLowerCase()).classList.add("pressed");
       return false;
     }
-    document.querySelector("#"+e.key.toLowerCase()).classList.add("pressed");
+    //document.querySelector("#"+e.key.toLowerCase()).classList.add("pressed");
   }
 }
 
@@ -136,7 +137,7 @@ function release(e) {
   if((e.which>=186 && e.which<=192)|| (e.which>=219 && e.which<=222)){
     if(document.querySelector("#"+e.code.toLowerCase()))
       document.querySelector("#"+e.code.toLowerCase()).classList.remove("pressed");
-  }
+  }else
   if(e.key.toLowerCase()=="alt" || e.key.toLowerCase()=="shift" || e.key.toLowerCase()=="meta"){
     if (e.key.toLowerCase()=="meta") {
       commandDown = false;
@@ -150,19 +151,19 @@ function release(e) {
 
     if(document.querySelector("#"+keyString.toLowerCase()))
       document.querySelector("#"+keyString.toLowerCase()).classList.remove("pressed");
-  }
+  }else
   if(e.code.toLowerCase()=="space"){
     if(document.querySelector("#space"))
       document.querySelector("#space").classList.remove("pressed");
-  }
+  }else
   if(e.key.toLowerCase()=="capslock"){
     document.querySelector("#"+e.key.toLowerCase()).classList.toggle("pressed");
     document.querySelector('.letter').classList.toggle('uppercase');
     caps=false;
   } 
   else{
-    if(document.querySelector("#"+e.key.toLowerCase() ))
-      document.querySelector("#"+e.key.toLowerCase() ).classList.remove("pressed");
+    if(document.querySelector("#"+e.key.toLowerCase()))
+      document.querySelector("#"+e.key.toLowerCase()).classList.remove("pressed");
   }
 }
 
