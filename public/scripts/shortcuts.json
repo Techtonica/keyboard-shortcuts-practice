@@ -1,11 +1,5 @@
 [
   {
-    "answer": "F2",
-    "question": "How do you rename a symbol in VSCode?",
-    "keys": [113],
-    "shortcutType": "mac vscode"
-  },
-  {
     "answer": "command+x",
     "question": "How do you cut the selected item and copy it to the clipboard?",
     "keys": [91, 88],
@@ -196,5 +190,11 @@
     "question": "How do you open preferences for the front app?",
     "keys": [91, 188], 
     "shortcutType": "mac"
+  },
+  {
+    "answer": "F2",
+    "question": "How do you rename a symbol in VSCode?",
+    "keys": [113],
+    "shortcutType": "mac vscode"
   }
 ]
