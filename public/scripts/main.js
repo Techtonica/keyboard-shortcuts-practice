@@ -109,6 +109,11 @@ function handle(e) {
     }
     $("#"+keyString.toLowerCase()).toggleClass("pressed");
   }
+  // Highlight Fn key if any of F1-F12 is pressed
+  if (e.which>=112 && e.which<=123) {
+    $("#"+e.key.toLowerCase()).addClass("pressed");
+    $("#fnc").addClass("pressed");
+  }
   if(e.key.toLowerCase()=="capslock" && caps==false){
     caps= true;
     $("#"+e.key.toLowerCase()).toggleClass("pressed");
@@ -118,11 +123,6 @@ function handle(e) {
     $("#"+e.key.toLowerCase()).toggleClass("pressed");
     $('.letter').toggleClass('uppercase');
     caps=false;
-  }
-  // Highlight Fn key if any of F1-F12 is pressed
-  else if (e.which>=112 && e.which<=123) {
-    $("#"+e.key.toLowerCase()).addClass("pressed");
-    $("#fnc").addClass("pressed");
   }
   else {
     if (commandDown) {
@@ -158,6 +158,11 @@ function release(e) {
   if(e.code.toLowerCase()=="space"){
     if(document.querySelector("#space"))
       document.querySelector("#space").classList.remove("pressed");
+  }
+  // Uhighlight Fn key if any of F1-F12 is pressed
+  if (e.which>=112 && e.which<=123) {
+    $("#"+e.key.toLowerCase()).removeClass("pressed");
+    $("#fnc").removeClass("pressed");
   }
   if(e.key.toLowerCase()=="capslock"){
     $("#"+e.key.toLowerCase()).toggleClass("pressed");
