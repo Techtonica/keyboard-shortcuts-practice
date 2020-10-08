@@ -1,6 +1,6 @@
 /**
  * Simple cookie session auth for local development when not testing with Auth0.
- * Uses Sequelize to store the
+ * Uses Sequelize to store the sessions using an adapter.
  *
  *  - `/login` will automatically sign you in as a current $USER
  *       (this user will be created if it does not exist)

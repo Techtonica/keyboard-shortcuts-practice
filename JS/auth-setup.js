@@ -3,11 +3,11 @@ const Auth0 = require("./auth0");
 const { User } = require("./orm");
 /**
  * Retrieves the currently signed-in user id, if signed-in,
- * from the Express Request object.
+ * from the Express Response object.
  *
  * This mechanism is independent if the app is using Auth0 or not.
  *
- * @param {*} response Express response object
+ * @param {*} response Express Response object
  */
 const getCurrentUserId = (response) => response.locals.currentUserId;
 
