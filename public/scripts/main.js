@@ -109,6 +109,11 @@ function handle(e) {
     }
     $("#"+keyString.toLowerCase()).toggleClass("pressed");
   }
+  // Highlight Fn key if any of F1-F12 is pressed
+  if (e.which>=112 && e.which<=123) {
+    document.querySelector("#"+e.key.toLowerCase()).classList.add("pressed");
+    document.querySelector("#fnc").classList.add("pressed");
+  }
   if(e.key.toLowerCase()=="capslock" && caps==false){
     caps= true;
     $("#"+e.key.toLowerCase()).toggleClass("pressed");
@@ -154,6 +159,11 @@ function release(e) {
     if(document.querySelector("#space"))
       document.querySelector("#space").classList.remove("pressed");
   }
+  // Uhighlight Fn key if any of F1-F12 is pressed
+  if (e.which>=112 && e.which<=123) {
+    document.querySelector("#"+e.key.toLowerCase()).classList.remove("pressed");
+    document.querySelector("#fnc").classList.remove("pressed");
+  }
   if(e.key.toLowerCase()=="capslock"){
     $("#"+e.key.toLowerCase()).toggleClass("pressed");
     $('.letter').toggleClass('uppercase');
@@ -176,9 +186,17 @@ function highlightNextKey(params){
 function promptKey2(key){
   //if($('li[data-keycode="'+key+'"]'[0]).hasClass('prompt')){
     if (isShowHint) {
-      $($('li[data-keycode="'+key+'"]')[0]).addClass("prompt")
+      $($('li[data-keycode="'+key+'"]')[0]).addClass("prompt");
+      // Highlight Fn to be a combination with F1-F12
+      if (key>=112 && key <=123) {
+        document.querySelector("#fnc").classList.add("prompt");
+      }
     } else {
       $($('li[data-keycode="'+key+'"]')[0]).removeClass("prompt")
+      // Remove Fn highlight
+      if (key>=112 && key <=123) {
+        document.querySelector("#fnc").classList.remove("prompt");
+      }
     }
   //}
 }
