@@ -42,9 +42,11 @@ router.post('/user/answers/question/:questionNumber', (req, res) => {
 })
 
 router.get('/user/answers/question/:questionNumber', (req, res) => {  
-    // TODO: When issue #74 be done, the userId should be handled differently from req object   
+    // TODO: When issue #74 be done, the userId should be handled from req object 
+    let userId = 'guest';
+
     UserAnswers.findAll({
-        where: {question_number: req.params.questionNumber, user_id: req.query.userId},
+        where: {question_number: req.params.questionNumber, user_id: userId},
         order: [
             ['created_at', 'DESC']
         ],

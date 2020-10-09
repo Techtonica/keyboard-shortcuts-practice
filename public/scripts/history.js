@@ -3,10 +3,6 @@
 // returns an array with timing data for a given question number
 async function getHistory(questionNo) {
     let url = new URL(document.URL + 'user/answers/question/' + questionNo);
-    let params = {
-        userId: 'guest'
-    }
-    url.search = new URLSearchParams(params).toString();
 
     try{
         let response = await fetch(url);
