@@ -24,8 +24,8 @@
     "ecstatic": "^4.1.4",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
-    "http-server": "^0.12.3",
     "express-openid-connect": "^2.0.0",
+    "http-server": "^0.12.3",
     "morgan": "^1.9.1",
     "mysql": "^2.17.1",
     "path": "^0.12.7",
@@ -33,6 +33,7 @@
     "pg-hstore": "^2.3.3",
     "request": "^2.88.0",
     "sequelize": "^6.3.5",
+    "serve-favicon": "^2.5.0",
     "sqlite3": "^5.0.0"
   },
   "devDependencies": {
