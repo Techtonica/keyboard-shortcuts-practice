@@ -87,17 +87,15 @@ function prevQuestion() {
 
   // Function called on KeyDown to show Pressed key by adding class = 'pressed'
 function handle(e) {
-  var text1 = e.type +
-    ' key=' + e.key +
-    ' code=' + e.code
-  console.log(text1);
-  
-  if(e.code.toLowerCase()=="space"){
-    document.querySelector('#space').classList.toggle("pressed");
+
+  if(e.key.toLowerCase()=="capslock"){
+    document.querySelector("#"+e.key.toLowerCase()).classList.toggle("pressed");
+    document.querySelectorAll('.letter').forEach(letter => {
+      letter.classList.toggle('uppercase');
+    });
+    return true;
   }else
-  if((e.which>=186 && e.which<=192)|| (e.which>=219 && e.which<=222)){
-    document.querySelector("#"+e.code.toLowerCase()).classList.toggle("pressed");
-  }else
+
   if(e.key.toLowerCase()=="alt" || e.key.toLowerCase()=="shift" || e.key.toLowerCase()=="meta"){
     if (e.key.toLowerCase()=="meta") {
       commandDown = true;
@@ -108,36 +106,36 @@ function handle(e) {
     } else if (e.code == FIREFOX_RIGHT_COMMAND_STRING) {
       keyString = CHROME_RIGHT_COMMAND_STRING
     }
-    document.querySelector("#"+keyString.toLowerCase()).classList.toggle("pressed");
+    document.querySelector("#"+keyString.toLowerCase()).classList.add("pressed");
+    return true;
   }else
-  if(e.key.toLowerCase()=="capslock" && caps==false){
-    caps= true;
-    document.querySelector("#"+e.key.toLowerCase()).classList.toggle("pressed");
-    document.querySelector('.letter').classList.toggle('uppercase');
+  
+  // Highlught Numpad keys
+  if(e.which>=96 && e.which<=105){
+    console.log("teclado numerico");
+    document.querySelector(`li[id="${e.key}"]`).classList.add('pressed');
+    return true;
+  }else
+  
+  // Highlight Fn key if any of F1-F12 is pressed
+  if (e.which>=112 && e.which<=123) {
+    document.querySelector("#fnc").classList.add("pressed");
   }
-  else if(e.key.toLowerCase()=="capslock" && caps==true) {
-    document.querySelector("#"+e.key.toLowerCase()).classList.toggle("pressed");
-    document.querySelector('.letter').classList.toggle('uppercase');
-    caps=false;
-  }
-  else {
-    console.log(e);
+
+  if (commandDown) {
+    e.preventDefault();
+    e.stopPropagation();
     document.querySelector("#"+e.key.toLowerCase()).classList.add("pressed");
-    if (commandDown) {
-      e.preventDefault();
-      e.stopPropagation();
-      return false;
-    }
-    //document.querySelector("#"+e.key.toLowerCase()).classList.add("pressed");
+    return false;
   }
+
+  document.querySelector(`li[data-keycode="${e.keyCode}"]`).classList.add('pressed');
+  
 }
 
 // Function called on KeyUp to reset the key by removing class = 'pressed'
 function release(e) {
-  if((e.which>=186 && e.which<=192)|| (e.which>=219 && e.which<=222)){
-    if(document.querySelector("#"+e.code.toLowerCase()))
-      document.querySelector("#"+e.code.toLowerCase()).classList.remove("pressed");
-  }else
+
   if(e.key.toLowerCase()=="alt" || e.key.toLowerCase()=="shift" || e.key.toLowerCase()=="meta"){
     if (e.key.toLowerCase()=="meta") {
       commandDown = false;
@@ -148,39 +146,42 @@ function release(e) {
     } else if (e.code == FIREFOX_RIGHT_COMMAND_STRING) {
       keyString = CHROME_RIGHT_COMMAND_STRING
     }
-
-    if(document.querySelector("#"+keyString.toLowerCase()))
+    if( document.querySelector("#"+keyString.toLowerCase()).classList.contains("pressed"))
       document.querySelector("#"+keyString.toLowerCase()).classList.remove("pressed");
+    return true;
   }else
-  if(e.code.toLowerCase()=="space"){
-    if(document.querySelector("#space"))
-      document.querySelector("#space").classList.remove("pressed");
+  
+  // Highlught Numpad keys
+  if(e.which>=96 && e.which<=105){
+    if(document.querySelector(`li[id="${e.key}"]`).classList.contains('pressed'))
+      document.querySelector(`li[id="${e.key}"]`).classList.remove('pressed');
+    return true;
   }else
-  if(e.key.toLowerCase()=="capslock"){
-    document.querySelector("#"+e.key.toLowerCase()).classList.toggle("pressed");
-    document.querySelector('.letter').classList.toggle('uppercase');
-    caps=false;
-  } 
-  else{
-    if(document.querySelector("#"+e.key.toLowerCase()))
-      document.querySelector("#"+e.key.toLowerCase()).classList.remove("pressed");
+  
+  // Highlight Fn key if any of F1-F12 is pressed
+  if (e.which>=112 && e.which<=123){
+    if(document.querySelector("#fnc").classList.contains("pressed"))
+      document.querySelector("#fnc").classList.remove("pressed");
   }
-}
+  if(document.querySelector(`li[data-keycode="${e.keyCode}"]`).classList.contains('pressed'))
+    document.querySelector(`li[data-keycode="${e.keyCode}"]`).classList.remove('pressed');
 
-// May have to be removed. Not being used currently
-function highlightNextKey(params){
-  document.querySelector("#"+nxt.toLowerCase()).classList.toggle("pressed");
-  // <!-- var params = { width:1680, height:1050 }; -->
-  //   <!-- var str = jQuery.param( params ); -->
-  //   <!-- document.querySelector("#results").textContent = str; -->
 }
 
 function promptKey2(key){
   //if($('li[data-keycode="'+key+'"]'[0]).hasClass('prompt')){
     if (isShowHint) {
-      $($('li[data-keycode="'+key+'"]')[0]).addClass("prompt")
+      $($('li[data-keycode="'+key+'"]')[0]).addClass("prompt");
+      // Highlight Fn to be a combination with F1-F12
+      if (key>=112 && key <=123) {
+        document.querySelector("#fnc").classList.add("prompt");
+      }
     } else {
       $($('li[data-keycode="'+key+'"]')[0]).removeClass("prompt")
+      // Remove Fn highlight
+      if (key>=112 && key <=123) {
+        document.querySelector("#fnc").classList.remove("prompt");
+      }
     }
   //}
 }
