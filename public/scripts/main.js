@@ -112,7 +112,6 @@ function handle(e) {
   
   // Highlught Numpad keys
   if(e.which>=96 && e.which<=105){
-    console.log("teclado numerico");
     document.querySelector(`li[id="${e.key}"]`).classList.add('pressed');
     return true;
   }else
@@ -128,14 +127,17 @@ function handle(e) {
     document.querySelector("#"+e.key.toLowerCase()).classList.add("pressed");
     return false;
   }
-
-  document.querySelector(`li[data-keycode="${e.keyCode}"]`).classList.add('pressed');
+  if(document.querySelector(`li[data-keycode="${e.keyCode}"]`))
+    document.querySelector(`li[data-keycode="${e.keyCode}"]`).classList.add('pressed');
   
 }
 
 // Function called on KeyUp to reset the key by removing class = 'pressed'
 function release(e) {
 
+  if(e.key.toLowerCase()=="capslock")
+    return true;
+    
   if(e.key.toLowerCase()=="alt" || e.key.toLowerCase()=="shift" || e.key.toLowerCase()=="meta"){
     if (e.key.toLowerCase()=="meta") {
       commandDown = false;
@@ -163,7 +165,7 @@ function release(e) {
     if(document.querySelector("#fnc").classList.contains("pressed"))
       document.querySelector("#fnc").classList.remove("pressed");
   }
-  if(document.querySelector(`li[data-keycode="${e.keyCode}"]`).classList.contains('pressed'))
+  if(document.querySelector(`li[data-keycode="${e.keyCode}"]`) && document.querySelector(`li[data-keycode="${e.keyCode}"]`).classList.contains('pressed'))
     document.querySelector(`li[data-keycode="${e.keyCode}"]`).classList.remove('pressed');
 
 }
