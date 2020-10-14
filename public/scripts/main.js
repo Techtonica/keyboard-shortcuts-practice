@@ -269,7 +269,7 @@ function clearIncorrectIndication() {
 
 function clearPromptKeys() {
   if(document.querySelector('.prompt'))
-    document.querySelector('.prompt').classList.remove('prompt');
+    document.querySelectorAll('.prompt').forEach(key => key.classList.remove('prompt'));
 };
 
 
