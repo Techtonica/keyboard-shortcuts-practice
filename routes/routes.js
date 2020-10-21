@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const{ User, UserAnswers } = require('../JS/orm');
+const { User, UserAnswers } = require('../JS/orm');
+
+const ANSWER_HISTORY_LIMIT = 3;
+
 
 router.get('/', (req, res) => {
     res.render('index');
@@ -38,5 +41,24 @@ router.post('/user/answers/question/:questionNumber', (req, res) => {
     })
 })
 
+router.get('/user/answers/question/:questionNumber', (req, res) => {  
+    // TODO: When issue #74 be done, the userId should be handled from req object 
+    let userId = 'guest';
+
+    UserAnswers.findAll({
+        where: {question_number: req.params.questionNumber, user_id: userId},
+        order: [
+            ['created_at', 'DESC']
+        ],
+        limit: ANSWER_HISTORY_LIMIT
+    }).then(userAnswers => {
+        return res.json({
+            previousTimingMs: userAnswers.map(userAnswer => userAnswer.elapsed_time_ms)
+        })
+    }).catch(error => {
+        console.log(error);
+        return res.status(500).json(error.errors) // TODO: handle better error messages
+    })
+})
 
 module.exports = router;

@@ -298,19 +298,19 @@ function updateTimingDisplay() {
   $('#timing-feedback').html('');
   var questionNo = localStorage.getItem('questionNo');
   // grab the last bits of timing data
-  var timings = getHistory(questionNo).slice(-3);
+  getHistory(questionNo).then(timings => {
+    // and then drop them into the boxes
+    timings.forEach(function(t, idx) {
+      var element = $('#timing-' + idx);
+      element.html(t / 1000 + ' sec');
+      element.show();
+    })
 
-  // and then drop them into the boxes
-  timings.forEach(function(t, idx) {
-    var element = $('#timing-' + idx);
-    element.html(t / 1000 + ' sec');
-    element.show();
-  })
-
-  // hide the boxes if we don't have timing data
-  for (var i = timings.length; i < 3; i++) {
-    $('#timing-' + i).hide();
-  }
+    // hide the boxes if we don't have timing data
+    for (var i = timings.length; i < 3; i++) {
+      $('#timing-' + i).hide();
+    }
+  });
 }
 
 function onIncorrect() {
@@ -321,36 +321,37 @@ function onIncorrect() {
 };
 
 function handleTimingFeedback(questionNo, curMS) {
-  var previousTimings = getHistory(questionNo);
-  if (previousTimings.length == 0) {
-    return;
-  }
-
-  var average = previousTimings.reduce(
-    function(acc, cur) { return acc + cur },
-    0,
-  ) / previousTimings.length;
-
-  var delta = average - curMS;
-
-  var template = null;
-  if (delta > 0) {
-    template = "<br/>You were <span style='color:green;'>faster</span> by ${delta} sec!";
-  }
-  if (delta < 0) {
-    template = "<br/>You were <span style='color:red;'>slower</span> by ${delta} sec.";
-  }
-  if (template === null) {
-    return;
-  }
-
-  // convert MS to S
-  delta = Math.abs(delta) / 1000;
-  // now we want to trunate to 2 decimals; the `+` will let us only use 2
-  // decimals if we actually need them, e.g., we want 1.5 not 1.50
-  // cf. https://stackoverflow.com/a/12830454
-  delta = +delta.toFixed(2);
-  $('#timing-feedback').html(template.replace('${delta}', delta));
+  getHistory(questionNo).then(previousTimings => {
+    if (previousTimings.length == 0) {
+      return;
+    }
+  
+    var average = previousTimings.reduce(
+      function(acc, cur) { return acc + cur },
+      0,
+    ) / previousTimings.length;
+  
+    var delta = average - curMS;
+  
+    var template = null;
+    if (delta > 0) {
+      template = "<br/>You were <span style='color:green;'>faster</span> by ${delta} sec!";
+    }
+    if (delta < 0) {
+      template = "<br/>You were <span style='color:red;'>slower</span> by ${delta} sec.";
+    }
+    if (template === null) {
+      return;
+    }
+  
+    // convert MS to S
+    delta = Math.abs(delta) / 1000;
+    // now we want to trunate to 2 decimals; the `+` will let us only use 2
+    // decimals if we actually need them, e.g., we want 1.5 not 1.50
+    // cf. https://stackoverflow.com/a/12830454
+    delta = +delta.toFixed(2);
+    $('#timing-feedback').html(template.replace('${delta}', delta));
+  });
 }
 
 // Function to execute when correct keys are pressed.
@@ -358,8 +359,6 @@ function onSuccess() {
   var questionNo = localStorage.getItem("questionNo");
   var thisAnswerMS = Date.now() - questionStartMS;
   handleTimingFeedback(questionNo, thisAnswerMS);
-  recordAnswer(questionNo, thisAnswerMS);
-  saveHistory();
   document.querySelector("#textdiv span").textContent = 'Correct Keys pressed!';
   clearPromptKeys();
   clearPressedKeys();
