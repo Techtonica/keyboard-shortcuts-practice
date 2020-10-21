@@ -87,16 +87,15 @@ function prevQuestion() {
 
   // Function called on KeyDown to show Pressed key by adding class = 'pressed'
 function handle(e) {
-  var text1 = e.type +
-    ' key=' + e.key +
-    ' code=' + e.code
 
-  if(e.code.toLowerCase()=="space"){
-    $("#space").toggleClass("pressed");
-  }
-  if((e.which>=186 && e.which<=192)|| (e.which>=219 && e.which<=222)){
-    $("#"+e.code.toLowerCase()).toggleClass("pressed");
-  }
+  if(e.key.toLowerCase()=="capslock"){
+    document.querySelector("#"+e.key.toLowerCase()).classList.toggle("pressed");
+    document.querySelectorAll('.letter').forEach(letter => {
+      letter.classList.toggle('uppercase');
+    });
+    return true;
+  }else
+
   if(e.key.toLowerCase()=="alt" || e.key.toLowerCase()=="shift" || e.key.toLowerCase()=="meta"){
     if (e.key.toLowerCase()=="meta") {
       commandDown = true;
@@ -107,40 +106,38 @@ function handle(e) {
     } else if (e.code == FIREFOX_RIGHT_COMMAND_STRING) {
       keyString = CHROME_RIGHT_COMMAND_STRING
     }
-    $("#"+keyString.toLowerCase()).toggleClass("pressed");
-  }
+    document.querySelector("#"+keyString.toLowerCase()).classList.add("pressed");
+    return true;
+  }else
+  
+  // Highlught Numpad keys
+  if(e.which>=96 && e.which<=105){
+    document.querySelector(`li[id="${e.key}"]`).classList.add('pressed');
+    return true;
+  }else
+  
   // Highlight Fn key if any of F1-F12 is pressed
   if (e.which>=112 && e.which<=123) {
-    document.querySelector("#"+e.key.toLowerCase()).classList.add("pressed");
     document.querySelector("#fnc").classList.add("pressed");
   }
-  if(e.key.toLowerCase()=="capslock" && caps==false){
-    caps= true;
-    $("#"+e.key.toLowerCase()).toggleClass("pressed");
-    $('.letter').toggleClass('uppercase');
+
+  if (commandDown) {
+    e.preventDefault();
+    e.stopPropagation();
+    document.querySelector("#"+e.key.toLowerCase()).classList.add("pressed");
+    return false;
   }
-  else if(e.key.toLowerCase()=="capslock" && caps==true) {
-    $("#"+e.key.toLowerCase()).toggleClass("pressed");
-    $('.letter').toggleClass('uppercase');
-    caps=false;
-  }
-  else {
-    if (commandDown) {
-      e.preventDefault();
-      e.stopPropagation();
-      $("#"+e.key.toLowerCase() ).addClass("pressed");
-      return false;
-    }
-    $("#"+e.key.toLowerCase() ).addClass("pressed");
-  }
+  if(document.querySelector(`li[data-keycode="${e.keyCode}"]`))
+    document.querySelector(`li[data-keycode="${e.keyCode}"]`).classList.add('pressed');
+  
 }
 
 // Function called on KeyUp to reset the key by removing class = 'pressed'
 function release(e) {
-  if((e.which>=186 && e.which<=192)|| (e.which>=219 && e.which<=222)){
-    if(document.querySelector("#"+e.code.toLowerCase()))
-      document.querySelector("#"+e.code.toLowerCase()).classList.remove("pressed");
-  }
+
+  if(e.key.toLowerCase()=="capslock")
+    return true;
+    
   if(e.key.toLowerCase()=="alt" || e.key.toLowerCase()=="shift" || e.key.toLowerCase()=="meta"){
     if (e.key.toLowerCase()=="meta") {
       commandDown = false;
@@ -151,36 +148,26 @@ function release(e) {
     } else if (e.code == FIREFOX_RIGHT_COMMAND_STRING) {
       keyString = CHROME_RIGHT_COMMAND_STRING
     }
-
-    if(document.querySelector("#"+keyString.toLowerCase()))
+    if( document.querySelector("#"+keyString.toLowerCase()).classList.contains("pressed"))
       document.querySelector("#"+keyString.toLowerCase()).classList.remove("pressed");
+    return true;
+  }else
+  
+  // Highlught Numpad keys
+  if(e.which>=96 && e.which<=105){
+    if(document.querySelector(`li[id="${e.key}"]`).classList.contains('pressed'))
+      document.querySelector(`li[id="${e.key}"]`).classList.remove('pressed');
+    return true;
+  }else
+  
+  // Highlight Fn key if any of F1-F12 is pressed
+  if (e.which>=112 && e.which<=123){
+    if(document.querySelector("#fnc").classList.contains("pressed"))
+      document.querySelector("#fnc").classList.remove("pressed");
   }
-  if(e.code.toLowerCase()=="space"){
-    if(document.querySelector("#space"))
-      document.querySelector("#space").classList.remove("pressed");
-  }
-  // Uhighlight Fn key if any of F1-F12 is pressed
-  if (e.which>=112 && e.which<=123) {
-    document.querySelector("#"+e.key.toLowerCase()).classList.remove("pressed");
-    document.querySelector("#fnc").classList.remove("pressed");
-  }
-  if(e.key.toLowerCase()=="capslock"){
-    $("#"+e.key.toLowerCase()).toggleClass("pressed");
-    $('.letter').toggleClass('uppercase');
-    caps=false;
-  } 
-  else{
-    if(document.querySelector("#"+e.key.toLowerCase() ))
-      document.querySelector("#"+e.key.toLowerCase() ).classList.remove("pressed");
-  }
-}
+  if(document.querySelector(`li[data-keycode="${e.keyCode}"]`) && document.querySelector(`li[data-keycode="${e.keyCode}"]`).classList.contains('pressed'))
+    document.querySelector(`li[data-keycode="${e.keyCode}"]`).classList.remove('pressed');
 
-// May have to be removed. Not being used currently
-function highlightNextKey(params){
-  $("#"+nxt.toLowerCase()).toggleClass("pressed");
-  // <!-- var params = { width:1680, height:1050 }; -->
-  //   <!-- var str = jQuery.param( params ); -->
-  //   <!-- document.querySelector("#results").textContent = str; -->
 }
 
 function promptKey2(key){
@@ -206,7 +193,7 @@ function promptKey(key){
   // Handling all key types
   key = key.toLowerCase();
   id = key.length == 1 ? key : keyToId[key];
-  if (id) $('#' + id).toggleClass('prompt');
+  if (id) document.querySelector('#' + id).classList.toggle('prompt');
 }
 
 /**
