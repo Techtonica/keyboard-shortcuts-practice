@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const { setupAuth } = require("./JS/auth-setup");
 const { connectToDb } = require("./JS/orm");
 const { port } = require("./JS/config");
+const favicon = require("serve-favicon");
 
 const app = express();
 app.use(morgan("dev")); //morgan gives us useful logging
@@ -17,6 +18,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(favicon(__dirname + "/public/images/favicon.ico"));
 
 setupAuth(app);
 const routes = require("./routes/routes.js");
