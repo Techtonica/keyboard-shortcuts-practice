@@ -1,11 +1,12 @@
+require("dotenv").config();
 const path = require("path");
 const morgan = require("morgan");
 const express = require("express");
 const bodyParser = require("body-parser");
-const { auth } = require('express-openid-connect');
+const { setupAuth } = require("./JS/auth-setup");
 const { connectToDb } = require("./JS/orm");
-const { authConfig } = require("./JS/auth0");
-const favicon = require('serve-favicon');
+const { port } = require("./JS/config");
+const favicon = require("serve-favicon");
 
 const app = express();
 app.use(morgan("dev")); //morgan gives us useful logging
@@ -17,22 +18,18 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(favicon(__dirname + '/public/images/favicon.ico'));
+app.use(favicon(__dirname + "/public/images/favicon.ico"));
 
-if (authConfig) {
-  app.use(auth(authConfig)); // auth router attaches /login, /logout, and /callback routes to the baseURL
-}
-
+setupAuth(app);
 const routes = require("./routes/routes.js");
 app.use("/", routes);
 
-app.use((req, res) => {
+app.use((_, res) => {
   res.status(404).render("not_found");
 });
 
 const startServer = async () => {
   await connectToDb();
-  const port = process.env.port || 3000;
   app.listen(port, () => {
     console.log(`Listening on http://localhost:${port} :-D`);
   });

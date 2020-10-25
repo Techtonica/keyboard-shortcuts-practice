@@ -37,7 +37,9 @@
     "sqlite3": "^5.0.0"
   },
   "devDependencies": {
+    "connect-session-sequelize": "^7.0.3",
     "cross-env": "^7.0.2",
+    "express-session": "^1.17.1",
     "nodemon": "^2.0.1"
   },
   "nodemonConfig": {
