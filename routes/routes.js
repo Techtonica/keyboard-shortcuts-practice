@@ -33,11 +33,8 @@ router.post("/user/answers/question/:questionNumber", (req, res, next) => {
     .catch(next);
 });
 router.get("/user/answers/question/:questionNumber", (req, res) => {
-  // TODO: When issue #74 be done, the userId should be handled from req object
-  let userId = "guest";
-
   UserAnswers.findAll({
-    where: { question_number: req.params.questionNumber, user_id: userId },
+    where: { question_number: req.params.questionNumber, user_id: getCurrentUserId(res) },
     order: [["created_at", "DESC"]],
     limit: ANSWER_HISTORY_LIMIT,
   })
