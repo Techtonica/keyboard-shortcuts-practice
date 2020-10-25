@@ -20,6 +20,7 @@ can sign in, practice with the app, and save their progress. That way, the next 
 1. Create a `Regular Web Application`
 1. Run `cp .env.example .env` to create a .env file
 1. From the settings page of your Auth0 web application fill in the environment variables, ensuring that the `AUTH0_ISSUER_BASE_URL` is the Domain URL starting with `https://`
+1. The _Allowed Callback URLs_ for local development should be `http://localhost:3000/callback`
 
 ## Running the project
 
