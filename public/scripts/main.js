@@ -283,7 +283,15 @@ function clearPressedKeys() {
 
 function updateTimingDisplay() {
   $('#timing-feedback').html('');
+   // hide the boxes if we don't have timing data
+   for (var i = 0; i < 3; i++) {
+    $('#timing-' + i).hide();
+  }
   var questionNo = localStorage.getItem('questionNo');
+
+  if (!window.isLoggedIn) {
+    return;
+  }
   // grab the last bits of timing data
   getHistory(questionNo).then(timings => {
     // and then drop them into the boxes
@@ -292,11 +300,6 @@ function updateTimingDisplay() {
       element.html(t / 1000 + ' sec');
       element.show();
     })
-
-    // hide the boxes if we don't have timing data
-    for (var i = timings.length; i < 3; i++) {
-      $('#timing-' + i).hide();
-    }
   });
 }
 
@@ -308,6 +311,9 @@ function onIncorrect() {
 };
 
 function handleTimingFeedback(questionNo, curMS) {
+  if (!window.isLoggedIn) {
+    return;
+  }
   getHistory(questionNo).then(previousTimings => {
     if (previousTimings.length == 0) {
       return;
@@ -430,6 +436,9 @@ showHintCheckbox.addEventListener('change', function(e) {
 })
 
 function createUserAnswer(questionNo, isCorrect, elapsedTimeMs){
+  if (!window.isLoggedIn) {
+    return;
+  }
   let requestBody = {
     userId: 'guest',
     isCorrect: isCorrect,
