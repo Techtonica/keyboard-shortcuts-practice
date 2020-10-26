@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { routeRequiresSignedIn, getCurrentUserId } = require("../JS/auth-setup");
 
-const { User, UserAnswers } = require("../JS/orm");
+const { UserAnswers } = require("../JS/orm");
 
 const ANSWER_HISTORY_LIMIT = 3;
 
@@ -16,6 +16,20 @@ router.get("/cheatsheet", (req, res) => {
 
 // All user-related API routes need a signed in user
 router.use("/user", routeRequiresSignedIn);
+
+router.get("/user/progress", (_, res, next) => {
+  UserAnswers.findOne({
+    where: {
+      user_id: getCurrentUserId(res),
+    },
+    order: [["created_at", "DESC"]],
+  })
+    .then((answer) => {
+      const currentQuestionNumber = answer ? answer.question_number + 1 : 1;
+      res.send({ currentQuestionNumber });
+    })
+    .catch(next);
+});
 
 router.post("/user/answers/question/:questionNumber", (req, res, next) => {
   if (req.body.id) {
