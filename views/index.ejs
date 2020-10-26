@@ -30,7 +30,12 @@
         <div id="timing-2" class="timing-entry"></div>
       </div>
       <div id="bottom">
-        <ul id="keyboard">
+        <div id='hint-checkbox-container'>
+          <input type="checkbox" id="show-hint" checked='true' />
+          <span>Show Hint</span>
+        </div>
+        <div id="keyboard">
+          <ul class="row">
           <li class="special" id="escape" data-keycode="27">esc</li>
           <li class="special" id="f1" data-keycode="112">F1</li>
           <li class="special" id="f2" data-keycode="113">F2</li>
@@ -45,6 +50,8 @@
           <li class="special" id="f11" data-keycode="122">F11</li>
           <li class="special" id="f12" data-keycode="123">F12</li>
           <li class="special lastitem" id="f13" data-keycode="124">TBD</li>
+        </ul>
+        <ul class="row">
           <li class="symbol double" id="backquote" data-keycode="192"><span class="off">~<br/>`</span><span class="on">~</span><span class="on">`</span></li>
           <li class="symbol double" id="1" data-keycode="49"><span class="off">!<br/>1</span><span class="on">!</span><span class="on">1</span></li>
           <li class="symbol double" id="2" data-keycode="50"><span class="off">@<br/>2</span><span class="on">@</span><span class="on">2</span></li>
@@ -59,6 +66,8 @@
           <li class="symbol double" id="minus" data-keycode="189"><span class="off">_<br/>-</span><span class="on">_</span><span class="on">-</span></li>
           <li class="symbol double" id="equal" data-keycode="187"><span class="off">+<br/>=</span><span class="on">+</span><span class="on">=</span></li>
           <li class="delete lastitem" id="backspace" data-keycode="8">delete</li>
+          </ul>
+          <ul class="row">
           <li class="tab" id="tab" data-keycode="9">tab</li>
           <li class="letter" id="q" data-keycode="81">q</li>
           <li class="letter" id="w" data-keycode="87">w</li>
@@ -73,6 +82,8 @@
           <li class="symbol double" id="bracketleft" data-keycode="219">{<br/>[</li>
           <li class="symbol double" id="bracketright" data-keycode="221">]<br/>}</li>
           <li class="symbol double" id="backslash" data-keycode="220">|<br/>\</li>
+          </ul>
+          <ul class="row">
           <li class="capslock" id="capslock" data-keycode="20">caps lock</li>
           <li class="letter" id="a" data-keycode="65">a</li>
           <li class="letter" id="s" data-keycode="83">s</li>
@@ -86,6 +97,8 @@
           <li class="symbol double" id="semicolon" data-keycode="186"><span class="off">:<br/>;</span><span class="on" id=";">;</span><span class="on" id=":">:</span></li>
           <li class="symbol double" id="quote" data-keycode="222"><span class="off">'<br/>&quot;</span><span id="'" class="on">'</span><span class="on" id="quot">&quot;</span></li>
           <li class="return lastitem" id="enter" data-keycode="13">return</li>
+        </ul>
+        <ul class="row">
           <li class="shift" id="shiftleft" data-keycode="16">shift</li>
           <li class="letter" id="z" data-keycode="90">z</li>
           <li class="letter" id="x" data-keycode="88">x</li>
@@ -98,6 +111,8 @@
           <li class="symbol double" id="period" data-keycode="190"><span class="off">&gt;<br/>.</span><span class="on">.</span><span class="on">&gt;</span></li>
           <li class="symbol double" id="slash" data-keycode="191"><span class="off">?<br/>/</span><span class="on">/</span><span class="on">?</span></li>
           <li class="shift lastitem" id="shiftright" data-keycode="16">shift</li>
+        </ul>
+        <ul class="row">
           <li class="function" id="fnc" data-keycode="fn">fn</li>
           <li class="control" id="control" data-keycode="17"><span>control</span></li>
           <li class="option" id="altleft" data-keycode="18">option</li>
@@ -106,12 +121,20 @@
           <li class="command" id="metaright" data-keycode="91">command</li>
           <li class="option" id="altright" data-keycode="18">option</li>
           <li class="arrows" id="arrowleft" data-keycode="37" style ="margin-top: 20px;" >&#9664;</li>
-          <li  class="arrows"><div class="arrows" id="arrowup" data-keycode="38">&#9650;</div></li>
+          <li class="arrows" data-keycode="38"><div class="arrows" id="arrowup">&#9650;</div></li>
+          <li class="arrows" style="margin-top: 37px; margin-left: -44px;" data-keycode="40"><div id="arrowdown">&#9660;</div></li>
           <li class="arrows" id="arrowright" data-keycode="39"  style ="margin-top: 20px;" >&#9658;</li>
-          <li  class="arrows" style="margin-top: -15px;margin-left: 48px;"><div id="arrowdown" data-keycode="40">&#9660;</div></li>
+            </ul>
         </ul>
       </div>
       <div>
+        <p>
+          <% if (currentUserId) { %>
+            You are logged in as <%= currentUserId %>. <a href="/logout">Logout</a>
+          <% } else { %>
+            You are not logged in. <a href="/login">Login</a> to save your progress!
+          <% } %>
+        </p>
         <p class="center-text-horizontally">This project is open-source! <a href="https://github.com/Techtonica/keyboard-shortcuts-practice">Look at the code and contribute here</a>.</p>
       </div>
       <script src="/js/bundle.js" defer></script>

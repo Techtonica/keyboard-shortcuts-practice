@@ -23,10 +23,11 @@
   "homepage": "https://github.com/Techtonica/keyboard-shortcuts-practice#readme",
   "dependencies": {
     "dotenv": "^8.1.0",
+    "ecstatic": "^4.1.4",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
-    "http-server": "^0.11.1",
     "express-openid-connect": "^2.0.0",
+    "http-server": "^0.12.3",
     "morgan": "^1.9.1",
     "mysql": "^2.17.1",
     "path": "^0.12.7",
@@ -34,14 +35,22 @@
     "pg-hstore": "^2.3.3",
     "request": "^2.88.0",
     "sequelize": "^6.3.5",
+    "serve-favicon": "^2.5.0",
     "sqlite3": "^5.0.0"
   },
   "devDependencies": {
+<<<<<<< HEAD
     "nodemon": "^2.0.1",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
     "webpack-node-externals": "^2.5.2",
     "cross-env": "^7.0.2"
+=======
+    "connect-session-sequelize": "^7.0.3",
+    "cross-env": "^7.0.2",
+    "express-session": "^1.17.1",
+    "nodemon": "^2.0.1"
+>>>>>>> 599469997fe2c2ad66c4f74e6e5e3b34e8de8115
   },
   "nodemonConfig": {
     "execMap": {
