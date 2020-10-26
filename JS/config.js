@@ -6,10 +6,9 @@ const isProduction = () => NODE_ENV === "production";
 const isDevelopment = () => NODE_ENV === "development";
 
 const getDefaultDbUrl = () => {
-  if (isDevelopment()) {
+  if (!isProduction()) {
     return "sqlite:dev-db.sqlite";
   }
-  throw new Error("DB_URL must be specified in production mode");
 };
 
 module.exports = {
