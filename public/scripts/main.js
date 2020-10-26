@@ -172,6 +172,16 @@ function release(e) {
   if(document.querySelector(`li[data-keycode="${e.keyCode}"]`) && document.querySelector(`li[data-keycode="${e.keyCode}"]`).classList.contains('pressed'))
     document.querySelector(`li[data-keycode="${e.keyCode}"]`).classList.remove('pressed');
 
+// May have to be removed. Not being used currently
+function highlightNextKey(params){
+  $("#"+nxt.toLowerCase()).toggleClass("pressed");
+  // <!-- var params = { width:1680, height:1050 }; -->
+  //   <!-- var str = jQuery.param( params ); -->
+
+  //   <!-- $( "#results" ).text( str ); -->
+
+  //   <!-- document.querySelector("#results").textContent = str; -->
+
 }
 
 function promptKey2(key){
@@ -350,7 +360,11 @@ function onSuccess() {
   var questionNo = localStorage.getItem("questionNo");
   var thisAnswerMS = Date.now() - questionStartMS;
   handleTimingFeedback(questionNo, thisAnswerMS);
+
+  recordAnswer(questionNo, thisAnswerMS);
+  saveHistory();
   document.querySelector("#textdiv span").textContent = 'Correct Keys pressed!';
+
   clearPromptKeys();
   clearPressedKeys();
   confettiImport.confetti($("#confetti").get(0), { spread: 180, startVelocity: 50, elementCount: 150 });
@@ -450,4 +464,5 @@ function createUserAnswer(questionNo, isCorrect, elapsedTimeMs){
     // TODO: handle error messages in a better way
     console.log(error);
   })
+}
 }
