@@ -97,11 +97,10 @@ function confetti(root, {
 }
 
 module.exports = {
-  createElements: createElements,
-  randomPhysics: randomPhysics,
-  updateFetti: updateFetti,
-  animate: animate,
-  confetti: confetti
-
+  createElements,
+  randomPhysics,
+  updateFetti,
+  animate,
+  confetti
 
 };

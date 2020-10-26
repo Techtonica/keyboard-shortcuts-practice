@@ -99,14 +99,12 @@ function recordAnswer(questionNo, timeSpentMS) {
 }
 
 module.exports = {
-    getHistory: getHistory,
-    getRemoteHistory: getRemoteHistory,
-    saveRemoteHistory: saveRemoteHistory,
-    loadHistory: loadHistory,
-    saveHistory: saveHistory,
-    recordAnswer: recordAnswer,
-    clearHistory: clearHistory
-
-
+    getHistory,
+    getRemoteHistory,
+    saveRemoteHistory,
+    loadHistory,
+    saveHistory,
+    recordAnswer,
+    clearHistory
 
   };

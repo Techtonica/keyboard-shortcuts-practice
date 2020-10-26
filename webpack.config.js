@@ -1,6 +1,6 @@
 module.exports = {
-    entry: ["./public/scripts/history.js", "./public/scripts/confetti.js", "./public/scripts/main.js","./public/scripts/keymaster.js" ],
-    target: 'node',
+    entry: [ "./public/scripts/main.js","./public/scripts/keymaster.js" ],
+    target: 'browser',
     output: {
         path: __dirname + "/dist",
         filename: "bundle.js",
@@ -8,5 +8,5 @@ module.exports = {
         library: 'ui'
     },
     
-    mode: "production",
+    mode: "development",
 }
