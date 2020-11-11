@@ -8,8 +8,10 @@ const Model = Sequelize.Model;
 class User extends Model {}
 User.init(
   {
-    q_number: Sequelize.STRING,
-    last_login: Sequelize.DATE,
+    last_login: {
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW,
+    },
     id: {
       type: Sequelize.STRING,
       primaryKey: true,
@@ -22,30 +24,27 @@ User.init(
     updatedAt: "updated_at",
   }
 );
-class UserAnswers extends Model{}
+class UserAnswers extends Model {}
 UserAnswers.init(
   {
-    id:{
-      primaryKey : true,
-      type: Sequelize.INTEGER,
-    },
-    user_id:{
+    user_id: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: false,
     },
-    question_number:{
+    question_number: {
       type: Sequelize.INTEGER,
-      allowNull: false
+      allowNull: false,
     },
-    is_correct:{
+    is_correct: {
       type: Sequelize.BOOLEAN,
-      allowNull: false
+      allowNull: false,
     },
-    elapsed_time_ms:{
+    elapsed_time_ms: {
       type: Sequelize.INTEGER,
-      allowNull: false
+      allowNull: false,
     },
-  },{
+  },
+  {
     sequelize,
     modelName: "user_answers",
     createdAt: 'created_at',
@@ -60,8 +59,8 @@ UserAnswers.init(
     ]
   }
 );
-User.hasMany(UserAnswers, {foreignKey: 'user_id'});
-UserAnswers.belongsTo(User,{foreignKey: 'user_id'});
+User.hasMany(UserAnswers, { foreignKey: "user_id" });
+UserAnswers.belongsTo(User, { foreignKey: "user_id" });
 const connectToDb = async () => {
   await sequelize.authenticate();
   await sequelize.sync();
@@ -70,5 +69,6 @@ const connectToDb = async () => {
 module.exports = {
   User,
   connectToDb,
-  UserAnswers
+  UserAnswers,
+  sequelize,
 };
