@@ -47,8 +47,16 @@ UserAnswers.init(
   {
     sequelize,
     modelName: "user_answers",
-    createdAt: "created_at",
+    createdAt: 'created_at',
     updatedAt: false,
+    indexes: [
+      {
+        fields: ['created_at', 'user_id', 'question_number']
+      },
+      {
+        fields: ['created_at', 'user_id']
+      }
+    ]
   }
 );
 User.hasMany(UserAnswers, { foreignKey: "user_id" });
