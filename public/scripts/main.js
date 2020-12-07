@@ -37,34 +37,39 @@ const keyToId = {
   'underscore(_)': 'minus'
 };
 
+// Since we are not using localStorage anymore, this is a one-time clear
+localStorage.clear();
+// These variables used to be stored in localStorage
+let questionNo = 1;
+let totalCount;
+
 // this tracks when we started asking for the current key command
 let questionStartMS = 0;
 
-$(document).ready(function() {
-  //$("#retryButton").toggleClass("on");
-  //alert($('li[data-keycode="test"]').attr('id'));
-   fetch('scripts/shortcuts.json')
-  .then(response => response.json())
-  .then(data => {
-    allData=data
-    if(localStorage.getItem("questionNo")==null)
-    {
-      localStorage.setItem("questionNo", "1");
-      localStorage.setItem("totalCount", Object.keys(allData).length);
-    }
-     readText()
-     updateTimingDisplay()
-  });
+
+document.addEventListener("DOMContentLoaded", () => {
+  fetch("scripts/shortcuts.json")
+    .then((response) => response.json())
+    .then((data) => {
+      allData = data;
+      totalCount = Object.keys(allData).length;
+      if (window.isLoggedIn) {
+        return getSavedProgress().then((progressData) => {
+          questionNo = progressData.currentQuestionNumber;
+        });
+      }
+    }).then(() => {
+      readText();
+      updateTimingDisplay();
+    })
+ 
 });
 
 function nextQuestion() {
-  if(localStorage.getItem("questionNo")!=null){
-    if(parseInt(localStorage.getItem("questionNo"))<parseInt(localStorage.getItem("totalCount"))){
-      localStorage.setItem("questionNo", parseInt(localStorage.getItem("questionNo"))+1);
-    } else {
-      localStorage.setItem("questionNo","1");
-    }
+  if (questionNo === totalCount) {
+    return;
   }
+  questionNo += 1;
   clearPromptKeys();
   clearPressedKeys();
   updateTimingDisplay();
@@ -73,11 +78,10 @@ function nextQuestion() {
 }
 
 function prevQuestion() {
-  if(localStorage.getItem("questionNo")!=null){
-    if(parseInt(localStorage.getItem("questionNo")) > 1) {
-      localStorage.setItem("questionNo", parseInt(localStorage.getItem("questionNo"))-1);
-    }
+  if (questionNo === 1) {
+    return;
   }
+  questionNo -= 1;
   clearPromptKeys();
   clearPressedKeys();
   updateTimingDisplay();
@@ -192,7 +196,7 @@ function promptKey2(key){
 function promptKey(key){
   // Handling all key types
   key = key.toLowerCase();
-  id = key.length == 1 ? key : keyToId[key];
+  const id = key.length == 1 ? key : keyToId[key];
   if (id) document.querySelector('#' + id).classList.toggle('prompt');
 }
 
@@ -201,51 +205,27 @@ function promptKey(key){
  * @param withoutAnimation {boolean=} [withoutAnimation = false] flag to prevent typing question animation
  */
 function readText(withoutAnimation){
-  quesNo = localStorage.getItem("questionNo")
-  if(quesNo!=null){
-    commandText = allData[parseInt(quesNo)-1].answer
-    answerkeys = allData[parseInt(quesNo)-1].keys
-    type = allData[parseInt(quesNo) - 1].shortcutType
-    //commandText = "A+Control"  // document.querySelector("#textdiv").textContent; // Will be taken from some other list type of a source.
-    //Each command will have an associated question text used in writeQuestion
-    var speed = 50
-    var i = 0;
+  const questionIdx = questionNo - 1;
+    const { question, keys, shortcutType } = allData[questionIdx];
 
     // Call writeQuestion to add question on the top textarea
     if (!withoutAnimation) {
-      writeQuestion(allData[parseInt(localStorage.getItem("questionNo"))-1].question)
+      writeQuestion(question);
     }
 
-    $.each(answerkeys , function(index, val) {
+    keys.forEach((val) => {
       reqKeys.push(val)
       // Highlight the prompt keys
       promptKey2(val)
     });
 
     // update shortcut type
-    document.querySelector("#shortcut-tag").textContent = type + " Shortcut";
-    if(type == 'mac') {
+    document.querySelector("#shortcut-tag").textContent = shortcutType + " Shortcut";
+    if(shortcutType === 'mac') {
       $('#shortcut-tag').first().css('background-color', '#3455db')
     } else {
       $('#shortcut-tag').first().css('background-color', '#4b2142')
     }
-
-    /* commandText.split('+').forEach(function(c) {
-      if(c.toLowerCase()=="command"){
-        reqKeys.push("meta")
-      }else if(c.toLowerCase()=="option"){
-        reqKeys.push("alt")
-      }
-      else{
-        reqKeys.push(c)
-      }
-// Highlight the prompt keys
-      promptKey(c)
-
-    }); */
-
-    //key(commandText, function(){ onSuccess(...reqKeys)});
-  } // END IF for localStorage check
 }
 
 function writeQuestion(question) {
@@ -283,20 +263,21 @@ function clearPressedKeys() {
 
 function updateTimingDisplay() {
   $('#timing-feedback').html('');
-  var questionNo = localStorage.getItem('questionNo');
+   // hide the boxes if we don't have timing data
+   for (var i = 0; i < 3; i++) {
+    $('#timing-' + i).hide();
+  }
+  if (!window.isLoggedIn) {
+    return;
+  }
   // grab the last bits of timing data
   getHistory(questionNo).then(timings => {
     // and then drop them into the boxes
     timings.forEach(function(t, idx) {
-      var element = $('#timing-' + idx);
+      const element = $('#timing-' + idx);
       element.html(t / 1000 + ' sec');
       element.show();
     })
-
-    // hide the boxes if we don't have timing data
-    for (var i = timings.length; i < 3; i++) {
-      $('#timing-' + i).hide();
-    }
   });
 }
 
@@ -308,6 +289,9 @@ function onIncorrect() {
 };
 
 function handleTimingFeedback(questionNo, curMS) {
+  if (!window.isLoggedIn) {
+    return;
+  }
   getHistory(questionNo).then(previousTimings => {
     if (previousTimings.length == 0) {
       return;
@@ -343,8 +327,7 @@ function handleTimingFeedback(questionNo, curMS) {
 
 // Function to execute when correct keys are pressed.
 function onSuccess() {
-  var questionNo = localStorage.getItem("questionNo");
-  var thisAnswerMS = Date.now() - questionStartMS;
+  const thisAnswerMS = Date.now() - questionStartMS;
   handleTimingFeedback(questionNo, thisAnswerMS);
   document.querySelector("#textdiv span").textContent = 'Correct Keys pressed!';
   clearPromptKeys();
@@ -357,11 +340,6 @@ function onSuccess() {
 document.addEventListener('keydown', function(event) {
   event.preventDefault();
   clearIncorrectIndication();
-  if(localStorage.getItem("questionNo")!=null){
-    if(quesNo!=localStorage.getItem("questionNo")){
-      return;
-    }
-  }
 
   // If used in Firefox, change command key code to be the same as that of Chrome
   let keyCode = event.keyCode;
@@ -391,11 +369,6 @@ document.addEventListener('keydown', function(event) {
 
 document.addEventListener('keyup', function(event) {
   event.preventDefault();
-  if(localStorage.getItem("questionNo")!=null){
-    if(quesNo!=localStorage.getItem("questionNo")) {
-      return;
-    }
-  }
 
   // If used in Firefox, change command key code to be the same as that of Chrome
   let keyCode = event.keyCode;
@@ -430,6 +403,9 @@ showHintCheckbox.addEventListener('change', function(e) {
 })
 
 function createUserAnswer(questionNo, isCorrect, elapsedTimeMs){
+  if (!window.isLoggedIn) {
+    return;
+  }
   let requestBody = {
     userId: 'guest',
     isCorrect: isCorrect,
@@ -445,5 +421,15 @@ function createUserAnswer(questionNo, isCorrect, elapsedTimeMs){
   }).catch(error => {
     // TODO: handle error messages in a better way
     console.log(error);
+  })
+}
+
+function getSavedProgress() {
+  return fetch('/user/progress').then(resp => {
+      if (resp.ok) {
+          return resp.json();
+      } else {
+          throw new Error(`Unable to retrieve saved progress. Received ${resp.status}`);
+      }
   })
 }
