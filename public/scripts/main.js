@@ -5,6 +5,8 @@ var reqKeys = []
 var typewriter;
 var quesNo;
 let pressed = new Set();
+let commandDown = false;
+let isShowHint = true;
 
 // event.keyCode Chrome and Firefox
 const CHROME_LEFT_COMMAND_CODE = 91;
@@ -17,38 +19,57 @@ const FIREFOX_RIGHT_COMMAND_STRING = 'OSRight';
 const CHROME_LEFT_COMMAND_STRING = 'MetaLeft';
 const CHROME_RIGHT_COMMAND_STRING = 'MetaRight';
 
+// Key names to ID
+const keyToId = {
+  ctrl: 'control',
+  control: 'control',
+  command: 'metaleft',
+  cmd: 'metaleft',
+  meta: 'metaleft',
+  fn: 'fnc',
+  alt: 'optionleft',
+  shift: 'shiftleft',
+  esc: 'escape',
+  tab: 'tab',
+  'space bar': 'space',
+  'tilde(~)': 'tilde',
+  'comma(,)': 'comma',
+  'underscore(_)': 'minus'
+};
+
+// Since we are not using localStorage anymore, this is a one-time clear
+localStorage.clear();
+// These variables used to be stored in localStorage
+let questionNo = 1;
+let totalCount;
+
 // this tracks when we started asking for the current key command
 let questionStartMS = 0;
 
-$(document).ready(function() {
-  //$("#retryButton").toggleClass("on");
-  //alert($('li[data-keycode="test"]').attr('id'));
-  $.getJSON( "scripts/shortcuts.json", function( data ) {
-    allData = data;
-    if(localStorage.getItem("questionNo")==null){
-      localStorage.setItem("questionNo", "1");
-      localStorage.setItem("totalCount", Object.keys(allData).length);
-    }
-    // Call readText()
-    readText()
-    
-    updateTimingDisplay();
-  })
 
-  $('.container').css('height', $(window).height());
-  $(window).on('resize', function() {
-    $('.container').css('height', $(window).height());
-  });
+document.addEventListener("DOMContentLoaded", () => {
+  fetch("scripts/shortcuts.json")
+    .then((response) => response.json())
+    .then((data) => {
+      allData = data;
+      totalCount = Object.keys(allData).length;
+      if (window.isLoggedIn) {
+        return getSavedProgress().then((progressData) => {
+          questionNo = progressData.currentQuestionNumber;
+        });
+      }
+    }).then(() => {
+      readText();
+      updateTimingDisplay();
+    })
+ 
 });
 
 function nextQuestion() {
-  if(localStorage.getItem("questionNo")!=null){
-    if(parseInt(localStorage.getItem("questionNo"))<parseInt(localStorage.getItem("totalCount"))){
-      localStorage.setItem("questionNo", parseInt(localStorage.getItem("questionNo"))+1);
-    } else {
-      localStorage.setItem("questionNo","1");
-    }
+  if (questionNo === totalCount) {
+    return;
   }
+  questionNo += 1;
   clearPromptKeys();
   clearPressedKeys();
   updateTimingDisplay();
@@ -57,11 +78,10 @@ function nextQuestion() {
 }
 
 function prevQuestion() {
-  if(localStorage.getItem("questionNo")!=null){
-    if(parseInt(localStorage.getItem("questionNo")) > 1) {
-      localStorage.setItem("questionNo", parseInt(localStorage.getItem("questionNo"))-1);
-    }
+  if (questionNo === 1) {
+    return;
   }
+  questionNo -= 1;
   clearPromptKeys();
   clearPressedKeys();
   updateTimingDisplay();
@@ -71,147 +91,147 @@ function prevQuestion() {
 
   // Function called on KeyDown to show Pressed key by adding class = 'pressed'
 function handle(e) {
-  var text1 = e.type +
-    ' key=' + e.key +
-    ' code=' + e.code
 
-  if(e.code.toLowerCase()=="space"){
-    $("#space").toggleClass("pressed");
-  }
-  if((e.which>=186 && e.which<=192)|| (e.which>=219 && e.which<=222)){
-    $("#"+e.code.toLowerCase()).toggleClass("pressed");
-  }
+  if(e.key.toLowerCase()=="capslock"){
+    document.querySelector("#"+e.key.toLowerCase()).classList.toggle("pressed");
+    document.querySelectorAll('.letter').forEach(letter => {
+      letter.classList.toggle('uppercase');
+    });
+    return true;
+  }else
+
   if(e.key.toLowerCase()=="alt" || e.key.toLowerCase()=="shift" || e.key.toLowerCase()=="meta"){
+    if (e.key.toLowerCase()=="meta") {
+      commandDown = true;
+    }
     let keyString = e.code;
     if(e.code == FIREFOX_LEFT_COMMAND_STRING) {
       keyString = CHROME_LEFT_COMMAND_STRING
     } else if (e.code == FIREFOX_RIGHT_COMMAND_STRING) {
       keyString = CHROME_RIGHT_COMMAND_STRING
     }
-    $("#"+keyString.toLowerCase()).toggleClass("pressed");
+    document.querySelector("#"+keyString.toLowerCase()).classList.add("pressed");
+    return true;
+  }else
+  
+  // Highlught Numpad keys
+  if(e.which>=96 && e.which<=105){
+    document.querySelector(`li[id="${e.key}"]`).classList.add('pressed');
+    return true;
+  }else
+  
+  // Highlight Fn key if any of F1-F12 is pressed
+  if (e.which>=112 && e.which<=123) {
+    document.querySelector("#fnc").classList.add("pressed");
   }
-  if(e.key.toLowerCase()=="capslock" && caps==false){
-    caps= true;
-    $("#"+e.key.toLowerCase()).toggleClass("pressed");
-    $('.letter').toggleClass('uppercase');
+
+  if (commandDown) {
+    e.preventDefault();
+    e.stopPropagation();
+    document.querySelector("#"+e.key.toLowerCase()).classList.add("pressed");
+    return false;
   }
-  else if(e.key.toLowerCase()=="capslock" && caps==true) {
-    $("#"+e.key.toLowerCase()).toggleClass("pressed");
-    $('.letter').toggleClass('uppercase');
-    caps=false;
-  }
-  else $("#"+e.key.toLowerCase() ).addClass("pressed");
+  if(document.querySelector(`li[data-keycode="${e.keyCode}"]`))
+    document.querySelector(`li[data-keycode="${e.keyCode}"]`).classList.add('pressed');
+  
 }
 
 // Function called on KeyUp to reset the key by removing class = 'pressed'
 function release(e) {
-  if((e.which>=186 && e.which<=192)|| (e.which>=219 && e.which<=222)){
-    $("#"+e.code.toLowerCase()).removeClass("pressed");
-  }
+
+  if(e.key.toLowerCase()=="capslock")
+    return true;
+    
   if(e.key.toLowerCase()=="alt" || e.key.toLowerCase()=="shift" || e.key.toLowerCase()=="meta"){
+    if (e.key.toLowerCase()=="meta") {
+      commandDown = false;
+    }
     let keyString = e.code;
     if(e.code == FIREFOX_LEFT_COMMAND_STRING) {
       keyString = CHROME_LEFT_COMMAND_STRING
     } else if (e.code == FIREFOX_RIGHT_COMMAND_STRING) {
       keyString = CHROME_RIGHT_COMMAND_STRING
     }
-    $("#"+keyString.toLowerCase()).removeClass("pressed");
+    if( document.querySelector("#"+keyString.toLowerCase()).classList.contains("pressed"))
+      document.querySelector("#"+keyString.toLowerCase()).classList.remove("pressed");
+    return true;
+  }else
+  
+  // Highlught Numpad keys
+  if(e.which>=96 && e.which<=105){
+    if(document.querySelector(`li[id="${e.key}"]`).classList.contains('pressed'))
+      document.querySelector(`li[id="${e.key}"]`).classList.remove('pressed');
+    return true;
+  }else
+  
+  // Highlight Fn key if any of F1-F12 is pressed
+  if (e.which>=112 && e.which<=123){
+    if(document.querySelector("#fnc").classList.contains("pressed"))
+      document.querySelector("#fnc").classList.remove("pressed");
   }
-  if(e.code.toLowerCase()=="space"){
-    $("#space").removeClass("pressed");
-  }
-  if(e.key.toLowerCase()=="capslock") return
-  else{
-    $("#"+e.key.toLowerCase() ).removeClass("pressed");
-  }
-}
+  if(document.querySelector(`li[data-keycode="${e.keyCode}"]`) && document.querySelector(`li[data-keycode="${e.keyCode}"]`).classList.contains('pressed'))
+    document.querySelector(`li[data-keycode="${e.keyCode}"]`).classList.remove('pressed');
 
-// May have to be removed. Not being used currently
-function highlightNextKey(params){
-  $("#"+nxt.toLowerCase()).toggleClass("pressed");
-  <!-- var params = { width:1680, height:1050 }; -->
-    <!-- var str = jQuery.param( params ); -->
-    <!-- $( "#results" ).text( str ); -->
 }
 
 function promptKey2(key){
   //if($('li[data-keycode="'+key+'"]'[0]).hasClass('prompt')){
-  $($('li[data-keycode="'+key+'"]')[0]).toggleClass("prompt")
+    if (isShowHint) {
+      $($('li[data-keycode="'+key+'"]')[0]).addClass("prompt");
+      // Highlight Fn to be a combination with F1-F12
+      if (key>=112 && key <=123) {
+        document.querySelector("#fnc").classList.add("prompt");
+      }
+    } else {
+      $($('li[data-keycode="'+key+'"]')[0]).removeClass("prompt")
+      // Remove Fn highlight
+      if (key>=112 && key <=123) {
+        document.querySelector("#fnc").classList.remove("prompt");
+      }
+    }
   //}
 }
 
 // Function to highlight any key passed as input
 function promptKey(key){
   // Handling all key types
-  if(key.length==1) $("#"+key.toLowerCase()).toggleClass("prompt");
-  else {
-    if(key.toLowerCase()=='ctrl'||key.toLowerCase()=='control')
-      $("#control").toggleClass("prompt");
-    if(key.toLowerCase()=='command' || key.toLowerCase()=='cmd'|| key.toLowerCase()=="meta")
-      $("#metaleft").toggleClass("prompt");
-    if(key.toLowerCase()=='fn')
-      $("#fnc").toggleClass("prompt");
-    if(key.toLowerCase()=='alt')
-      $("#optionleft").toggleClass("prompt");
-    if(key.toLowerCase()=='shift')
-      $("#shiftleft").toggleClass("prompt");
-    if(key.toLowerCase()=='esc')
-      $("#escape").toggleClass("prompt");
-    if(key.toLowerCase()=='space bar')
-      $("#space").toggleClass("prompt");
-    if(key.toLowerCase()=='tab')
-      $("#tab").toggleClass("prompt");
-    if(key.toLowerCase()=='tilde(~)')
-      $("#tilde").toggleClass("prompt");
-    if(key.toLowerCase()=='comma(,)')
-      $("#comma").toggleClass("prompt");
-    if(key.toLowerCase()=='underscore(_)')
-      $("#minus").toggleClass("prompt");
-  }
+  key = key.toLowerCase();
+  const id = key.length == 1 ? key : keyToId[key];
+  if (id) document.querySelector('#' + id).classList.toggle('prompt');
 }
 
-// Function to read the next combination of keys and highlight it on keyboard
-function readText(){
-  quesNo = localStorage.getItem("questionNo")
-  if(quesNo!=null){
-    commandText = allData[parseInt(quesNo)-1].answer
-    answerkeys = allData[parseInt(quesNo)-1].keys
-    //commandText = "A+Control"  //$("#textdiv").text(); // Will be taken from some other list type of a source.
-    //Each command will have an associated question text used in writeQuestion
-    var speed = 50
-    var i = 0;
+/**
+ * Function to read the next combination of keys and highlight it on keyboard
+ * @param withoutAnimation {boolean=} [withoutAnimation = false] flag to prevent typing question animation
+ */
+function readText(withoutAnimation){
+  const questionIdx = questionNo - 1;
+    const { question, keys, shortcutType } = allData[questionIdx];
 
     // Call writeQuestion to add question on the top textarea
-    writeQuestion(allData[parseInt(localStorage.getItem("questionNo"))-1].question)
+    if (!withoutAnimation) {
+      writeQuestion(question);
+    }
 
-    $.each(answerkeys , function(index, val) {
+    keys.forEach((val) => {
       reqKeys.push(val)
       // Highlight the prompt keys
       promptKey2(val)
     });
 
-    /* commandText.split('+').forEach(function(c) {
-      if(c.toLowerCase()=="command"){
-        reqKeys.push("meta")
-      }else if(c.toLowerCase()=="option"){
-        reqKeys.push("alt")
-      }
-      else{
-        reqKeys.push(c)
-      }
-// Highlight the prompt keys
-      promptKey(c)
-
-    }); */
-
-    //key(commandText, function(){ onSuccess(...reqKeys)});
-  } // END IF for localStorage check
+    // update shortcut type
+    document.querySelector("#shortcut-tag").textContent = shortcutType + " Shortcut";
+    if(shortcutType === 'mac') {
+      $('#shortcut-tag').first().css('background-color', '#3455db')
+    } else {
+      $('#shortcut-tag').first().css('background-color', '#4b2142')
+    }
 }
 
 function writeQuestion(question) {
   if(typewriter!=null) {
       typewriter.state.eventQueue = [];
-    $('#textdiv span').first().text('');
+      document.querySelector("#textdiv span").textContent = '';
   } else {
     typewriter = new Typewriter(document.getElementById('textdiv'), {
       loop: false,
@@ -225,98 +245,101 @@ function writeQuestion(question) {
 }
 
 function clearIncorrectIndication() {
-  $("#read").removeClass('incorrect');
+  if(document.querySelector("#read"))
+    document.querySelector("#read").classList.remove('incorrect');
 };
 
 function clearPromptKeys() {
-  $('.prompt').removeClass('prompt');
+  if(document.querySelector('.prompt'))
+    document.querySelectorAll('.prompt').forEach(key => key.classList.remove('prompt'));
 };
+
 
 function clearPressedKeys() {
   pressed.clear();
-  $('.pressed').removeClass('pressed');
+  if(document.querySelector('.pressed'))
+    document.querySelector('.pressed').classList.remove('pressed');
 };
 
 function updateTimingDisplay() {
   $('#timing-feedback').html('');
-  var questionNo = localStorage.getItem('questionNo');
-  // grab the last bits of timing data
-  var timings = getHistory(questionNo).slice(-3);
-
-  // and then drop them into the boxes
-  timings.forEach(function(t, idx) {
-    var element = $('#timing-' + idx);
-    element.html(t / 1000 + ' sec');
-    element.show();
-  })
-
-  // hide the boxes if we don't have timing data
-  for (var i = timings.length; i < 3; i++) {
+   // hide the boxes if we don't have timing data
+   for (var i = 0; i < 3; i++) {
     $('#timing-' + i).hide();
   }
+  if (!window.isLoggedIn) {
+    return;
+  }
+  // grab the last bits of timing data
+  getHistory(questionNo).then(timings => {
+    // and then drop them into the boxes
+    timings.forEach(function(t, idx) {
+      const element = $('#timing-' + idx);
+      element.html(t / 1000 + ' sec');
+      element.show();
+    })
+  });
 }
 
 function onIncorrect() {
   $('#textdiv').effect("shake", { distance: 3 });
-  $("#read").addClass('incorrect');
+  if(document.querySelector("#read"))
+    document.querySelector("#read").classList.add('incorrect');
   setTimeout(clearPressedKeys, 500);
 };
 
 function handleTimingFeedback(questionNo, curMS) {
-  var previousTimings = getHistory(questionNo);
-  if (previousTimings.length == 0) {
+  if (!window.isLoggedIn) {
     return;
   }
-
-  var average = previousTimings.reduce(
-    function(acc, cur) { return acc + cur },
-    0,
-  ) / previousTimings.length;
-
-  var delta = average - curMS;
-
-  var template = null;
-  if (delta > 0) {
-    template = "<br/>You were <span style='color:green;'>faster</span> by ${delta} sec!";
-  }
-  if (delta < 0) {
-    template = "<br/>You were <span style='color:red;'>slower</span> by ${delta} sec.";
-  }
-  if (template === null) {
-    return;
-  }
-
-  // convert MS to S
-  delta = Math.abs(delta) / 1000;
-  // now we want to trunate to 2 decimals; the `+` will let us only use 2
-  // decimals if we actually need them, e.g., we want 1.5 not 1.50
-  // cf. https://stackoverflow.com/a/12830454
-  delta = +delta.toFixed(2);
-  $('#timing-feedback').html(template.replace('${delta}', delta));
+  getHistory(questionNo).then(previousTimings => {
+    if (previousTimings.length == 0) {
+      return;
+    }
+  
+    var average = previousTimings.reduce(
+      function(acc, cur) { return acc + cur },
+      0,
+    ) / previousTimings.length;
+  
+    var delta = average - curMS;
+  
+    var template = null;
+    if (delta > 0) {
+      template = "<br/>You were <span style='color:green;'>faster</span> by ${delta} sec!";
+    }
+    if (delta < 0) {
+      template = "<br/>You were <span style='color:red;'>slower</span> by ${delta} sec.";
+    }
+    if (template === null) {
+      return;
+    }
+  
+    // convert MS to S
+    delta = Math.abs(delta) / 1000;
+    // now we want to trunate to 2 decimals; the `+` will let us only use 2
+    // decimals if we actually need them, e.g., we want 1.5 not 1.50
+    // cf. https://stackoverflow.com/a/12830454
+    delta = +delta.toFixed(2);
+    $('#timing-feedback').html(template.replace('${delta}', delta));
+  });
 }
 
 // Function to execute when correct keys are pressed.
 function onSuccess() {
-  var questionNo = localStorage.getItem("questionNo");
-  var thisAnswerMS = Date.now() - questionStartMS;
+  const thisAnswerMS = Date.now() - questionStartMS;
   handleTimingFeedback(questionNo, thisAnswerMS);
-  recordAnswer(questionNo, thisAnswerMS);
-  saveHistory();
-  $('#textdiv span').first().text('Correct Keys pressed!');
+  document.querySelector("#textdiv span").textContent = 'Correct Keys pressed!';
   clearPromptKeys();
   clearPressedKeys();
   confetti($("#confetti").get(0), { spread: 180, startVelocity: 50, elementCount: 150 });
+  createUserAnswer(questionNo, true, thisAnswerMS);
   setTimeout(nextQuestion, 1500);
 }
 
 document.addEventListener('keydown', function(event) {
   event.preventDefault();
   clearIncorrectIndication();
-  if(localStorage.getItem("questionNo")!=null){
-    if(quesNo!=localStorage.getItem("questionNo")){
-      return;
-    }
-  }
 
   // If used in Firefox, change command key code to be the same as that of Chrome
   let keyCode = event.keyCode;
@@ -346,11 +369,6 @@ document.addEventListener('keydown', function(event) {
 
 document.addEventListener('keyup', function(event) {
   event.preventDefault();
-  if(localStorage.getItem("questionNo")!=null){
-    if(quesNo!=localStorage.getItem("questionNo")) {
-      return;
-    }
-  }
 
   // If used in Firefox, change command key code to be the same as that of Chrome
   let keyCode = event.keyCode;
@@ -378,3 +396,40 @@ window.addEventListener('focus', function (e) {
   }
 });
 
+const showHintCheckbox = document.getElementById('show-hint');
+showHintCheckbox.addEventListener('change', function(e) {
+  isShowHint = e.target.checked;
+  readText(true)
+})
+
+function createUserAnswer(questionNo, isCorrect, elapsedTimeMs){
+  if (!window.isLoggedIn) {
+    return;
+  }
+  let requestBody = {
+    userId: 'guest',
+    isCorrect: isCorrect,
+    elapsedTimeMs: elapsedTimeMs
+  }
+  
+  fetch(document.URL + 'user/answers/question/' + questionNo, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(requestBody)
+  }).catch(error => {
+    // TODO: handle error messages in a better way
+    console.log(error);
+  })
+}
+
+function getSavedProgress() {
+  return fetch('/user/progress').then(resp => {
+      if (resp.ok) {
+          return resp.json();
+      } else {
+          throw new Error(`Unable to retrieve saved progress. Received ${resp.status}`);
+      }
+  })
+}

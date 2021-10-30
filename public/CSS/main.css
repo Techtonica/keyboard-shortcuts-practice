@@ -1,5 +1,5 @@
 .container {
-  height: 800px;
+  height: 100vh;
   margin: 0px auto;
 }
 
@@ -13,6 +13,19 @@
 
 .image-container img {
   width: 800px;
+}
+
+.center-column {
+  width: 690px;
+}
+
+.log-button {
+  border-radius: 5px;
+  font-size:  12px;
+  padding: 3px 10px;
+  text-align: center;
+  text-transform: capitalize;
+  text-decoration: none;
 }
 
 body {
@@ -72,7 +85,7 @@ body {
 }
 
 .cheatsheet {
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .img-button {
@@ -99,9 +112,14 @@ body {
   -webkit-border-radius: 5px;
   margin: 0;
   padding: 2px;
-  list-style: none;
   overflow:auto;
   font-family: 'Roboto', sans-serif;;
+}
+#keyboard ul.row {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 #keyboard li {
@@ -194,4 +212,55 @@ div .arrows{
   padding: 1em;
   border-radius: 4px;
   margin: -1.5em 1em 0em 1em;
+}
+
+#shortcut-tag{
+  border-radius: 50px;
+  color: #ffffff;
+  font-size: 12px;
+  margin-top: 30px;
+  padding: 3px 10px;
+  text-align: center;
+  text-transform: capitalize;
+  width: 100px;
+}
+
+#hint-checkbox-container {
+  width: 100%;
+  text-align: right;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+}
+
+#hint-checkbox-container span {
+  vertical-align: text-bottom;
+}
+
+#hint-checkbox-container #show-hint {
+  height: 1rem;
+  width: 1rem;
+}
+
+#account-info {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 0.8rem;
+  margin: -37.5px 0px 32.5px 0px;
+}
+
+#login-button {
+  color: #28a7c5;
+  background-color: #ffffff;
+  border: 1px solid #28a7c5;
+}
+
+#logout-button {
+  color: #ffffff;
+  background-color: #28a7c5;
+  border: 1px solid #28a7c5;
+}
+
+#login-indicator {
+  margin: 0rem 0.5rem;
 }

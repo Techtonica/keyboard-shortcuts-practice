@@ -12,7 +12,15 @@ We discovered that our participants need an app similar to typing practice websi
 
 This project should train and test users to use the quicker keyboard shortcuts instead of a mouse and the GUI. The app gets more challenging as you progress through the commands.
 
-Our goal for the backend project is to create a persistant app where users can sign in, practice with the app, and save their progress. That way, the next time they sign in, they can pick up where they left off rather than starting at the beginning.
+Our goal for the backend project is to create a persistent app where users 
+can sign in, practice with the app, and save their progress. That way, the next time they sign in, they can pick up where they left off rather than starting at the beginning.
+
+# Setting up Auth0 and creating an account
+1. Create a [free personal Auth0 account](https://auth0.com/)
+1. Create a `Regular Web Application`
+1. Run `cp .env.example .env` to create a .env file
+1. From the settings page of your Auth0 web application fill in the environment variables, ensuring that the `AUTH0_ISSUER_BASE_URL` is the Domain URL starting with `https://`
+1. The _Allowed Callback URLs_ for local development should be `http://localhost:3000/callback`
 
 ## Running the project
 
