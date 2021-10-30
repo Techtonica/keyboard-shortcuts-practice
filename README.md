@@ -28,6 +28,7 @@ can sign in, practice with the app, and save their progress. That way, the next 
 1. Run `npm start` to start the server.
 1. Navigate to `http://localhost:3000` in your browser. Your project should be running at this point.
 
+
 ## Contributing / Volunteering
 
 Go to [CONTRIBUTING.md](/CONTRIBUTING.md).
