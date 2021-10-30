@@ -14,19 +14,9 @@
     <script type="text/javascript">
       window.isLoggedIn = <%= !!currentUserId %>;
     </script>
-    <script src="scripts/confetti.js" defer></script>
-    <script src="scripts/history.js" defer></script>
-    <script src="scripts/main.js" defer></script>
+    <script src="/js/bundle.js" defer></script>
     <div class="container">
       <div id="top">
-        <div class="center-column" id="account-info">
-          <% if (currentUserId) { %>
-            <span id="login-indicator">Logged in</span>
-            <a href="/logout" class="log-button" id="logout-button">Logout</a>
-          <% } else { %>
-            <a href="/login" class="log-button" id="login-button">Login</a>
-          <% } %>
-        </div>
         <div id="read">
           <a id="prevButton" class="prev img-button" href="javascript:prevQuestion();"><img src="images/arrow_left.png"></img></a>
           <div id="textdiv"></div>

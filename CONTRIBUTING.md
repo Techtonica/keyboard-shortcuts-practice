@@ -18,7 +18,7 @@ Prepare for contributing by following these beginner-friendly steps.
 1. Run `git checkout backend` to go to the backend feature branch. This is the *only* branch that we will be working in.
 1. Follow [the steps to run the project locally](/README.md/#running-the-project).
 1. Run `git remote add upstream https://github.com/Techtonica/keyboard-shortcuts-practice.git`.  This is so that you can refer to the original project owned by Techtonica as the `upstream` version.
-1. Run `git remove -v` to test that you can get updates from Techtonica's repo. [You should see something like this](https://github.com/anitab-org/mentorship-android/wiki/Fork,-Clone-&-Remote#remote). If it shows an error that you don't have permission, contact a Tectonica admin. You can still get started without this part, but you'll need it soon.
+1. Run `git remote -v` to test that you can get updates from Techtonica's repo. [You should see something like this](https://github.com/anitab-org/mentorship-android/wiki/Fork,-Clone-&-Remote#remote). If it shows an error that you don't have permission, contact a Tectonica admin. You can still get started without this part, but you'll need it soon.
 
 ### Get started
 1. Choose an issue in the "To Do" column of [this board](https://github.com/Techtonica/keyboard-shortcuts-practice/projects/4).
@@ -32,4 +32,3 @@ Prepare for contributing by following these beginner-friendly steps.
     <img src="/images/make-pr-to-backend.png" alt="making a pull request to the backend branch" title="make a pr to backend" width="350" height="200" />
 1. See your pull requests here: https://github.com/Techtonica/keyboard-shortcuts-practice/pulls
 1. In your new PR's description, add `Fixes #<issue number>`, for example `fixes #1`.  This will automatically close the issue once your PR is merged, and it will link the issue with your PR. Also add a description of what the PR is, and how reviewers can validate it.
-
