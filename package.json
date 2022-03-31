@@ -26,7 +26,7 @@
     "ecstatic": "^4.1.4",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
-    "express-openid-connect": "^2.0.0",
+    "express-openid-connect": "^2.7.2",
     "http-server": "^0.12.3",
     "keymaster": "^1.6.2",
     "morgan": "^1.9.1",
