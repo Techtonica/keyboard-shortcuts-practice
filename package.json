@@ -37,7 +37,7 @@
     "request": "^2.88.0",
     "sequelize": "^6.3.5",
     "serve-favicon": "^2.5.0",
-    "sqlite3": "^5.0.0"
+    "sqlite3": "^5.0.3"
   },
   "devDependencies": {
     "connect-session-sequelize": "^7.0.3",
